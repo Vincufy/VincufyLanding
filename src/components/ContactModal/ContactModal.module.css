@@ -1,0 +1,111 @@
+/* .overlay inicia invisible y con un tamaño reducido */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0; /* Inicia invisible */
+  transform: scale(0.9); /* Inicia más pequeño */
+  transition: opacity 1s ease, transform 0.5s ease; /* Transición suave */
+}
+
+/* .overlay con la clase 'show' se mostrará con opacidad completa y tamaño normal */
+.overlay.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Nuevo contenedor para manejar el border-radius */
+.modalWrapper {
+  border-radius: 15px; /* Aquí defines el border-radius */
+  overflow: hidden; /* Para asegurarte de que los bordes redondeados no afecten a la imagen */
+}
+
+/* Estilos para el contenido del modal */
+.modalContainer {
+  width: 400px;
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: lighter;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.closeButton:focus {
+  outline: none;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  margin-top: 55px;
+  height: 40px;
+  width: 80%;
+  border-radius: 10px;
+  overflow: hidden; /* fuerza que los hijos respeten el redondeo */
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  /* color: white; */
+  border-radius: 0;
+  font-weight: bold;
+  height: 100%;
+  outline: none; /* elimina el borde al enfocar */
+}
+
+.tab:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.tab:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+}
+
+.wsLogo {
+  height: 25px;
+}
+
+.gmailLogo {
+  height: 25px;
+}
+
+.meetLogo {
+  height: 20px;
+}

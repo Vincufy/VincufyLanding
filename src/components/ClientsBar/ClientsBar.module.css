@@ -1,0 +1,26 @@
+.container {
+  background-image: url("../../assets/Backgrounds/fondoCard.png");
+  background-size: 100vw;
+  background-position: center;
+  border-radius: 40px;
+  padding: 1rem;
+  margin: 0 auto;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.container img {
+  width: 81;
+  height: 70px;
+}
+
+.clientLogos {
+  transition: transform 0.3s ease-in-out;
+}
+
+.clientLogos:hover {
+  transform: scale(1.3);
+}

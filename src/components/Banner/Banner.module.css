@@ -1,0 +1,201 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 90vw;
+  margin: 10px 0px;
+}
+
+.titlesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 33px;
+  text-wrap: nowrap;
+  margin-bottom: 0px;
+}
+.subtitle {
+  font-size: 25px;
+  font-weight: 200;
+  color: rgb(196, 196, 196);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+.textAndButton {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  gap: 20px;
+}
+.btnContainer button {
+  width: 190px;
+  height: 43px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  color: white;
+}
+
+.createEventBtn {
+  all: unset;
+  position: relative;
+  background-color: #8811c8;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  padding: 3px 15px;
+  overflow: hidden;
+  z-index: 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.createEventBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  transform: skewX(-20deg);
+  z-index: 1;
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -75%;
+  }
+  20% {
+    left: -75%;
+  }
+  50% {
+    left: 125%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+.createEventBtn:hover {
+  transform: scale(1.05);
+  background-color: #620a91;
+  cursor: pointer;
+}
+
+.logInBtn {
+  background-color: black;
+  border: 1px solid gray;
+}
+
+.imageWrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.iphoneImage {
+  height: 355px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.iphoneImage:hover {
+  cursor: pointer;
+}
+
+.demoButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.demoButton:hover {
+  cursor: pointer;
+}
+
+.imageWrapper:hover .demoButton {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  background-color: black;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none; /* Elimina el borde de enfoque */
+}
+
+/* Estilo opcional cuando el botón está enfocado (si deseas agregar un estilo de enfoque personalizado) */
+.closeButton:focus {
+  outline: none; /* Elimina el outline */
+}
+
+.backgroundVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}

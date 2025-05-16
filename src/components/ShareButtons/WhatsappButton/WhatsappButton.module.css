@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.container p {
+  font-size: 15.5px;
+  width: 65%;
+  text-align: center;
+  margin: 0;
+}
+.container button {
+  all: unset;
+  height: 20px;
+  width: 140px;
+  color: #fff;
+  background-color: #8811c8;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 450;
+  font-size: 13px;
+  outline: none;
+}
+
+.container button:hover,
+.container button:focus,
+.container button:active {
+  background-color: #620a91;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}

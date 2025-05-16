@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.container p {
+  font-size: 15.5px;
+  width: 70%;
+  text-align: center;
+  margin: 0;
+}
+
+.container form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: stretch; /* hace que input y botón tengan la misma altura */
+  border-radius: 7px;
+  overflow: hidden; /* quita bordes redondeados que sobresalgan */
+  background-color: rgb(234, 234, 234);
+}
+
+.inputWrapper input {
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 14px;
+  background-color: transparent;
+  flex: 1;
+}
+
+.inputWrapper button {
+  all: unset;
+  border: none;
+  background-color: #8811c8;
+  color: white;
+  padding: 0 16px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+}
+.thanksDiv {
+  text-align: "center";
+}
+.thanksDiv img {
+  width: "50px";
+  animation: "pulse 1s infinite";
+}
