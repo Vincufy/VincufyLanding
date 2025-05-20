@@ -4,7 +4,7 @@ import step3 from "../../assets/StepByStep/step3.png";
 import step4 from "../../assets/StepByStep/step4.gif";
 import styles from "./StepByStep.module.css";
 
-const StepByStep = () => {
+const StepByStep = ({ setOpenModal, setOrigin }) => {
   const steps = [
     {
       title: "Entradas",
@@ -38,30 +38,37 @@ const StepByStep = () => {
 
   return (
     <>
-    <h1 className={styles.sectionTitle}>Paso a paso</h1>
-    <div className={styles.container}>
-      {steps.map((step, index) => (
-        <div key={index} className={styles.card}>
-          {/* Div para imagen de fondo solo si corresponde */}
-          {step.hasBackground && (
-            <div className={styles.background} />
-          )}
+      <h1 className={styles.sectionTitle}>Paso a paso</h1>
+      <div className={styles.container}>
+        {steps.map((step, index) => (
+          <div key={index} className={styles.card}>
+            {step.hasBackground && <div className={styles.background} />}
 
-          <div className={styles.textDiv}>
-            <h1>{index + 1}</h1>
-            <div className={styles.titleSubtitle}>
-              <h2>{step.title}</h2>
-              <p>{step.subtitle}</p>
+            <div className={styles.textDiv}>
+              <h1>{index + 1}</h1>
+              <div className={styles.titleSubtitle}>
+                <h2>{step.title}</h2>
+                <p>{step.subtitle}</p>
+              </div>
             </div>
+            <img
+              src={step.img}
+              alt={`paso${index + 1}`}
+              className={styles.video}
+            />
           </div>
-          <img
-            src={step.img}
-            alt={`paso${index + 1}`}
-            className={styles.video}
-          />
-        </div>
-      ))}
-    </div></>
+        ))}
+      </div>
+      <button
+        className={styles.callToAction}
+        onClick={() => {
+          setOpenModal(true);
+          setOrigin("MessageButton");
+        }}
+      >
+        Agendar una reunión
+      </button>
+    </>
   );
 };
 

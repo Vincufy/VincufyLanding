@@ -12,10 +12,10 @@
 
 .messageButtonContainer {
   position: fixed;
-  bottom: 20px;
+  bottom: 25px;
   right: 30px;
-  width: 65px;
-  height: 65px;
+  width: 73px;
+  height: 73px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,5 +28,5 @@
 }
 
 .messageIcon {
-  height: 30px;
+  height: 33px;
 }

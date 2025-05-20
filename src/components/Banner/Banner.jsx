@@ -1,12 +1,9 @@
-import { useState } from "react";
 import styles from "./Banner.module.css";
 import iphone from "../../assets/Banner/iphone.png";
 import demoButton from "../../assets/Banner/demoButton1.png";
 import backgroundVideo from "../../assets/Banner/backgroundVideo.mp4";
 
-const Banner = ({ setOpenModal, setOrigin }) => {
-  const [openDemo, setOpenDemo] = useState(false);
-
+const Banner = ({ setOpenModal, setOrigin, openDemo, setOpenDemo }) => {
   return (
     <>
       {openDemo && (

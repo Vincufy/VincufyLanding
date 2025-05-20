@@ -28,7 +28,6 @@
   max-width: 100%;
 }
 
-
 .textAndButton {
   display: flex;
   flex-direction: column;
@@ -55,7 +54,7 @@
   position: relative;
   background-color: #8811c8;
   color: white;
-  font-size: 15px;
+  font-size: 17px;
   border-radius: 5px;
   padding: 3px 15px;
   overflow: hidden;
@@ -198,4 +197,84 @@
     rgba(0, 0, 0, 1) 60%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+    width: 100%;
+  }
+  .backgroundVideo {
+    width: 150%;
+    height: 62%;
+  }
+  .iphoneImage {
+    margin-right: 20px;
+  }
+  .createEventBtn {
+  padding: 3px 20px;
+}
+  .textAndButton {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    text-wrap: wrap;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .btnContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .btnContainer button {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .iphoneImage {
+    height: 300px;
+  }
+
+  .demoButton {
+    height: 55px;
+  }
+
+  .modalContent iframe {
+    width: 90vw !important;
+    height: 60vh !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .iphoneImage {
+    height: 240px;
+  }
+
+  .demoButton {
+    height: 50px;
+  }
 }

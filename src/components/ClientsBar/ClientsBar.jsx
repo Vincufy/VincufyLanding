@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./ClientsBar.module.css";
 import cliente1 from "../../assets/Clients/LogoSiglo21.png";
 import cliente2 from "../../assets/Clients/LogoSantander.png";

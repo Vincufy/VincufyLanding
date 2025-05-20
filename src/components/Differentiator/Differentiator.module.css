@@ -3,18 +3,22 @@
     margin-top: 100px;
     margin-bottom: 50px;
 }
-.container {
-  background-image: url("../../assets/Backgrounds/fondoCard.png");
+.container{
+    display: flex;
+    flex-direction: row;
+}
+.box {
+  background-image: url("../../assets/Backgrounds/fondoLoginDateWeb.png");
   background-size: 100vw;
   background-position: center;
   border-radius: 40px;
-  padding: 1rem;
+  padding: 35px 1rem;
   margin: 0 auto;
-  height: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 0 20px;
+  width: 80%;
 }
 .textDiv h2{
     font-size: 25px;
@@ -22,5 +26,30 @@
 }
 .textDiv p{
     font-size: 17px;
-    padding: 0 50px;
+    padding: 0 40px;
+    line-height: 35px;
+}
+.textDiv img{
+    height: 80px;
+}
+.callToAction{
+  all: unset;
+  background-color: #8811c8;
+  color: white;
+  font-size: 17px;
+  border-radius: 5px;
+  padding: 13px 45px;
+  transition: transform 0.5s ease-in-out;
+  margin-top: 10px;
+}
+.callToAction:hover {
+  transform: scale(1.05);
+  background-color: #620a91;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+      .sectionTitle {
+    font-size: 24px;
+    text-align: center;
+  }
 }
