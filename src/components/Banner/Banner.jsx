@@ -1,7 +1,6 @@
 import styles from "./Banner.module.css";
-import iphone from "../../assets/Banner/iphone.png";
-import demoButton from "../../assets/Banner/demoButton1.png";
 import backgroundVideo from "../../assets/Banner/backgroundVideo.mp4";
+import IphoneDevice from "../IphoneDevice/IphoneDevice";
 
 const Banner = ({ setOpenModal, setOrigin, openDemo, setOpenDemo }) => {
   return (
@@ -52,19 +51,7 @@ const Banner = ({ setOpenModal, setOrigin, openDemo, setOpenDemo }) => {
             </button>
           </div>
         </div>
-
-        <div className={styles.imageWrapper} onClick={() => setOpenDemo(true)}>
-          <img
-            src={iphone}
-            alt="iPhone device"
-            className={styles.iphoneImage}
-          />
-          <img
-            src={demoButton}
-            alt="Botón demo"
-            className={styles.demoButton}
-          />
-        </div>
+        <IphoneDevice />
       </div>
     </>
   );

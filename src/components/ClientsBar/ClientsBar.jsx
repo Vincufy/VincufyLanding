@@ -8,12 +8,18 @@ import cliente5 from "../../assets/Clients/LogoPandrah.png";
 const ClientsBar = () => {
   const clients = [cliente1, cliente2, cliente3, cliente4, cliente5];
   return (
-    <div className={styles.container}>
-  {clients.map((client, index) => (
-    <img key={index} src={client} alt={`Logo cliente ${index}`} className={styles.clientLogos}/>
-  ))}
-</div>
-
+    <div className={styles.mainContainer}>
+      <div className={styles.container}>
+        {clients.map((client, index) => (
+          <img
+            key={index}
+            src={client}
+            alt={`Logo cliente ${index}`}
+            className={styles.clientLogos}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

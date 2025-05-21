@@ -101,46 +101,6 @@
   cursor: pointer;
 }
 
-.logInBtn {
-  background-color: black;
-  border: 1px solid gray;
-}
-
-.imageWrapper {
-  position: relative;
-  width: fit-content;
-  height: fit-content;
-}
-
-.iphoneImage {
-  height: 355px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.iphoneImage:hover {
-  cursor: pointer;
-}
-
-.demoButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 70px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
-}
-
-.demoButton:hover {
-  cursor: pointer;
-}
-
-.imageWrapper:hover .demoButton {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -210,15 +170,12 @@
     width: 100%;
   }
   .backgroundVideo {
-    width: 150%;
+    width: 135%;
     height: 62%;
   }
-  .iphoneImage {
-    margin-right: 20px;
-  }
   .createEventBtn {
-  padding: 3px 20px;
-}
+    padding: 3px 20px;
+  }
   .textAndButton {
     width: 100%;
     padding: 0 20px;
@@ -262,19 +219,4 @@
 }
 
 @media (max-width: 480px) {
-  .title {
-    font-size: 20px;
-  }
-
-  .subtitle {
-    font-size: 16px;
-  }
-
-  .iphoneImage {
-    height: 240px;
-  }
-
-  .demoButton {
-    height: 50px;
-  }
 }

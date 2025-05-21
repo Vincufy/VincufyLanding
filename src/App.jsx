@@ -1,6 +1,6 @@
-import vincufyLogo from "./assets/Logo/logoHeaderVincufy.png";
 import { useState } from "react";
 import {
+  Header,
   Banner,
   ClientsBar,
   MessageButton,
@@ -19,11 +19,7 @@ const App = () => {
   return (
     <div>
       <section id="inicio">
-        <img
-          src={vincufyLogo}
-          alt="Vincufy Logo"
-          style={{ height: "28px", width: "115px", marginTop: "2rem" }}
-        />
+        <Header/>
         <Banner
           setOpenModal={setOpenModal}
           setOrigin={setOrigin}
@@ -38,7 +34,7 @@ const App = () => {
       <section id="paso-a-paso">
         <StepByStep setOpenModal={setOpenModal} setOrigin={setOrigin} />
       </section>
-      <MessageButton setOpenModal={setOpenModal} setOrigin={setOrigin} />
+      {/* <MessageButton setOpenModal={setOpenModal} setOrigin={setOrigin} /> */}
       {openModal && (
         <ContactModal
           openModal={openModal}
