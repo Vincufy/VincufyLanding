@@ -136,14 +136,14 @@
 
   .textDiv {
     flex-direction: row;
-    gap: 10px;
+    gap: 18px;
     padding: 0 10px;
     justify-content: center;
   }
 
   .textDiv h1 {
     font-size: 28px;
-    margin: 0;
+    margin-top: 3px;
   }
 
   .titleSubtitle {
@@ -152,11 +152,12 @@
   }
 
   .titleSubtitle h2 {
-    font-size: 20px;
+    font-size: 23px;
+    margin-bottom: 4px;
   }
 
   .titleSubtitle p {
-    font-size: 14px;
+    font-size: 17px;
     line-height: 20px;
   }
 
