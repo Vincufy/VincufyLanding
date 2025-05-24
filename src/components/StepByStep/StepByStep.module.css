@@ -1,6 +1,6 @@
-.sectionTitle{
-    font-size: 35px;
-    margin-top: 100px;
+.sectionTitle {
+  font-size: 35px;
+  margin-top: 100px;
 }
 .container {
   display: grid;
@@ -13,7 +13,7 @@
 
 .card {
   position: relative;
-  border-radius: 5px;
+  border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -23,6 +23,7 @@
   height: 450px;
   color: white;
   gap: 30px;
+  background-color: rgb(40, 39, 39);
 }
 
 .background {
@@ -31,27 +32,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../../assets/Backgrounds/fondoCard.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 9px;
+  background: linear-gradient(
+    90deg,
+    #141414 0%,
+    #3f3f3f 25%,
+    #9b9b9b 50%,
+    #3f3f3f 75%,
+    #1a1a1a 100%
+  );
+  background-size: cover;
   z-index: 0;
 }
 
-/* Asegura que el contenido esté por encima del fondo */
 .card > *:not(.background) {
   position: relative;
   z-index: 1;
 }
 
-/* Card 1 y 4: color sólido */
 .card:nth-child(1),
 .card:nth-child(4) {
   background-color: #8811c8;
 }
 
-/* Escalonado: desplaza toda la segunda columna */
 .card:nth-child(2n) {
   margin-top: 55px;
 }
@@ -96,7 +98,7 @@
   width: 135px;
   border-radius: 9px;
 }
-.callToAction{
+.callToAction {
   all: unset;
   background-color: #8811c8;
   color: white;
@@ -104,11 +106,72 @@
   border-radius: 5px;
   padding: 13px 45px;
   transition: transform 0.5s ease-in-out;
-  margin-top: 70px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 .callToAction:hover {
   transform: scale(1.05);
   background-color: #620a91;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+
+  .card {
+    max-width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0 !important;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .textDiv {
+    flex-direction: row;
+    gap: 10px;
+    padding: 0 10px;
+    justify-content: center;
+  }
+
+  .textDiv h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .titleSubtitle {
+    width: auto;
+    text-align: left;
+  }
+
+  .titleSubtitle h2 {
+    font-size: 20px;
+  }
+
+  .titleSubtitle p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .video {
+    height: 200px;
+    width: auto;
+    max-width: 80vw;
+    border-radius: 9px;
+  }
+  .sectionTitle {
+    font-size: 26px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  .callToAction{
+      padding: 13px 35px;
+  }
 }

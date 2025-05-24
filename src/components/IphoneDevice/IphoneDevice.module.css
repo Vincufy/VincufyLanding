@@ -7,28 +7,14 @@
   cursor: pointer;
 }
 
-/* .demoButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 70px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  pointer-events: none;
+@media (max-width: 768px) {
+  .iphoneImage {
+    height: 250px;
+  }
 }
 
-.demoButton:hover {
-  cursor: pointer;
+@media (max-width: 480px) {
+  .iphoneImage {
+    height: 250px;
+  }
 }
-
-.imageWrapper {
-  position: relative;
-  width: fit-content;
-  height: fit-content;
-}
-
-.imageWrapper:hover .demoButton {
-  opacity: 1;
-  pointer-events: auto;
-} */

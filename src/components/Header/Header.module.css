@@ -39,16 +39,15 @@
 
 @media (max-width: 600px) {
   .header {
-    flex-direction: row;
-    align-items: center;
+    justify-content: space-between;
   }
   .vincufyLogo {
-    height: 35px;
-    width: 145px;
+    height: 30px;
+    width: 125px;
   }
   .login {
-    left: 30px;
-    right: auto;
+    position: static;
+    transform: none;
     padding: 3px 15px;
   }
 }

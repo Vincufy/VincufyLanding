@@ -1,22 +1,26 @@
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 .container {
-  background-image: url("../../assets/Backgrounds/fondoCard.png");
-  background-size: 100vw;
+  width: 100%;
+  max-width: 1200px;
+  background-size: cover;
   background-position: center;
-  border-radius: 40px;
+  border-radius: 25px;
   padding: 1rem;
-  margin: 0 auto;
   height: 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 20px;
-}
-
-.container img {
-  height: 70px;
 }
 
 .clientLogos {
+  height: 70px;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -24,17 +28,21 @@
   transform: scale(1.3);
 }
 
-/* Responsive: tablets y pantallas medias */
 @media (max-width: 768px) {
-  .container {
-    height: 80px;
-    background-size: 110%;
-    margin-top: 30px;
-  }
-  .container img {
-    height: 55px;
-  }
   .mainContainer {
-    width: 105%;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .container {
+    flex-wrap: wrap;
+    gap: 10px;
+    height: auto;
+    padding: 1.8rem 1.6rem;
+    margin-top: 40px;
+  }
+
+  .clientLogos {
+    height: 50px;
   }
 }

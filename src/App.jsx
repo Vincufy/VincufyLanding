@@ -34,7 +34,7 @@ const App = () => {
       <section id="paso-a-paso">
         <StepByStep setOpenModal={setOpenModal} setOrigin={setOrigin} />
       </section>
-      {/* <MessageButton setOpenModal={setOpenModal} setOrigin={setOrigin} /> */}
+      <MessageButton setOpenModal={setOpenModal} setOrigin={setOrigin} />
       {openModal && (
         <ContactModal
           openModal={openModal}
