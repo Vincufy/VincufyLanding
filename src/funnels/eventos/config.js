@@ -3,13 +3,12 @@ export const eventosFunnel = {
   launchDate: "septiembre 2026",
   questions: [
     {
-      id: "participants",
-      text: "¿Cuántas personas suelen ir a tus eventos?",
+      id: "organizerType",
+      text: "¿Qué tipo de organizador sos?",
       options: [
-        { value: "0-100", label: "0 a 100" },
-        { value: "100-300", label: "100 a 300" },
-        { value: "300-700", label: "300 a 700" },
-        { value: "700+", label: "Más de 700" },
+        { value: "boliche", label: "Boliche" },
+        { value: "productor", label: "Productor" },
+        { value: "otro", label: "Otro" },
       ],
     },
     {
@@ -23,12 +22,13 @@ export const eventosFunnel = {
       ],
     },
     {
-      id: "organizerType",
-      text: "¿Qué tipo de organizador sos?",
+      id: "participants",
+      text: "¿Cuántas personas suelen ir a tus eventos?",
       options: [
-        { value: "boliche", label: "Boliche" },
-        { value: "productor", label: "Productor" },
-        { value: "otro", label: "Otro" },
+        { value: "0-100", label: "0 a 100" },
+        { value: "100-300", label: "100 a 300" },
+        { value: "300-700", label: "300 a 700" },
+        { value: "700+", label: "Más de 700" },
       ],
     },
   ],
