@@ -123,7 +123,9 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
             <li key={i}>{b}</li>
           ))}
         </ul>
-        <p className={styles.launchLine}>{reveal.launchLine}</p>
+        {reveal.launchLine && (
+          <p className={styles.launchLine}>{reveal.launchLine}</p>
+        )}
 
         <form onSubmit={handleSubmit} className={styles.form}>
           {/* Floating-label email field */}

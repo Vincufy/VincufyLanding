@@ -38,8 +38,8 @@
 
 /* ── Card ── */
 .card {
-  background: rgb(40, 39, 39);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0a0a;
+  border: 1px solid rgba(136, 17, 200, 0.35);
   border-radius: 12px;
   padding: 1.5rem;
   position: relative;
@@ -50,13 +50,13 @@
 }
 
 .card:hover {
-  border-color: rgba(136, 17, 200, 0.4);
+  border-color: rgba(136, 17, 200, 0.6);
   box-shadow: 0 0 24px rgba(136, 17, 200, 0.12);
 }
 
 .cardHighlighted {
   border: 2px solid #8811c8;
-  background: rgba(136, 17, 200, 0.1);
+  background: rgba(136, 17, 200, 0.06);
   box-shadow: 0 0 32px rgba(136, 17, 200, 0.2);
 }
 
@@ -82,36 +82,37 @@
   color: rgb(196, 196, 196);
 }
 
-.priceLine {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.price {
+.ticketsLine {
   font-size: 1.75rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.92);
+  line-height: 1.2;
 }
 
-.priceOriginal {
-  color: rgb(111, 111, 111);
-  font-size: 0.875rem;
-  text-decoration: line-through;
+.pricePerTicket {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
 }
 
-.priceSuffix {
-  font-size: 0.8rem;
-  color: #a52ee0;
-  font-weight: 600;
+.discountBadge {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  width: fit-content;
 }
 
-.description {
-  font-size: 0.875rem;
-  color: rgb(196, 196, 196);
-  line-height: 1.5;
-  margin: 0.5rem 0 0.8rem;
+.totalLine {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.87);
+  margin: 0.25rem 0 0.5rem;
 }
 
 /* ── CTA Button — multi-layer shine ── */

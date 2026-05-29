@@ -2,6 +2,28 @@
    OfferModule — dark theme, multi-layer CTA shine
    ============================================================ */
 
+/* ── Scroll-reveal wrapper ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal[data-revealed="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .hero {
   max-width: 720px;
   margin: 0 auto;
@@ -125,21 +147,34 @@
 .steps {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+@media (min-width: 720px) {
+  .steps {
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: flex-start;
+    max-width: 100%;
+  }
 }
 
 .step {
   display: flex;
-  gap: 0.85rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
 }
 
 .stepNumber {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #8811c8;
   color: white;
@@ -147,10 +182,18 @@
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  font-size: 1.05rem;
 }
 
-.stepContent { flex: 1; }
-.stepBody { color: rgb(196, 196, 196); margin: 0; line-height: 1.5; }
+.stepContent {
+  text-align: center;
+}
+
+.stepContent .h3 {
+  text-align: center;
+}
+
+.stepBody { color: rgb(196, 196, 196); margin: 0; line-height: 1.5; text-align: center; }
 
 .inlineCtaWrap {
   display: flex;

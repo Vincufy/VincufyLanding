@@ -49,23 +49,7 @@
   transform-origin: left;
 }
 
-/* Shine sweep over active pill */
-.active::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  transform: skewX(-20deg);
-  animation: shine 3s ease-in-out infinite;
-}
+/* Shine sweep removed — active dot has no ::after */
 
 /* ── Completed dot ── */
 .done {
@@ -91,8 +75,7 @@
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .dot,
-  .active::before,
-  .active::after {
+  .active::before {
     animation: none;
     transition: none;
   }

@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import OfferModule from "../components/quiz/OfferModule";
 import PricingModule from "../components/quiz/PricingModule";
 import HonestRevealModal from "../components/quiz/HonestRevealModal";
+import useInViewReveal from "../components/quiz/useInViewReveal";
 import { landingsBySegment } from "../content/landings";
 import { eventosFunnel } from "../funnels/eventos/config";
 import { SEGMENTS } from "../lib/segments";
@@ -16,17 +17,12 @@ import { submitLead } from "../lib/leadSink";
 import { pixelTrack } from "../lib/metaPixel";
 import styles from "./OfferPage.module.css";
 
-const formatArs = (n) =>
-  new Intl.NumberFormat("es-AR", {
-    style: "decimal",
-    maximumFractionDigits: 0,
-  }).format(n);
-
 const OfferPage = () => {
   const { segment } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTier, setActiveTier] = useState(null);
+  const [pricingRevealRef, pricingRevealed] = useInViewReveal();
 
   // Validate segment early (but after all hooks are declared)
   const isValidSegment = SEGMENTS.includes(segment);
@@ -37,15 +33,22 @@ const OfferPage = () => {
       "pro"
     : "pro";
 
-  const highlightedTier = useMemo(() => {
+  const highlightedTier = (() => {
     const t = eventosFunnel.pricing.tiers.find((x) => x.id === highlightedTierId);
-    return {
-      ...t,
-      priceLabel: `ARS ${formatArs(t.priceArs)}/mes`,
-    };
-  }, [highlightedTierId]);
+    return { ...t };
+  })();
 
   const answers = location.state?.answers;
+
+  // Sentinel tier for custom volume link
+  const customVolumeTier = {
+    id: "custom",
+    name: "Mayor volumen",
+    source: "custom_volume_link",
+    tickets: null,
+    total: null,
+    discountPercent: 0,
+  };
 
   useEffect(() => {
     if (!isValidSegment) return;
@@ -58,7 +61,10 @@ const OfferPage = () => {
     analyticEvent("cta_buy_clicked", {
       segment,
       tier: tier.id,
-      tier_price_ars: tier.priceArs,
+      tier_total_ars: tier.total ?? null,
+      tier_tickets: tier.tickets ?? null,
+      tier_price_per_ticket: tier.pricePerTicket ?? null,
+      source: tier.source ?? "pricing_card",
     });
     setActiveTier(tier);
     analyticEvent("reveal_shown", {
@@ -82,7 +88,8 @@ const OfferPage = () => {
       email,
       segment,
       tier: activeTier.id,
-      tier_price_ars: activeTier.priceArs,
+      tier_total_ars: activeTier.total ?? null,
+      tier_tickets: activeTier.tickets ?? null,
       event_text: eventText,
       funnel_slug: "eventos",
     });
@@ -108,7 +115,7 @@ const OfferPage = () => {
 
     pixelTrack("Lead", {
       content_category: segment,
-      value: activeTier.priceArs,
+      value: activeTier.total ?? null,
       currency: "ARS",
     });
 
@@ -131,9 +138,6 @@ const OfferPage = () => {
     );
   }
 
-  // Get the tier object that a module's cta_buy should use
-  const heroTierWithLabel = highlightedTier;
-
   return (
     <div className={styles.container}>
       <div className={styles.vignette} aria-hidden="true" />
@@ -141,16 +145,27 @@ const OfferPage = () => {
         {landing.modules.map((m, i) => {
           if (m.kind === "pricing") {
             return (
-              <PricingModule
-                key={i}
-                highlightedTierId={highlightedTierId}
-                onTierClick={(tier) =>
-                  handleCtaBuy({
-                    ...tier,
-                    priceLabel: `ARS ${formatArs(tier.priceArs)}/mes`,
-                  })
-                }
-              />
+              <div key={i}>
+                <div
+                  ref={pricingRevealRef}
+                  className={styles.revealWrapper}
+                  data-revealed={pricingRevealed ? "true" : "false"}
+                >
+                  <PricingModule
+                    highlightedTierId={highlightedTierId}
+                    onTierClick={(tier) => handleCtaBuy(tier)}
+                  />
+                </div>
+                <div className={styles.customVolumeRow}>
+                  <button
+                    type="button"
+                    className={styles.customVolumeLink}
+                    onClick={() => handleCtaBuy(customVolumeTier)}
+                  >
+                    Por mayor volumen consultar
+                  </button>
+                </div>
+              </div>
             );
           }
           return (
@@ -158,7 +173,7 @@ const OfferPage = () => {
               key={i}
               module={m}
               onCtaBuy={handleCtaBuy}
-              highlightedTier={heroTierWithLabel}
+              highlightedTier={highlightedTier}
             />
           );
         })}

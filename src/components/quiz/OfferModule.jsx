@@ -1,4 +1,5 @@
 import styles from "./OfferModule.module.css";
+import useInViewReveal from "./useInViewReveal";
 
 const Hero = ({ data, onCtaBuy, highlightedTier }) => (
   <section className={styles.hero}>
@@ -10,7 +11,7 @@ const Hero = ({ data, onCtaBuy, highlightedTier }) => (
         className={styles.ctaPrimary}
         onClick={() => onCtaBuy(highlightedTier)}
       >
-        Comprar Vincufy — {highlightedTier.priceLabel}
+        Registrarme y comprar
       </button>
       {data.ctaSecondary && (
         <button
@@ -115,7 +116,7 @@ const HowItWorks = ({ data, onCtaBuy, highlightedTier }) => (
           className={styles.ctaPrimary}
           onClick={() => onCtaBuy(highlightedTier)}
         >
-          Comprar Vincufy — {highlightedTier.priceLabel}
+          Registrarme y comprar
         </button>
       </div>
     )}
@@ -145,7 +146,7 @@ const Offer = ({ data, onCtaBuy, highlightedTier }) => (
         className={styles.ctaPrimary}
         onClick={() => onCtaBuy(highlightedTier)}
       >
-        Comprar Vincufy — {highlightedTier.priceLabel}
+        Registrarme y comprar
       </button>
     </div>
     {data.microcopy && (
@@ -181,7 +182,7 @@ const FinalClose = ({ data, onCtaBuy, highlightedTier }) => (
           className={styles.ctaPrimary}
           onClick={() => onCtaBuy(highlightedTier)}
         >
-          Comprar Vincufy — {highlightedTier.priceLabel}
+          Registrarme y comprar
         </button>
       </div>
     )}
@@ -210,8 +211,18 @@ const KIND_MAP = {
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {
   const Component = KIND_MAP[m.kind];
+  const [revealRef, revealed] = useInViewReveal();
+
   if (!Component) return null;
-  return <Component data={m} onCtaBuy={onCtaBuy} highlightedTier={highlightedTier} />;
+  return (
+    <div
+      ref={revealRef}
+      className={styles.reveal}
+      data-revealed={revealed ? "true" : "false"}
+    >
+      <Component data={m} onCtaBuy={onCtaBuy} highlightedTier={highlightedTier} />
+    </div>
+  );
 };
 
 export default OfferModule;

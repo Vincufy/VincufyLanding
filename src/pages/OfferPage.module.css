@@ -94,6 +94,54 @@
   min-height: 48px;
 }
 
+/* ── Scroll-reveal wrapper for PricingModule ── */
+.revealWrapper {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.revealWrapper[data-revealed="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealWrapper {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Custom volume link ── */
+.customVolumeRow {
+  display: flex;
+  justify-content: center;
+  padding: 0 1.25rem 2rem;
+}
+
+.customVolumeLink {
+  appearance: none;
+  background: none;
+  border: none;
+  color: #a52ee0;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.5rem;
+  transition: color 150ms ease;
+  min-height: 44px;
+}
+
+.customVolumeLink:hover {
+  color: #8811c8;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .container::before { animation: none; }
 }

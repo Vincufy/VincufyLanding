@@ -49,16 +49,20 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                 <div className={styles.badge}>RECOMENDADO PARA VOS</div>
               )}
               <div className={styles.tierName}>{tier.name}</div>
-              <div className={styles.priceLine}>
-                <span className={styles.price}>
-                  ARS {formatArs(tier.priceArs)}
-                </span>
-                <span className={styles.priceOriginal}>
-                  ARS {formatArs(tier.priceArsOriginal)}
-                </span>
+              <div className={styles.ticketsLine}>
+                {formatArs(tier.tickets)} entradas
               </div>
-              <div className={styles.priceSuffix}>/mes para siempre</div>
-              <p className={styles.description}>{tier.description}</p>
+              <div className={styles.pricePerTicket}>
+                ARS {formatArs(tier.pricePerTicket)} c/u
+              </div>
+              {tier.discountPercent > 0 && (
+                <div className={styles.discountBadge}>
+                  {tier.discountPercent}% off
+                </div>
+              )}
+              <div className={styles.totalLine}>
+                Total: ARS {formatArs(tier.total)}
+              </div>
               <button
                 type="button"
                 className={`${styles.cta} ${
@@ -69,7 +73,7 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                   onTierClick(tier);
                 }}
               >
-                Comprar Vincufy — ARS {formatArs(tier.priceArs)}/mes
+                Registrarme y comprar
               </button>
             </div>
           );

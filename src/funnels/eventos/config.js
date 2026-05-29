@@ -40,26 +40,28 @@ export const eventosFunnel = {
       {
         id: "starter",
         name: "Starter",
-        priceArs: 9500,
-        priceArsOriginal: 19000,
-        description:
-          "Eventos hasta 100 personas. 1 evento activo por vez. Funciones esenciales.",
+        tickets: 20,
+        pricePerTicket: 320,
+        total: 6400,
+        discountPercent: 0,
       },
       {
         id: "pro",
         name: "Pro",
-        priceArs: 24500,
-        priceArsOriginal: 49000,
-        description:
-          "Eventos hasta 700 personas. Eventos ilimitados. Comunidad + comunicación.",
+        tickets: 300,
+        pricePerTicket: 256,
+        total: 76800,
+        discountPercent: 20,
+        originalPricePerTicket: 320,
       },
       {
         id: "business",
         name: "Business",
-        priceArs: 64500,
-        priceArsOriginal: 129000,
-        description:
-          "Eventos +700 personas. Multi-staff, antifraude, control de aforo.",
+        tickets: 1000,
+        pricePerTicket: 192,
+        total: 192000,
+        discountPercent: 40,
+        originalPricePerTicket: 320,
       },
     ],
     // tier destacado por segmento (Pro en las 3 para este round)
@@ -70,23 +72,22 @@ export const eventosFunnel = {
     },
   },
   reveal: {
-    title: "Antes de cobrarte, te debo honestidad.",
+    title: "Estamos sumando organizadores cada semana.",
     paragraphs: [
-      "Vincufy todavía no está en la calle. Estoy hablando con organizadores como vos para construir la versión que de verdad les sirva, no algo a medio cocinar.",
-      "Tu click me dice algo importantísimo. Y para los primeros que reserven, vale:",
+      "Vincufy está creciendo con cuidado. Sumamos clientes paulatinamente para que cada uno tenga la experiencia que se merece — eso significa que la lista para arrancar tiene espera.",
+      "Si dejás tu mail, te contactamos personalmente para que seas uno de los próximos en empezar a vivir la experiencia Vincufy en tus eventos.",
     ],
     benefits: [
-      "Precio fundador: 50% off de por vida. Sí, para siempre.",
-      "Acceso 30 días antes que el público general.",
-      "Te llamo personalmente antes de cobrarte el primer peso.",
+      "Te contactamos personalmente, sin formularios genéricos.",
+      "Acceso prioritario apenas se abra tu lugar.",
+      "Precio fundador asegurado: 50% off de por vida.",
     ],
-    launchLine: "Lanzamos en septiembre 2026.",
+    launchLine: "",
     emailLabel: "Tu email",
     emailPlaceholder: "tu@email.com",
     eventTextLabel: "¿Qué evento estás armando ahora?",
     eventTextHint: "Opcional",
-    submitLabel: "Reservar mi lugar",
-    footerNote:
-      "No te cobro ahora. Si decido no construirlo, te aviso y nunca más te molesto.",
+    submitLabel: "Registrarme y comprar",
+    footerNote: "Nos contactamos personalmente. Sin spam, sin compromiso.",
   },
 };
