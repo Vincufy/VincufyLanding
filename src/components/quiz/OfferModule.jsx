@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
+
+/* ── Existing renderers ── */
 
 const Hero = ({ data, onCtaBuy, highlightedTier }) => (
   <section className={styles.hero}>
@@ -189,6 +192,284 @@ const FinalClose = ({ data, onCtaBuy, highlightedTier }) => (
   </section>
 );
 
+/* ── NEW renderers ── */
+
+const HeroMockup = () => (
+  <div
+    className={`${styles.placeholder} ${styles.heroMockup}`}
+    data-label="PLACEHOLDER — agregar video o imagen de producto"
+    aria-hidden="true"
+  >
+    PLACEHOLDER — video/imagen de producto
+    <span>1920×1080 · 16:9</span>
+  </div>
+);
+
+const HeroImage = () => (
+  <div className={styles.heroImageWrap}>
+    <div
+      className={`${styles.placeholder} ${styles.heroImagePlaceholder}`}
+      data-label="PLACEHOLDER — imagen contextual del evento"
+      aria-hidden="true"
+    >
+      PLACEHOLDER — imagen contextual del evento
+      <span>2100×900 · 21:9 cinematic</span>
+    </div>
+  </div>
+);
+
+const ProblemStat = ({ data }) => (
+  <section className={styles.problemStat}>
+    <p className={styles.statNumber}>{data.stat}</p>
+    <p className={styles.statText}>{data.text}</p>
+    {data.estimacion && (
+      <p className={styles.statEstimacion}>* estimación interna · no auditada</p>
+    )}
+  </section>
+);
+
+const FounderVoice = ({ data }) => (
+  <section className={styles.founderVoice}>
+    <div className={styles.founderInner}>
+      <div className={styles.founderAvatarWrap}>
+        <div
+          className={`${styles.placeholder} ${styles.founderAvatar}`}
+          data-label="foto founder"
+          aria-hidden="true"
+        >
+          foto
+          <span>400×400</span>
+        </div>
+        <p className={styles.founderName}>{data.name}</p>
+      </div>
+      <div>
+        <span className={styles.founderQuoteIcon}>"</span>
+        <p className={styles.founderText}>{data.text}</p>
+      </div>
+    </div>
+  </section>
+);
+
+const ProblemFamiliar = ({ data }) => (
+  <section className={styles.problemFamiliar}>
+    <h2 className={styles.problemFamiliarTitle}>{data.title}</h2>
+    <ul className={styles.emojiBullets}>
+      {data.bullets.map((b, i) => (
+        <li key={i}>
+          <span>{b.emoji}</span>
+          <span>{b.text}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+);
+
+const BeforeAfterArrow = ({ data }) => (
+  <section className={styles.beforeAfterArrow}>
+    {data.title && (
+      <h2 className={styles.beforeAfterTitle}>{data.title}</h2>
+    )}
+    <div className={styles.baaGrid}>
+      <div className={styles.baaCol}>
+        <p className={styles.baaColTitle}>{data.before.title}</p>
+        <ul className={styles.baaBullets}>
+          {data.before.items.map((it, i) => (
+            <li key={i}>{it}</li>
+          ))}
+        </ul>
+      </div>
+      <div className={styles.baaArrow} aria-hidden="true">➔</div>
+      <div className={`${styles.baaCol} ${styles.baaColAfter}`}>
+        <p className={`${styles.baaColTitle} ${styles.baaColTitleAfter}`}>{data.after.title}</p>
+        <ul className={styles.baaBullets}>
+          {data.after.items.map((it, i) => (
+            <li key={i}>{it}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+);
+
+const IncludesChecklist = ({ data }) => (
+  <section className={styles.includesChecklist}>
+    <h2 className={styles.includesChecklistTitle}>{data.title}</h2>
+    <div className={styles.checklistItems}>
+      {data.items.map((item, i) => (
+        <div key={i}>
+          {item.isBonus && (
+            <p className={styles.bonusEyebrow}>🎁 BONO</p>
+          )}
+          <div
+            className={`${styles.checklistRow}${item.isBonus ? ` ${styles.checklistRowBonus}` : ""}`}
+          >
+            <span className={styles.checklistIcon}>{item.emoji}</span>
+            <div>
+              <p className={styles.checklistFeatureName}>{item.name}</p>
+              <p className={styles.checklistFeatureDesc}>{item.desc}</p>
+            </div>
+            <div className={styles.checkmarkIcon} aria-hidden="true">✓</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const GalleryCarousel = ({ data }) => (
+  <section className={styles.galleryCarousel}>
+    <div className={styles.galleryCarouselInner}>
+      <h2 className={styles.galleryCarouselTitle}>{data.title}</h2>
+    </div>
+    <div className={styles.galleryTrackWrap}>
+      <div className={styles.galleryTrack} role="region" aria-label="Galería de pantallas">
+        {data.cards.map((card, i) => (
+          <div key={i} className={styles.galleryCard}>
+            <div
+              className={`${styles.placeholder} ${styles.galleryCardPlaceholder}`}
+              data-label={`PLACEHOLDER — ${card.caption}`}
+              aria-hidden="true"
+            >
+              PLACEHOLDER
+              <span>{card.dimensions || "390×844 · 9:16"}</span>
+            </div>
+            <p className={styles.galleryCardCaption}>{card.caption}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const BenefitsGridTwoCol = ({ data }) => (
+  <section className={styles.benefitsGrid}>
+    <h2 className={styles.benefitsGridTitle}>{data.title}</h2>
+    <div className={styles.benefitsGridCols}>
+      <div className={styles.benefitsCol}>
+        <p className={styles.benefitsColTitle}>{data.colOrganizer.title}</p>
+        <ul className={styles.benefitsList}>
+          {data.colOrganizer.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      </div>
+      <div className={styles.benefitsCol}>
+        <p className={styles.benefitsColTitle}>{data.colAudience.title}</p>
+        <ul className={styles.benefitsList}>
+          {data.colAudience.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+);
+
+const TestimonialsCarousel = ({ data }) => (
+  <section className={styles.testimonialsCarousel}>
+    <div className={styles.testimonialsCarouselInner}>
+      <h2 className={styles.testimonialsCarouselTitle}>{data.title}</h2>
+    </div>
+    <div className={styles.testimonialsTrackWrap}>
+      <div className={styles.testimonialsTrack} role="region" aria-label="Testimonios">
+        {data.items.map((t, i) => (
+          <div key={i} className={styles.testimonialCard}>
+            {t.placeholder && (
+              <span className={styles.exampleBadge} aria-label="Ejemplo ilustrativo">Ejemplo</span>
+            )}
+            <p className={styles.testimonialStars}>★★★★★</p>
+            <p className={styles.testimonialQuote}>"{t.quote}"</p>
+            <div className={styles.testimonialFooter}>
+              <div
+                className={`${styles.placeholder} ${styles.testimonialAvatar}`}
+                data-label="foto"
+                aria-hidden="true"
+              >
+                foto
+              </div>
+              <div className={styles.testimonialMeta}>
+                <span className={styles.testimonialName}>{t.name}</span>
+                <span className={styles.testimonialRole}>{t.role}</span>
+                <span className={styles.testimonialCity}>{t.city}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const computeCountdownRemaining = (targetDate) => {
+  const target = new Date(targetDate).getTime();
+  const now = Date.now();
+  const diff = Math.max(0, target - now);
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return { days, hours, minutes, seconds };
+};
+
+const UrgencyCountdown = ({ data }) => {
+  const [remaining, setRemaining] = useState(() => computeCountdownRemaining(data.targetDate));
+
+  useEffect(() => {
+    const targetDate = data.targetDate;
+    const id = setInterval(() => setRemaining(computeCountdownRemaining(targetDate)), 1000);
+    return () => clearInterval(id);
+  }, [data.targetDate]);
+
+  const pad = (n) => String(n).padStart(2, "0");
+
+  return (
+    <section className={styles.urgencyCountdown}>
+      <p className={styles.countdownTitle}>{data.label || "Cierre de la lista de fundadores en:"}</p>
+      <div className={styles.countdownGrid}>
+        {[
+          { value: pad(remaining.days), label: "días" },
+          { value: pad(remaining.hours), label: "horas" },
+          { value: pad(remaining.minutes), label: "min" },
+          { value: pad(remaining.seconds), label: "seg" },
+        ].map((cell) => (
+          <div key={cell.label} className={styles.countdownCell}>
+            <span className={styles.countdownDigits}>{cell.value}</span>
+            <span className={styles.countdownLabel}>{cell.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const MoneyBackGuarantee = ({ data }) => (
+  <section className={styles.moneyBack}>
+    <div className={styles.moneyBackCard}>
+      <span className={styles.moneyBackIcon} aria-hidden="true">🔒</span>
+      <h2 className={styles.moneyBackHeadline}>{data.headline || "Garantía 30 días"}</h2>
+      <p className={styles.moneyBackText}>{data.text}</p>
+    </div>
+  </section>
+);
+
+const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => (
+  <section className={styles.finalCtaCard}>
+    <div className={styles.finalCtaCardInner}>
+      <h2 className={styles.finalCtaHeadline}>{data.headline}</h2>
+      <p className={styles.finalCtaSubline}>{data.subline}</p>
+      <button
+        type="button"
+        className={styles.ctaPrimary}
+        onClick={() => onCtaBuy(highlightedTier)}
+      >
+        Registrarme y comprar
+      </button>
+    </div>
+  </section>
+);
+
+/* ── KIND_MAP ── */
 const KIND_MAP = {
   social_proof: SocialProof,
   hero: Hero,
@@ -207,6 +488,20 @@ const KIND_MAP = {
   risk_reduction: RiskReduction,
   faq: FAQ,
   final_close: FinalClose,
+  // New kinds
+  hero_mockup: HeroMockup,
+  hero_image: HeroImage,
+  problem_stat: ProblemStat,
+  founder_voice: FounderVoice,
+  problem_familiar: ProblemFamiliar,
+  before_after_arrow: BeforeAfterArrow,
+  includes_checklist: IncludesChecklist,
+  gallery_carousel: GalleryCarousel,
+  benefits_grid_two_col: BenefitsGridTwoCol,
+  testimonials_carousel: TestimonialsCarousel,
+  urgency_countdown: UrgencyCountdown,
+  money_back_guarantee: MoneyBackGuarantee,
+  final_cta_card: FinalCtaCard,
 };
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {

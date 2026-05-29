@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import OfferModule from "../components/quiz/OfferModule";
 import PricingModule from "../components/quiz/PricingModule";
@@ -16,13 +16,16 @@ import {
 import { submitLead } from "../lib/leadSink";
 import { pixelTrack } from "../lib/metaPixel";
 import styles from "./OfferPage.module.css";
+import moduleStyles from "../components/quiz/OfferModule.module.css";
 
 const OfferPage = () => {
   const { segment } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTier, setActiveTier] = useState(null);
+  const [stickyVisible, setStickyVisible] = useState(false);
   const [pricingRevealRef, pricingRevealed] = useInViewReveal();
+  const heroSentinelRef = useRef(null);
 
   // Validate segment early (but after all hooks are declared)
   const isValidSegment = SEGMENTS.includes(segment);
@@ -56,6 +59,19 @@ const OfferPage = () => {
     analyticEvent("offer_viewed", { segment });
     pixelTrack("ViewContent", { content_category: segment });
   }, [segment, isValidSegment]);
+
+  // IntersectionObserver: show sticky CTA when hero scrolls out of view
+  useEffect(() => {
+    if (!heroSentinelRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setStickyVisible(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(heroSentinelRef.current);
+    return () => observer.disconnect();
+  }, [isValidSegment]);
 
   const handleCtaBuy = (tier) => {
     analyticEvent("cta_buy_clicked", {
@@ -168,6 +184,20 @@ const OfferPage = () => {
               </div>
             );
           }
+          // Attach sentinel ref after the first hero module
+          if (m.kind === "hero" && !heroSentinelRef._attached) {
+            heroSentinelRef._attached = true;
+            return (
+              <div key={i}>
+                <OfferModule
+                  module={m}
+                  onCtaBuy={handleCtaBuy}
+                  highlightedTier={highlightedTier}
+                />
+                <div ref={heroSentinelRef} aria-hidden="true" style={{ height: 0 }} />
+              </div>
+            );
+          }
           return (
             <OfferModule
               key={i}
@@ -177,6 +207,25 @@ const OfferPage = () => {
             />
           );
         })}
+      </div>
+
+      {/* Sticky mobile CTA — shows after hero scrolls out of view, mobile only */}
+      <div
+        className={moduleStyles.stickyMobileCta}
+        data-visible={stickyVisible ? "true" : "false"}
+        aria-hidden={!stickyVisible}
+      >
+        <div className={moduleStyles.stickyMobilePrice}>
+          desde
+          <span className={moduleStyles.stickyMobilePriceNum}>ARS 6.400</span>
+        </div>
+        <button
+          type="button"
+          className={moduleStyles.stickyMobileBtn}
+          onClick={() => handleCtaBuy(customVolumeTier)}
+        >
+          Sumarme
+        </button>
       </div>
 
       {activeTier && (
