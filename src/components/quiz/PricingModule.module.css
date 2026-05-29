@@ -1,0 +1,125 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.headline {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  text-align: center;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.subheadline {
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin: 0 0 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cardHighlighted {
+  border: 2px solid #16a34a;
+  background: #f0fdf4;
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #16a34a;
+  color: white;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.tierName {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+.priceLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.priceOriginal {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  text-decoration: line-through;
+}
+
+.priceSuffix {
+  font-size: 0.8rem;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.5;
+  margin: 0.5rem 0 0.8rem;
+}
+
+.cta {
+  appearance: none;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 150ms ease;
+  margin-top: auto;
+}
+
+.cta:hover {
+  opacity: 0.92;
+}
+
+.ctaHighlighted {
+  background: #16a34a;
+}
