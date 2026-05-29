@@ -1,3 +1,7 @@
+/* ============================================================
+   PricingModule — dark theme, premium cards, shine CTA
+   ============================================================ */
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -9,12 +13,12 @@
   text-align: center;
   margin: 0 0 0.5rem;
   font-weight: 700;
-  color: #111;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .subheadline {
   text-align: center;
-  color: #4b5563;
+  color: rgb(196, 196, 196);
   font-size: 0.95rem;
   margin: 0 0 2rem;
 }
@@ -32,20 +36,28 @@
   }
 }
 
+/* ── Card ── */
 .card {
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: rgb(40, 39, 39);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover {
+  border-color: rgba(136, 17, 200, 0.4);
+  box-shadow: 0 0 24px rgba(136, 17, 200, 0.12);
 }
 
 .cardHighlighted {
-  border: 2px solid #16a34a;
-  background: #f0fdf4;
+  border: 2px solid #8811c8;
+  background: rgba(136, 17, 200, 0.1);
+  box-shadow: 0 0 32px rgba(136, 17, 200, 0.2);
 }
 
 .badge {
@@ -53,20 +65,21 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #16a34a;
+  background: #8811c8;
   color: white;
   padding: 0.2rem 0.75rem;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .tierName {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6b7280;
+  color: rgb(196, 196, 196);
 }
 
 .priceLine {
@@ -79,47 +92,129 @@
 .price {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #111;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .priceOriginal {
-  color: #9ca3af;
+  color: rgb(111, 111, 111);
   font-size: 0.875rem;
   text-decoration: line-through;
 }
 
 .priceSuffix {
   font-size: 0.8rem;
-  color: #16a34a;
+  color: #a52ee0;
   font-weight: 600;
 }
 
 .description {
   font-size: 0.875rem;
-  color: #374151;
+  color: rgb(196, 196, 196);
   line-height: 1.5;
   margin: 0.5rem 0 0.8rem;
 }
 
+/* ── CTA Button — multi-layer shine ── */
 .cta {
   appearance: none;
-  background: #111;
+  background: rgba(255, 255, 255, 0.08);
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   padding: 0.85rem;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
   font-family: inherit;
-  transition: opacity 150ms ease;
   margin-top: auto;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 80ms ease,
+    background 200ms ease,
+    box-shadow 200ms ease;
+  min-height: 48px;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  transform: skewX(-20deg);
+  z-index: 1;
+  animation: shine 3s ease-in-out infinite;
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.22) 0%, transparent 70%);
+  z-index: 0;
+  opacity: 0;
+  animation: breathe 3s ease-in-out infinite;
 }
 
 .cta:hover {
-  opacity: 0.92;
+  transform: scale(1.05);
+  box-shadow: 0 4px 24px rgba(136, 17, 200, 0.3);
 }
 
+.cta:active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
+/* Ripple span injected by JSX */
+.cta :global(.ripple) {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  animation: ripple 600ms ease-out forwards;
+  z-index: 2;
+  transform-origin: center;
+}
+
+/* ── Highlighted CTA — full purple + faster shine ── */
 .ctaHighlighted {
-  background: #16a34a;
+  background: #8811c8;
+  border-color: #8811c8;
+}
+
+.ctaHighlighted::before {
+  animation: shine 3s ease-in-out infinite;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+
+.ctaHighlighted:hover {
+  background: #620a91;
+  box-shadow: 0 6px 32px rgba(136, 17, 200, 0.45);
+}
+
+.ctaHighlighted:hover::before {
+  animation: shineFast 1.4s ease-in-out infinite;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .cta::before,
+  .cta::after { animation: none; }
+  .cta,
+  .cta:hover { transition: none; transform: none; }
 }

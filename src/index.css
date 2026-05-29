@@ -1,4 +1,5 @@
 @import url("https://assets.calendly.com/assets/external/widget.css");
+@import url("./styles/tokens.css");
 html, body {
   overflow-x: hidden;
   margin: 0;

@@ -1,28 +1,95 @@
+/* ============================================================
+   ThankYou — dark atmospheric, premium card
+   ============================================================ */
+
 .container {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #f0fdf4 0%, white 100%);
+  min-height: 100dvh;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1.25rem;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Ambient purple orb layer */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 25% 35%, rgba(136, 17, 200, 0.42) 0%, transparent 35%),
+    radial-gradient(circle at 75% 20%, rgba(165, 46, 224, 0.28) 0%, transparent 40%),
+    radial-gradient(circle at 50% 85%, rgba(98, 10, 145, 0.38) 0%, transparent 45%);
+  filter: blur(80px);
+  animation: orbDrift 18s ease-in-out infinite alternate;
+}
+
+/* SVG noise */
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.04;
+}
+
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(2%, -1.5%) scale(1.04); }
+  66%  { transform: translate(-1.5%, 2%) scale(0.97); }
+  100% { transform: translate(1%, 1%) scale(1.02); }
+}
+
+/* Vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ── Card ── */
 .card {
   max-width: 480px;
   width: 100%;
-  background: white;
+  background: rgb(20, 18, 26);
+  border: 1px solid rgba(136, 17, 200, 0.3);
   border-radius: 16px;
   padding: 2.5rem 1.75rem;
   text-align: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(136, 17, 200, 0.12);
+  position: relative;
+  z-index: 2;
+  animation: modalScaleFade 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes modalScaleFade {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Checkmark ── */
 .checkmark {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: #16a34a;
+  background: linear-gradient(135deg, #8811c8 0%, #a52ee0 100%);
   color: white;
   font-size: 2.25rem;
   font-weight: 700;
@@ -30,34 +97,44 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
+  box-shadow: 0 0 32px rgba(136, 17, 200, 0.4);
+  animation: popIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1) 200ms both;
 }
 
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Typography ── */
 .title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111;
+  color: rgba(255, 255, 255, 0.92);
   margin: 0 0 0.75rem;
 }
 
 .subtitle {
-  color: #4b5563;
+  color: rgb(196, 196, 196);
   margin: 0 0 1.5rem;
   line-height: 1.5;
 }
 
+/* ── List box ── */
 .list {
   text-align: left;
-  background: #f9fafb;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  color: #374151;
+  color: rgb(196, 196, 196);
   margin: 0 0 1.5rem;
 }
 
 .list p {
   margin: 0 0 0.5rem;
   font-weight: 600;
-  color: #111;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .list ol {
@@ -70,9 +147,10 @@
   margin-bottom: 0.3rem;
 }
 
+/* ── Calendly link ── */
 .calendlyButton {
   display: block;
-  background: #111;
+  background: #8811c8;
   color: white;
   text-decoration: none;
   padding: 0.9rem 1rem;
@@ -80,12 +158,51 @@
   font-weight: 600;
   margin: 0 0 1rem;
   font-size: 0.95rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: background 200ms ease, transform 80ms ease, box-shadow 200ms ease;
 }
 
+.calendlyButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shine 3s ease-in-out infinite;
+}
+
+.calendlyButton:hover {
+  background: #620a91;
+  transform: scale(1.03);
+  box-shadow: 0 4px 24px rgba(136, 17, 200, 0.4);
+}
+
+/* ── Home link ── */
 .homeLink {
-  color: #6b7280;
+  color: rgb(111, 111, 111);
   text-decoration: underline;
   font-size: 0.85rem;
 }
 
-.homeLink:hover { color: #111; }
+.homeLink:hover { color: rgba(255, 255, 255, 0.7); }
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before { animation: none; }
+  .card,
+  .checkmark { animation: none; }
+  .calendlyButton::before { animation: none; }
+  .calendlyButton { transition: none; transform: none; }
+}

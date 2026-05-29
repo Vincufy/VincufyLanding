@@ -1,9 +1,70 @@
+/* ============================================================
+   QuizLander — atmospheric dark background + layout
+   ============================================================ */
+
 .container {
-  min-height: 100vh;
-  background: white;
+  min-height: 100dvh;
+  background: #000;
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
+}
+
+/* Ambient purple orb layer */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(136, 17, 200, 0.45) 0%, transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(165, 46, 224, 0.30) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(98, 10, 145, 0.40) 0%, transparent 45%);
+  filter: blur(80px);
+  animation: orbDrift 18s ease-in-out infinite alternate;
+}
+
+/* SVG noise */
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.04;
+}
+
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(2%, -1.5%) scale(1.04); }
+  66%  { transform: translate(-1.5%, 2%) scale(0.97); }
+  100% { transform: translate(1%, 1%) scale(1.02); }
+}
+
+/* Vignette */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Content above all decorative layers */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .backButton {
@@ -12,11 +73,23 @@
   left: 1rem;
   background: none;
   border: none;
-  color: #4b5563;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.9rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
   font-family: inherit;
+  border-radius: 6px;
+  transition: color 150ms ease, background 150ms ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
-.backButton:hover { color: #111; }
+.backButton:hover {
+  color: rgba(255, 255, 255, 0.87);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container::before { animation: none; }
+}

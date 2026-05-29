@@ -136,30 +136,33 @@ const OfferPage = () => {
 
   return (
     <div className={styles.container}>
-      {landing.modules.map((m, i) => {
-        if (m.kind === "pricing") {
+      <div className={styles.vignette} aria-hidden="true" />
+      <div className={styles.pageContent}>
+        {landing.modules.map((m, i) => {
+          if (m.kind === "pricing") {
+            return (
+              <PricingModule
+                key={i}
+                highlightedTierId={highlightedTierId}
+                onTierClick={(tier) =>
+                  handleCtaBuy({
+                    ...tier,
+                    priceLabel: `ARS ${formatArs(tier.priceArs)}/mes`,
+                  })
+                }
+              />
+            );
+          }
           return (
-            <PricingModule
+            <OfferModule
               key={i}
-              highlightedTierId={highlightedTierId}
-              onTierClick={(tier) =>
-                handleCtaBuy({
-                  ...tier,
-                  priceLabel: `ARS ${formatArs(tier.priceArs)}/mes`,
-                })
-              }
+              module={m}
+              onCtaBuy={handleCtaBuy}
+              highlightedTier={heroTierWithLabel}
             />
           );
-        }
-        return (
-          <OfferModule
-            key={i}
-            module={m}
-            onCtaBuy={handleCtaBuy}
-            highlightedTier={heroTierWithLabel}
-          />
-        );
-      })}
+        })}
+      </div>
 
       {activeTier && (
         <HonestRevealModal

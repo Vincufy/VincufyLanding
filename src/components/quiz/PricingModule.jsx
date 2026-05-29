@@ -7,6 +7,26 @@ const formatArs = (n) =>
     maximumFractionDigits: 0,
   }).format(n);
 
+/** Inject a ripple span into the clicked button */
+const createRipple = (e) => {
+  const button = e.currentTarget;
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = e.clientX - rect.left - size / 2;
+  const y = e.clientY - rect.top - size / 2;
+
+  const ripple = document.createElement("span");
+  ripple.className = "ripple";
+  ripple.style.cssText = `
+    width: ${size}px;
+    height: ${size}px;
+    left: ${x}px;
+    top: ${y}px;
+  `;
+  button.appendChild(ripple);
+  ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+};
+
 const PricingModule = ({ highlightedTierId, onTierClick }) => {
   const { headline, subheadline, tiers } = eventosFunnel.pricing;
 
@@ -44,7 +64,10 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                 className={`${styles.cta} ${
                   isHighlighted ? styles.ctaHighlighted : ""
                 }`}
-                onClick={() => onTierClick(tier)}
+                onClick={(e) => {
+                  createRipple(e);
+                  onTierClick(tier);
+                }}
               >
                 Comprar Vincufy — ARS {formatArs(tier.priceArs)}/mes
               </button>

@@ -1,0 +1,196 @@
+/* ============================================================
+   Vincufy Quiz Funnel — Design Tokens & Global Utilities
+   ============================================================ */
+
+:root {
+  /* --- Brand palette --- */
+  --clr-bg: #000;
+  --clr-purple: #8811c8;
+  --clr-purple-hover: #620a91;
+  --clr-purple-light: #a52ee0;
+  --clr-purple-glow: rgba(136, 17, 200, 0.45);
+  --clr-purple-glow-soft: rgba(136, 17, 200, 0.18);
+
+  /* --- Text --- */
+  --clr-text: rgba(255, 255, 255, 0.87);
+  --clr-text-muted: rgb(196, 196, 196);
+  --clr-text-subtle: rgba(255, 255, 255, 0.45);
+
+  /* --- Cards & surfaces --- */
+  --clr-card-fill: rgb(40, 39, 39);
+  --clr-outline-neutral: rgb(111, 111, 111);
+  --clr-card-border: rgba(255, 255, 255, 0.1);
+
+  /* --- Error --- */
+  --clr-error: #ff6b8a;
+  --clr-error-ring: rgba(255, 107, 138, 0.15);
+
+  /* --- CTA shine timing --- */
+  --shine-duration: 3s;
+  --shine-duration-hover: 1.4s;
+
+  /* --- Motion easing --- */
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   Atmospheric Background: ambient purple orbs + SVG noise
+   ============================================================ */
+
+/* Usage: add class="scene" to the page container element */
+.scene {
+  position: relative;
+  background: var(--clr-bg);
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Orb layer */
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(136, 17, 200, 0.45) 0%, transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(165, 46, 224, 0.30) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(98, 10, 145, 0.40) 0%, transparent 45%);
+  filter: blur(80px);
+  animation: orbDrift 18s ease-in-out infinite alternate;
+}
+
+/* SVG noise overlay */
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* inline SVG noise — no external image required */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.04;
+}
+
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(2%, -1.5%) scale(1.04); }
+  66%  { transform: translate(-1.5%, 2%) scale(0.97); }
+  100% { transform: translate(1%, 1%) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene::before { animation: none; }
+}
+
+/* Vignette overlay — place this as a sibling div inside the page */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Page content must sit above orbs/noise */
+.sceneContent {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   CTA Shine — multi-layer (::before shine + ::after breathe)
+   Applied as a mixin via .ctaShine class on the button.
+   In CSS Modules, copy these declarations into the .submit /
+   .ctaPrimary / .cta rules and reference the keyframes below.
+   ============================================================ */
+
+@keyframes shine {
+  0%   { left: -75%; }
+  20%  { left: -75%; }
+  50%  { left: 125%; }
+  100% { left: 125%; }
+}
+
+@keyframes shineFast {
+  0%   { left: -75%; }
+  10%  { left: -75%; }
+  40%  { left: 125%; }
+  100% { left: 125%; }
+}
+
+@keyframes breathe {
+  0%   { opacity: 0; transform: scale(0.8); }
+  50%  { opacity: 0.35; transform: scale(1.15); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+/* Ripple span injected by JSX on click */
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.45; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* ============================================================
+   Progress bar keyframes (referenced from QuizProgressBar.module.css)
+   ============================================================ */
+
+@keyframes pillExpand {
+  from { width: 12px; }
+  to   { width: 48px; }
+}
+
+@keyframes pillFill {
+  from { width: 18%; }
+  to   { width: 100%; }
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(136, 17, 200, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(136, 17, 200, 0.22); }
+}
+
+/* ============================================================
+   Slide-fade keyframes (referenced from QuizQuestion.module.css)
+   ============================================================ */
+
+@keyframes slideEnterForward {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideEnterBack {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideExitForward {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-40px); }
+}
+
+@keyframes slideExitBack {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+/* ============================================================
+   Modal stagger children
+   ============================================================ */
+
+@keyframes modalChildIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modalScaleFade {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}

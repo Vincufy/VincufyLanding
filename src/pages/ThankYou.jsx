@@ -18,6 +18,7 @@ const ThankYou = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.vignette} aria-hidden="true" />
       <div className={styles.card}>
         <div className={styles.checkmark}>✓</div>
         <h1 className={styles.title}>Tu lugar está reservado.</h1>
