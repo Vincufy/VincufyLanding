@@ -31,7 +31,7 @@ const QuizLander = () => {
           setAnswers(saved.answers || {});
         }
       }
-    } catch {}
+    } catch { /* ignore sessionStorage errors */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,7 +46,7 @@ const QuizLander = () => {
   const persist = (next) => {
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    } catch {}
+    } catch { /* ignore sessionStorage errors */ }
   };
 
   const handleAnswer = (value, label) => {

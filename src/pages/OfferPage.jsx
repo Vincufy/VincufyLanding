@@ -76,7 +76,9 @@ const OfferPage = () => {
       tier: activeTier.id,
     });
 
-    const result = await submitLead({
+    // Fire-and-forget: submitLead runs in background, never blocks navigation.
+    // PostHog is the real sink for round 1; backend is optional.
+    const submitPromise = submitLead({
       email,
       segment,
       tier: activeTier.id,
@@ -101,13 +103,19 @@ const OfferPage = () => {
       tier: activeTier.id,
       email_domain: email.split("@")[1],
       has_event_text: !!eventText,
-      backend_delivered: result.delivered,
+      backend_delivered: null,
     });
 
     pixelTrack("Lead", {
       content_category: segment,
       value: activeTier.priceArs,
       currency: "ARS",
+    });
+
+    submitPromise.catch((err) => {
+      if (!import.meta.env.PROD) {
+        console.warn("[OfferPage] submitLead failed:", err);
+      }
     });
 
     navigate("/q/eventos/gracias");
@@ -155,7 +163,6 @@ const OfferPage = () => {
 
       {activeTier && (
         <HonestRevealModal
-          tier={activeTier}
           onClose={handleCloseModal}
           onSubmit={handleSubmitLead}
         />

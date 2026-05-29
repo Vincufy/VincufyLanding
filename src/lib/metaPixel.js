@@ -11,7 +11,6 @@ export function initMetaPixel() {
   }
 
   // Standard Meta Pixel snippet
-  /* eslint-disable */
   !(function (f, b, e, v, n, t, s) {
     if (f.fbq) return;
     n = f.fbq = function () {
@@ -33,7 +32,6 @@ export function initMetaPixel() {
     "script",
     "https://connect.facebook.net/en_US/fbevents.js"
   );
-  /* eslint-enable */
 
   window.fbq("init", pixelId);
   window.fbq("track", "PageView");

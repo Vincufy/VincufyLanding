@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./HonestRevealModal.module.css";
 import { eventosFunnel } from "../../funnels/eventos/config";
 
-const HonestRevealModal = ({ tier, onClose, onSubmit }) => {
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const HonestRevealModal = ({ onClose, onSubmit }) => {
   const { reveal } = eventosFunnel;
   const [email, setEmail] = useState("");
   const [eventText, setEventText] = useState("");
@@ -28,7 +30,7 @@ const HonestRevealModal = ({ tier, onClose, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !email.includes("@")) {
+    if (!email || !EMAIL_REGEX.test(email)) {
       setError("Necesitamos un mail válido");
       return;
     }
@@ -36,7 +38,7 @@ const HonestRevealModal = ({ tier, onClose, onSubmit }) => {
     setError(null);
     try {
       await onSubmit({ email, eventText });
-    } catch (err) {
+    } catch {
       setError("Algo falló. ¿Probás otra vez?");
       setSubmitting(false);
     }

@@ -40,7 +40,7 @@ const MailchimpForm = ({ title }) => {
       } else {
         throw new Error("No se pudo suscribir.");
       }
-    } catch (error) {
+    } catch {
       alert("Hubo un problema al intentar suscribirse.");
     }
   };
