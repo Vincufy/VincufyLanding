@@ -13,6 +13,7 @@ import {
   hashEmail,
 } from "../lib/posthog";
 import { submitLead } from "../lib/leadSink";
+import { pixelTrack } from "../lib/metaPixel";
 import styles from "./OfferPage.module.css";
 
 const formatArs = (n) =>
@@ -50,6 +51,7 @@ const OfferPage = () => {
     if (!isValidSegment) return;
     analyticPageview(`/q/eventos/r/${segment}`);
     analyticEvent("offer_viewed", { segment });
+    pixelTrack("ViewContent", { content_category: segment });
   }, [segment, isValidSegment]);
 
   const handleCtaBuy = (tier) => {
@@ -102,14 +104,11 @@ const OfferPage = () => {
       backend_delivered: result.delivered,
     });
 
-    // Dispatch Meta Pixel Lead event if pixel loaded (Task 22 will configure this)
-    if (typeof window.fbq === "function") {
-      window.fbq("track", "Lead", {
-        content_category: segment,
-        value: activeTier.priceArs,
-        currency: "ARS",
-      });
-    }
+    pixelTrack("Lead", {
+      content_category: segment,
+      value: activeTier.priceArs,
+      currency: "ARS",
+    });
 
     navigate("/q/eventos/gracias");
   };
