@@ -74,20 +74,18 @@ export const eventosFunnel = {
   reveal: {
     title: "Estamos sumando organizadores cada semana.",
     paragraphs: [
-      "Vincufy está creciendo con cuidado. Sumamos clientes paulatinamente para que cada uno tenga la experiencia que se merece — eso significa que la lista para arrancar tiene espera.",
-      "Si dejás tu mail, te contactamos personalmente para que seas uno de los próximos en empezar a vivir la experiencia Vincufy en tus eventos.",
+      "Sumamos clientes paulatinamente. Dejá tu mail y te contactamos para que seas uno de los próximos.",
     ],
     benefits: [
-      "Te contactamos personalmente, sin formularios genéricos.",
+      "Te contactamos personalmente.",
       "Acceso prioritario apenas se abra tu lugar.",
-      "Precio fundador asegurado: 50% off de por vida.",
     ],
     launchLine: "",
     emailLabel: "Tu email",
     emailPlaceholder: "tu@email.com",
     eventTextLabel: "¿Qué evento estás armando ahora?",
     eventTextHint: "Opcional",
-    submitLabel: "Registrarme y comprar",
-    footerNote: "Nos contactamos personalmente. Sin spam, sin compromiso.",
+    submitLabel: "Sumarme",
+    footerNote: "Sin spam, sin compromiso.",
   },
 };
