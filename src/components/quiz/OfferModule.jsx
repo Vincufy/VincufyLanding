@@ -230,7 +230,6 @@ const HeroImage = ({ data = {} }) => {
           src={data.src}
           alt={data.alt || ""}
           className={styles.heroImageImg}
-          loading="lazy"
           onError={() => setImgFailed(true)}
         />
       </div>
