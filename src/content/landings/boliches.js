@@ -57,26 +57,10 @@ export const boliches = {
       },
     },
     {
-      kind: "social_proof",
-      text: "Organizadores de eventos están dejando de perder su público después de cada noche.",
-    },
-    {
-      kind: "problem_stat",
-      stat: "8 de cada 10",
-      text: "boliches no sabe exactamente quién entró el sábado pasado ni cómo volver a contactarlos la semana siguiente.",
-      estimacion: true,
-    },
-    {
-      kind: "founder_voice",
-      name: "El founder de Vincufy",
-      text: "Armé Vincufy porque organicé eventos por años y siempre me pasaba lo mismo: llenábamos el boliche, la gente la pasaba bien, y al finde siguiente teníamos que salir a buscar ese mismo público desde cero. Las listas se perdían, los RRPPs manejaban sus contactos por separado, y el boliche nunca quedaba con nada. Después de mil noches así, entendí que el problema no era la convocatoria: era que no existía una forma simple de que el asistente quedara vinculado al boliche después de la puerta.",
-    },
-    {
       kind: "what_is",
-      title: "Vincufy: más que una ticketera.",
+      title: "¿Qué es Vincufy?",
       body:
-        "Vincufy es una plataforma para vender entradas, organizar asistentes y mantener a tu público conectado con tu boliche entre fecha y fecha. No es solo una transacción. Es el primer paso para convertir asistentes en comunidad.",
-      tagline: "Entrada + comunidad + comunicación directa.",
+        "Vincufy es una plataforma integral para la gestión de eventos: vendés entradas, gestionás acreditaciones, administrás clientes y construís una comunidad propia para llenar más fácil tus próximas fechas. Tu público se vincula antes, durante y después del evento dentro de la plataforma — una experiencia más completa, social y memorable.",
     },
     {
       kind: "includes_checklist",
