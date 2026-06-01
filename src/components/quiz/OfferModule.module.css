@@ -44,6 +44,7 @@
   color: rgb(196, 196, 196);
   line-height: 1.55;
   margin: 0 0 1.5rem;
+  white-space: pre-line;
 }
 
 .heroCtas {

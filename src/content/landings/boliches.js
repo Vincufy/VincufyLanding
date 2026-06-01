@@ -7,15 +7,15 @@ export const boliches = {
   modules: [
     {
       kind: "hero",
-      title: "Las ticketeras no deberían poder vender solo entradas.",
-      subtitle: "Sino ayudarte a crear tu comunidad y crecer.",
+      title: "Las ticketeras no deberían solo vender entradas.",
+      subtitle: "Sino ayudarte a crear\ntu comunidad y crecer.",
     },
     {
       kind: "hero_image",
     },
     {
       kind: "tagline_cta",
-      text: "0% de comisión, sin costo de servicio.",
+      text: "0% de comisión, sin costo de servicio, liquidación de fondos al instante.",
       ctaPrimary: { kind: "cta_buy" },
       ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
     },
