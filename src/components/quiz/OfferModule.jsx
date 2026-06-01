@@ -213,17 +213,46 @@ const HeroMockup = () => (
   </div>
 );
 
-const HeroImage = () => (
-  <div className={styles.heroImageWrap}>
-    <div
-      className={`${styles.placeholder} ${styles.heroImagePlaceholder}`}
-      data-label="PLACEHOLDER — imagen contextual del evento"
-      aria-hidden="true"
-    >
-      PLACEHOLDER — imagen contextual del evento
-      <span>2100×900 · 21:9 cinematic</span>
+const HeroImage = ({ data = {} }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const isSquare = data.aspect === "square";
+  const wrapClass = `${styles.heroImageWrap} ${isSquare ? styles.heroImageWrapSquare : ""}`;
+  const placeholderClass = `${styles.placeholder} ${isSquare ? styles.heroImagePlaceholderSquare : styles.heroImagePlaceholder}`;
+  const placeholderLabel = isSquare
+    ? "PLACEHOLDER — imagen cuadrada"
+    : "PLACEHOLDER — imagen contextual del evento";
+  const dimensionHint = isSquare ? "1200×1200 · 1:1 cuadrada" : "2100×900 · 21:9 cinematic";
+
+  if (data.src && !imgFailed) {
+    return (
+      <div className={wrapClass}>
+        <img
+          src={data.src}
+          alt={data.alt || ""}
+          className={styles.heroImageImg}
+          loading="lazy"
+          onError={() => setImgFailed(true)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className={wrapClass}>
+      <div className={placeholderClass} data-label={placeholderLabel} aria-hidden="true">
+        {placeholderLabel}
+        <span>{dimensionHint}</span>
+      </div>
     </div>
-  </div>
+  );
+};
+
+const HighlightBox = ({ data }) => (
+  <section className={styles.highlightBox}>
+    <div className={styles.highlightBoxInner}>
+      <p className={styles.highlightBoxText}>{data.text}</p>
+    </div>
+  </section>
 );
 
 const ProblemStat = ({ data }) => (
@@ -557,6 +586,7 @@ const KIND_MAP = {
   money_back_guarantee: MoneyBackGuarantee,
   final_cta_card: FinalCtaCard,
   tagline_cta: TaglineCta,
+  highlight_box: HighlightBox,
 };
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {

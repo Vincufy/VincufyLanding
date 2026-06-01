@@ -12,12 +12,18 @@ export const boliches = {
     },
     {
       kind: "hero_image",
+      aspect: "square",
+      src: "/landing/hero-boliches.png",
+      alt: "Vincufy para boliches",
     },
     {
       kind: "tagline_cta",
-      text: "0% de comisión, sin costo de servicio, liquidación de fondos al instante.",
       ctaPrimary: { kind: "cta_buy" },
       ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
+    },
+    {
+      kind: "highlight_box",
+      text: "0% de comisión · sin costo de servicio · liquidación de fondos al instante",
     },
     {
       kind: "problem_familiar",
