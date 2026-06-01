@@ -27,7 +27,7 @@
 .hero {
   max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 1.25rem 2rem;
+  padding: 3rem 1.25rem 0.75rem;
   text-align: center;
 }
 
@@ -45,6 +45,10 @@
   line-height: 1.55;
   margin: 0 0 1.5rem;
   white-space: pre-line;
+}
+
+.heroSubtitle:last-child {
+  margin-bottom: 0;
 }
 
 .heroCtas {
@@ -369,7 +373,7 @@
 .heroImageWrapSquare {
   max-width: 520px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem;
+  padding: 0 1.25rem 1.25rem;
 }
 
 .heroImagePlaceholder {
