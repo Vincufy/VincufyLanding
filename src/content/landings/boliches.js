@@ -8,7 +8,7 @@ export const boliches = {
     {
       kind: "hero",
       title: "Las ticketeras no deberían solo vender entradas.",
-      subtitle: "Sino ayudarte a crear\ntu comunidad y crecer.",
+      subtitle: "Sino ayudarte a crear\ntu comunidad y hacerte crecer.",
     },
     {
       kind: "hero_image",
