@@ -4,36 +4,44 @@ import useInViewReveal from "./useInViewReveal";
 
 /* ── Existing renderers ── */
 
-const Hero = ({ data, onCtaBuy, highlightedTier }) => (
-  <section className={styles.hero}>
-    <h1 className={styles.heroTitle}>{data.title}</h1>
-    <p className={styles.heroSubtitle}>{data.subtitle}</p>
-    <div className={styles.heroCtas}>
-      <button
-        type="button"
-        className={styles.ctaPrimary}
-        onClick={() => onCtaBuy(highlightedTier)}
-      >
-        Registrarme y comprar
-      </button>
-      {data.ctaSecondary && (
-        <button
-          type="button"
-          className={styles.ctaSecondary}
-          onClick={() => {
-            const el = document.getElementById(data.ctaSecondary.target);
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-          }}
-        >
-          {data.ctaSecondary.label}
-        </button>
+const Hero = ({ data, onCtaBuy, highlightedTier }) => {
+  const showPrimary = !!data.ctaPrimary;
+  const showSecondary = !!data.ctaSecondary;
+  return (
+    <section className={styles.hero}>
+      <h1 className={styles.heroTitle}>{data.title}</h1>
+      <p className={styles.heroSubtitle}>{data.subtitle}</p>
+      {(showPrimary || showSecondary) && (
+        <div className={styles.heroCtas}>
+          {showPrimary && (
+            <button
+              type="button"
+              className={styles.ctaPrimary}
+              onClick={() => onCtaBuy(highlightedTier)}
+            >
+              Registrarme y comprar
+            </button>
+          )}
+          {showSecondary && (
+            <button
+              type="button"
+              className={styles.ctaSecondary}
+              onClick={() => {
+                const el = document.getElementById(data.ctaSecondary.target);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {data.ctaSecondary.label}
+            </button>
+          )}
+        </div>
       )}
-    </div>
-    {data.microcopy && (
-      <p className={styles.heroMicrocopy}>{data.microcopy}</p>
-    )}
-  </section>
-);
+      {data.microcopy && (
+        <p className={styles.heroMicrocopy}>{data.microcopy}</p>
+      )}
+    </section>
+  );
+};
 
 const SocialProof = ({ data }) => (
   <div className={styles.socialProof}>{data.text}</div>

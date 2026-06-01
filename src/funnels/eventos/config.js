@@ -15,10 +15,10 @@ export const eventosFunnel = {
       id: "frequency",
       text: "¿Cada cuánto organizás eventos?",
       options: [
-        { value: "weekly", label: "Cada semana o más" },
-        { value: "monthly", label: "Cada mes" },
-        { value: "bimonthly", label: "Cada 2-3 meses" },
-        { value: "yearly", label: "1-2 veces al año o menos" },
+        { value: "weekly", label: "Semanal" },
+        { value: "monthly", label: "Mensual" },
+        { value: "quarterly", label: "Trimestral" },
+        { value: "yearly", label: "Anual" },
       ],
     },
     {

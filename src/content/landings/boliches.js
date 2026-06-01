@@ -6,24 +6,16 @@ export const boliches = {
   highlightedTier: "pro",
   modules: [
     {
-      kind: "hero_mockup",
+      kind: "hero",
+      title: "Las ticketeras no deberían solo vender ticket.",
+      subtitle: "Sino ayudarte a crear tu comunidad y crecer.",
     },
     {
-      kind: "hero",
-      title: "Tu boliche llena el sábado. ¿Qué queda el domingo?",
-      subtitle:
-        "Con Vincufy, cada entrada que vendés también construye la comunidad de tu boliche. Vendé anticipadas, organizá asistentes y mantené a tu público activo entre fecha y fecha.",
-      ctaPrimary: { kind: "cta_buy" },
-      ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
-      microcopy:
-        "Ideal para boliches con eventos recurrentes, listas, RRPPs y anticipadas.",
+      kind: "hero_image",
     },
     {
       kind: "social_proof",
       text: "Organizadores de eventos están dejando de perder su público después de cada noche.",
-    },
-    {
-      kind: "hero_image",
     },
     {
       kind: "problem_stat",
