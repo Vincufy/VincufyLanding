@@ -531,6 +531,14 @@
   line-height: 1;
 }
 
+.problemCardEmojiMulti {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
 .problemCardText {
   margin: 0;
   color: rgba(255, 255, 255, 0.92);

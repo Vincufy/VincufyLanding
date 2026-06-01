@@ -262,12 +262,23 @@ const ProblemFamiliar = ({ data }) => (
   <section className={styles.problemFamiliar}>
     <h2 className={styles.problemFamiliarTitle}>{data.title}</h2>
     <div className={styles.problemCards}>
-      {data.bullets.map((b, i) => (
-        <div key={i} className={styles.problemCard}>
-          <span className={styles.problemCardEmoji} aria-hidden="true">{b.emoji}</span>
-          <p className={styles.problemCardText}>{b.text}</p>
-        </div>
-      ))}
+      {data.bullets.map((b, i) => {
+        const emojis = Array.isArray(b.emoji) ? b.emoji : [b.emoji];
+        const isMulti = emojis.length > 1;
+        return (
+          <div key={i} className={styles.problemCard}>
+            <div
+              className={`${styles.problemCardEmoji} ${isMulti ? styles.problemCardEmojiMulti : ""}`}
+              aria-hidden="true"
+            >
+              {emojis.map((e, j) => (
+                <span key={j}>{e}</span>
+              ))}
+            </div>
+            <p className={styles.problemCardText}>{b.text}</p>
+          </div>
+        );
+      })}
     </div>
   </section>
 );

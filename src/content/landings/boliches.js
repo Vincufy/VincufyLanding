@@ -23,12 +23,12 @@ export const boliches = {
       kind: "problem_familiar",
       title: "¿Te pasa que...?",
       bullets: [
-        { emoji: "🔒", text: "Tu ticketera te retiene los fondos y te paga después de tu evento." },
+        { emoji: ["🔒", "💰", "💵", "⏳", "🏦"], text: "Tu ticketera te retiene los fondos y te paga después de tu evento." },
         { emoji: "🔄", text: "Cada evento volvés a convocar desde cero." },
         { emoji: "📣", text: "Dependés de Instagram, publicidad o RRPP para llenar." },
-        { emoji: "👻", text: "No sabés quiénes fueron ni podés contactarlos." },
-        { emoji: "🚷", text: "Llenás una fecha, pero no construís audiencia propia." },
-        { emoji: "💨", text: "Invertís para atraer gente que después desaparece." },
+        { emoji: ["👻", "👤", "❓", "🌫️", "🕵️"], text: "No sabés quiénes fueron ni podés contactarlos." },
+        { emoji: ["👥", "🏘️", "🤝", "🏟️", "👨‍👩‍👧"], text: "Llenás una fecha, pero no construís audiencia propia." },
+        { emoji: ["💨", "👋", "🏃", "🛫", "🚪"], text: "Invertís para atraer gente que después desaparece." },
       ],
     },
     {
@@ -48,9 +48,9 @@ export const boliches = {
     },
     {
       kind: "before_after_arrow",
-      title: "Antes y después de Vincufy",
+      title: "¿Y si tu próximo evento fuera diferente?",
       before: {
-        title: "Sin Vincufy",
+        title: "Con otra ticketera",
         items: [
           "Listas dispersas entre RRPPs",
           "El público se va y no queda nada",
