@@ -7,11 +7,17 @@ export const boliches = {
   modules: [
     {
       kind: "hero",
-      title: "Las ticketeras no deberían solo vender ticket.",
+      title: "Las ticketeras no deberían poder vender solo entradas.",
       subtitle: "Sino ayudarte a crear tu comunidad y crecer.",
     },
     {
       kind: "hero_image",
+    },
+    {
+      kind: "tagline_cta",
+      text: "0% de comisión, sin costo de servicio.",
+      ctaPrimary: { kind: "cta_buy" },
+      ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
     },
     {
       kind: "social_proof",
@@ -30,13 +36,14 @@ export const boliches = {
     },
     {
       kind: "problem_familiar",
-      title: "¿Te suena familiar?",
+      title: "El sábado tu boliche estalla. El miércoles, ¿qué te queda?",
       bullets: [
-        { emoji: "📋", text: "Cada RRPP maneja su lista por separado y terminas con cinco Excel distintos el sábado a la noche." },
-        { emoji: "💸", text: "Vendés anticipadas por transferencia, por link, por ticket físico y nunca sabés bien el total hasta que cierra la puerta." },
-        { emoji: "📲", text: "Tu público queda en el grupo de WhatsApp hasta que se llena, después se arma otro y perdés el hilo." },
-        { emoji: "🔄", text: "Cada fecha arrancás de cero: flyer nuevo, difusión nueva, público nuevo. Sin base acumulada." },
-        { emoji: "🤷", text: "No sabés quién viene seguido, quién vino una sola vez y quién dejó de venir sin que lo notes." },
+        { emoji: "📋", text: "Cinco Excel de RRPPs distintos." },
+        { emoji: "💸", text: "Anticipadas por mil canales." },
+        { emoji: "📲", text: "Público que se pierde en WhatsApp." },
+        { emoji: "🔄", text: "Cada fecha empieza de cero." },
+        { emoji: "🤷", text: "No sabés quién vino ni quién volvió." },
+        { emoji: "📉", text: "Convocatoria que no se acumula." },
       ],
     },
     {

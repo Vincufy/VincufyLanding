@@ -261,16 +261,51 @@ const FounderVoice = ({ data }) => (
 const ProblemFamiliar = ({ data }) => (
   <section className={styles.problemFamiliar}>
     <h2 className={styles.problemFamiliarTitle}>{data.title}</h2>
-    <ul className={styles.emojiBullets}>
+    <div className={styles.problemCards}>
       {data.bullets.map((b, i) => (
-        <li key={i}>
-          <span>{b.emoji}</span>
-          <span>{b.text}</span>
-        </li>
+        <div key={i} className={styles.problemCard}>
+          <span className={styles.problemCardEmoji} aria-hidden="true">{b.emoji}</span>
+          <p className={styles.problemCardText}>{b.text}</p>
+        </div>
       ))}
-    </ul>
+    </div>
   </section>
 );
+
+const TaglineCta = ({ data, onCtaBuy, highlightedTier }) => {
+  const showPrimary = !!data.ctaPrimary;
+  const showSecondary = !!data.ctaSecondary;
+  return (
+    <section className={styles.taglineCta}>
+      {data.text && <p className={styles.taglineText}>{data.text}</p>}
+      {(showPrimary || showSecondary) && (
+        <div className={styles.taglineCtas}>
+          {showPrimary && (
+            <button
+              type="button"
+              className={styles.ctaPrimary}
+              onClick={() => onCtaBuy(highlightedTier)}
+            >
+              Registrarme y comprar
+            </button>
+          )}
+          {showSecondary && (
+            <button
+              type="button"
+              className={styles.ctaSecondary}
+              onClick={() => {
+                const el = document.getElementById(data.ctaSecondary.target);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              {data.ctaSecondary.label}
+            </button>
+          )}
+        </div>
+      )}
+    </section>
+  );
+};
 
 const BeforeAfterArrow = ({ data }) => (
   <section className={styles.beforeAfterArrow}>
@@ -510,6 +545,7 @@ const KIND_MAP = {
   urgency_countdown: UrgencyCountdown,
   money_back_guarantee: MoneyBackGuarantee,
   final_cta_card: FinalCtaCard,
+  tagline_cta: TaglineCta,
 };
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {
