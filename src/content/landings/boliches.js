@@ -20,6 +20,18 @@ export const boliches = {
       ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
     },
     {
+      kind: "problem_familiar",
+      title: "¿Te pasa que...?",
+      bullets: [
+        { emoji: "💸", text: "Tu ticketera cobra costo de servicio y encarece tus entradas." },
+        { emoji: "🔄", text: "Cada evento volvés a convocar desde cero." },
+        { emoji: "📣", text: "Dependés de Instagram, publicidad o RRPP para llenar." },
+        { emoji: "👻", text: "No sabés quiénes fueron ni podés contactarlos." },
+        { emoji: "🏗️", text: "Llenás una fecha, pero no construís audiencia propia." },
+        { emoji: "💨", text: "Invertís para atraer gente que después desaparece." },
+      ],
+    },
+    {
       kind: "social_proof",
       text: "Organizadores de eventos están dejando de perder su público después de cada noche.",
     },
@@ -33,18 +45,6 @@ export const boliches = {
       kind: "founder_voice",
       name: "El founder de Vincufy",
       text: "Armé Vincufy porque organicé eventos por años y siempre me pasaba lo mismo: llenábamos el boliche, la gente la pasaba bien, y al finde siguiente teníamos que salir a buscar ese mismo público desde cero. Las listas se perdían, los RRPPs manejaban sus contactos por separado, y el boliche nunca quedaba con nada. Después de mil noches así, entendí que el problema no era la convocatoria: era que no existía una forma simple de que el asistente quedara vinculado al boliche después de la puerta.",
-    },
-    {
-      kind: "problem_familiar",
-      title: "El sábado tu boliche estalla. El miércoles, ¿qué te queda?",
-      bullets: [
-        { emoji: "📋", text: "Cinco Excel de RRPPs distintos." },
-        { emoji: "💸", text: "Anticipadas por mil canales." },
-        { emoji: "📲", text: "Público que se pierde en WhatsApp." },
-        { emoji: "🔄", text: "Cada fecha empieza de cero." },
-        { emoji: "🤷", text: "No sabés quién vino ni quién volvió." },
-        { emoji: "📉", text: "Convocatoria que no se acumula." },
-      ],
     },
     {
       kind: "before_after_arrow",
