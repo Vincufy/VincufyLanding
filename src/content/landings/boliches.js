@@ -23,28 +23,13 @@ export const boliches = {
       kind: "problem_familiar",
       title: "¿Te pasa que...?",
       bullets: [
-        { emoji: ["🔒", "💰", "💵", "⏳", "🏦"], text: "Tu ticketera te retiene los fondos y te paga después de tu evento." },
+        { emoji: "⏳", text: "Tu ticketera te retiene los fondos y te paga después de tu evento." },
         { emoji: "🔄", text: "Cada evento volvés a convocar desde cero." },
         { emoji: "📣", text: "Dependés de Instagram, publicidad o RRPP para llenar." },
-        { emoji: ["👻", "👤", "❓", "🌫️", "🕵️"], text: "No sabés quiénes fueron ni podés contactarlos." },
-        { emoji: ["👥", "🏘️", "🤝", "🏟️", "👨‍👩‍👧"], text: "Llenás una fecha, pero no construís audiencia propia." },
-        { emoji: ["💨", "👋", "🏃", "🛫", "🚪"], text: "Invertís para atraer gente que después desaparece." },
+        { emoji: "❓", text: "No sabés quiénes fueron ni podés contactarlos." },
+        { emoji: "👥", text: "Llenás una fecha, pero no construís audiencia propia." },
+        { emoji: "👋", text: "Invertís para atraer gente que después desaparece." },
       ],
-    },
-    {
-      kind: "social_proof",
-      text: "Organizadores de eventos están dejando de perder su público después de cada noche.",
-    },
-    {
-      kind: "problem_stat",
-      stat: "8 de cada 10",
-      text: "boliches no sabe exactamente quién entró el sábado pasado ni cómo volver a contactarlos la semana siguiente.",
-      estimacion: true,
-    },
-    {
-      kind: "founder_voice",
-      name: "El founder de Vincufy",
-      text: "Armé Vincufy porque organicé eventos por años y siempre me pasaba lo mismo: llenábamos el boliche, la gente la pasaba bien, y al finde siguiente teníamos que salir a buscar ese mismo público desde cero. Las listas se perdían, los RRPPs manejaban sus contactos por separado, y el boliche nunca quedaba con nada. Después de mil noches así, entendí que el problema no era la convocatoria: era que no existía una forma simple de que el asistente quedara vinculado al boliche después de la puerta.",
     },
     {
       kind: "before_after_arrow",
@@ -65,11 +50,26 @@ export const boliches = {
         items: [
           "Recibís la plata al instante",
           "Los asistentes compran entradas más baratas",
-          "Tu público está activo y accesible para volver a invitarlo",
+          "Tu público puede vincularse en la plataforma",
           "Podés mandarles promociones e invitarlos a próximos eventos",
           "No tenés que generar confianza desde cero",
         ],
       },
+    },
+    {
+      kind: "social_proof",
+      text: "Organizadores de eventos están dejando de perder su público después de cada noche.",
+    },
+    {
+      kind: "problem_stat",
+      stat: "8 de cada 10",
+      text: "boliches no sabe exactamente quién entró el sábado pasado ni cómo volver a contactarlos la semana siguiente.",
+      estimacion: true,
+    },
+    {
+      kind: "founder_voice",
+      name: "El founder de Vincufy",
+      text: "Armé Vincufy porque organicé eventos por años y siempre me pasaba lo mismo: llenábamos el boliche, la gente la pasaba bien, y al finde siguiente teníamos que salir a buscar ese mismo público desde cero. Las listas se perdían, los RRPPs manejaban sus contactos por separado, y el boliche nunca quedaba con nada. Después de mil noches así, entendí que el problema no era la convocatoria: era que no existía una forma simple de que el asistente quedara vinculado al boliche después de la puerta.",
     },
     {
       kind: "what_is",
