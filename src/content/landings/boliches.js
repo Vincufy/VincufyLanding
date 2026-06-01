@@ -52,11 +52,11 @@ export const boliches = {
       before: {
         title: "Con otra ticketera",
         items: [
-          "Listas dispersas entre RRPPs",
-          "El público se va y no queda nada",
-          "Difusión solo por Instagram/WhatsApp",
-          "Confirmaciones manuales sin cierre claro",
-          "Cada noche empieza desde cero",
+          "Te liquidan los fondos después de tu evento",
+          "Cobran costos elevados de servicio",
+          "No te ayudan a armar tu comunidad",
+          "No sabés quiénes fueron a tu evento",
+          "No te ayudan a crecer",
         ],
       },
       after: {
