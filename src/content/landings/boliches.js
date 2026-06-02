@@ -157,6 +157,26 @@ export const boliches = {
       },
     },
     {
+      kind: "trusted_by",
+      title: "Confían en nosotros",
+      logos: [
+        { name: "Empresa 1", src: "/landing/logos/logo-1.png" },
+        { name: "Empresa 2", src: "/landing/logos/logo-2.png" },
+        { name: "Empresa 3", src: "/landing/logos/logo-3.png" },
+        { name: "Empresa 4", src: "/landing/logos/logo-4.png" },
+        { name: "Empresa 5", src: "/landing/logos/logo-5.png" },
+        { name: "Empresa 6", src: "/landing/logos/logo-6.png" },
+        { name: "Empresa 7", src: "/landing/logos/logo-7.png" },
+        { name: "Empresa 8", src: "/landing/logos/logo-8.png" },
+        { name: "Empresa 9", src: "/landing/logos/logo-9.png" },
+        { name: "Empresa 10", src: "/landing/logos/logo-10.png" },
+      ],
+      stats: [
+        { number: "+1.500", label: "eventos gestionados" },
+        { number: "+600.000", label: "entradas emitidas" },
+      ],
+    },
+    {
       kind: "testimonials_carousel",
       title: "Lo que dicen los que lo usan",
       items: [

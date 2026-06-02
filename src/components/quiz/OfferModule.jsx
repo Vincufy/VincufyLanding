@@ -254,6 +254,60 @@ const HighlightBox = ({ data }) => (
   </section>
 );
 
+const TrustedLogo = ({ logo, hidden }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImg = logo.src && !imgFailed;
+  return (
+    <div className={styles.trustedCard} aria-hidden={hidden}>
+      <div className={styles.trustedLogoBox}>
+        {showImg ? (
+          <img
+            src={logo.src}
+            alt={logo.name}
+            className={styles.trustedLogoImg}
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          <span className={styles.trustedLogoPlaceholder}>LOGO</span>
+        )}
+      </div>
+      <p className={styles.trustedLogoName}>{logo.name}</p>
+    </div>
+  );
+};
+
+const TrustedBy = ({ data }) => {
+  const logos = data.logos || [];
+  // Duplicamos la lista para el loop infinito visual del marquee
+  const loop = [...logos, ...logos];
+  const stats = data.stats || [];
+
+  return (
+    <section className={styles.trustedBy}>
+      {data.title && <h2 className={styles.trustedByTitle}>{data.title}</h2>}
+
+      <div className={styles.trustedMarquee} aria-label="Empresas que confían en Vincufy">
+        <div className={styles.trustedTrack}>
+          {loop.map((logo, i) => (
+            <TrustedLogo key={i} logo={logo} hidden={i >= logos.length} />
+          ))}
+        </div>
+      </div>
+
+      {stats.length > 0 && (
+        <div className={styles.trustedStats}>
+          {stats.map((s, i) => (
+            <div key={i} className={styles.trustedStat}>
+              <p className={styles.trustedStatNumber}>{s.number}</p>
+              <p className={styles.trustedStatLabel}>{s.label}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+};
+
 const ProblemStat = ({ data }) => (
   <section className={styles.problemStat}>
     <p className={styles.statNumber}>{data.stat}</p>
@@ -588,6 +642,7 @@ const KIND_MAP = {
   final_cta_card: FinalCtaCard,
   tagline_cta: TaglineCta,
   highlight_box: HighlightBox,
+  trusted_by: TrustedBy,
 };
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {
