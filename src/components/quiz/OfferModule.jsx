@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
 
@@ -279,7 +280,7 @@ const WhatsAppHelp = ({ data }) => {
         {cta}
       </button>
 
-      {open && (
+      {open && createPortal(
         <div
           className={styles.whatsappOverlay}
           onClick={() => setOpen(false)}
@@ -313,7 +314,8 @@ const WhatsAppHelp = ({ data }) => {
             </a>
             <p className={styles.whatsappHint}>Tocá para abrir WhatsApp</p>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
