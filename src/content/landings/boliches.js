@@ -147,12 +147,12 @@ export const boliches = {
       colAudience: {
         title: "Para tu público",
         bullets: [
-          "Entrada digital clara, sin confusión",
-          "Info del evento en un solo lugar",
-          "Comunidad del boliche en el bolsillo",
-          "Menos filas y más rapidez en puerta",
-          "Primera enterarse de la próxima fecha",
-          "Experiencia que se nota más cuidada",
+          "Entrada única y de fácil acceso",
+          "Información del evento en todo momento",
+          "Espacio para vincularse con otros asistentes",
+          "Menos espera en puerta",
+          "Entradas más baratas sin costo de servicio",
+          "Notificaciones con tus nuevas fechas y actividades",
         ],
       },
     },
