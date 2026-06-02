@@ -32,8 +32,8 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.headline}>{headline}</h2>
-      <p className={styles.subheadline}>{subheadline}</p>
+      {headline && <h2 className={styles.headline}>{headline}</h2>}
+      {subheadline && <p className={styles.subheadline}>{subheadline}</p>}
 
       <div className={styles.grid}>
         {tiers.map((tier) => {
@@ -45,15 +45,16 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                 isHighlighted ? styles.cardHighlighted : ""
               }`}
             >
-              {isHighlighted && (
-                <div className={styles.badge}>RECOMENDADO PARA VOS</div>
-              )}
-              <div className={styles.tierName}>{tier.name}</div>
+              <div className={`${styles.tierName} ${isHighlighted ? styles.tierNameHighlighted : ""}`}>
+                {tier.name}
+              </div>
               <div className={styles.ticketsLine}>
                 {formatArs(tier.tickets)} entradas
               </div>
-              <div className={styles.pricePerTicket}>
-                ARS {formatArs(tier.pricePerTicket)} c/u
+              <div className={styles.priceRow}>
+                <span className={styles.priceCurrency}>ARS</span>
+                <span className={styles.priceMain}>${formatArs(tier.pricePerTicket)}</span>
+                <span className={styles.pricePer}>c/u</span>
               </div>
               {tier.discountPercent > 0 && (
                 <div className={styles.discountBadge}>
