@@ -90,12 +90,6 @@ export const boliches = {
           isBonus: false,
         },
         {
-          emoji: "💬",
-          name: "Construís comunidad",
-          desc: "Tu público queda vinculado a tu boliche después de la puerta.",
-          isBonus: false,
-        },
-        {
           emoji: "📣",
           name: "Comunicás directo",
           desc: "Avisás próximas fechas sin depender de que Instagram te muestre.",
@@ -105,6 +99,12 @@ export const boliches = {
           emoji: "📊",
           name: "Medís cada evento",
           desc: "Quién vino, por qué canal entró, cuántos repiten. Sin adivinanza.",
+          isBonus: false,
+        },
+        {
+          emoji: "💬",
+          name: "Construís comunidad",
+          desc: "Tu público queda vinculado a tu boliche después de la puerta.",
           isBonus: false,
         },
       ],
