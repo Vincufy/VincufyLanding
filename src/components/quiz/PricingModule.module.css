@@ -38,8 +38,8 @@
 
 /* ── Card ── */
 .card {
-  background: #0a0a0a;
-  border: 1px solid rgba(136, 17, 200, 0.35);
+  background: #1a1325;
+  border: 1px solid rgba(136, 17, 200, 0.3);
   border-radius: 14px;
   padding: 0;
   position: relative;
@@ -50,15 +50,15 @@
 }
 
 .card:hover {
-  border-color: rgba(136, 17, 200, 0.6);
+  border-color: rgba(136, 17, 200, 0.55);
   box-shadow: 0 0 24px rgba(136, 17, 200, 0.12);
   transform: translateY(-2px);
 }
 
 .cardHighlighted {
   border: 2px solid #8811c8;
-  background: rgba(136, 17, 200, 0.06);
-  box-shadow: 0 0 32px rgba(136, 17, 200, 0.2);
+  background: linear-gradient(180deg, rgba(136, 17, 200, 0.18) 0%, rgba(136, 17, 200, 0.08) 100%);
+  box-shadow: 0 0 32px rgba(136, 17, 200, 0.28);
 }
 
 /* Tier name → header full-width arriba de la card */
@@ -122,16 +122,18 @@
 }
 
 .discountBadge {
-  align-self: center;
-  background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  font-size: 0.78rem;
+  width: 100%;
+  text-align: center;
+  background: rgba(239, 68, 68, 0.16);
+  color: #ff6b6b;
+  border-top: 1px solid rgba(239, 68, 68, 0.32);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.32);
+  padding: 0.4rem 0.5rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.3px;
-  margin: 0 1.25rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0.5rem 0 0.25rem;
 }
 
 .totalLine {

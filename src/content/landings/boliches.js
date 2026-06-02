@@ -1,6 +1,3 @@
-// Target date: 30 days from 2026-05-29
-const COUNTDOWN_TARGET = "2026-06-28T23:59:59-03:00";
-
 export const boliches = {
   segment: "boliches",
   highlightedTier: "pro",
@@ -228,14 +225,10 @@ export const boliches = {
       kind: "pricing",
     },
     {
-      kind: "urgency_countdown",
-      label: "Cierre de la lista de fundadores en:",
-      targetDate: COUNTDOWN_TARGET,
-    },
-    {
-      kind: "money_back_guarantee",
-      headline: "Garantía 30 días",
-      text: "Probás Vincufy en tu primer evento. Si no te encanta, te devolvemos cada peso. Sin preguntas, sin formularios.",
+      kind: "whatsapp_help",
+      text: "¿Tenés alguna duda?",
+      cta: "Escribinos por WhatsApp",
+      phone: "+54 9 11 0000 0000",
     },
     {
       kind: "faq",

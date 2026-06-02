@@ -246,6 +246,75 @@ const HeroImage = ({ data = {} }) => {
   );
 };
 
+const WhatsAppHelp = ({ data }) => {
+  const [open, setOpen] = useState(false);
+  const phone = data.phone || "+54 9 11 0000 0000";
+  const waNumber = phone.replace(/[^0-9]/g, "");
+  const text = data.text || "¿Tenés alguna duda?";
+  const cta = data.cta || "Escribinos por WhatsApp";
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <section className={styles.whatsappHelp}>
+      <p className={styles.whatsappHelpTitle}>{text}</p>
+      <button
+        type="button"
+        className={styles.whatsappHelpBtn}
+        onClick={() => setOpen(true)}
+      >
+        <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
+        {cta}
+      </button>
+
+      {open && (
+        <div
+          className={styles.whatsappOverlay}
+          onClick={() => setOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            className={styles.whatsappClose}
+            onClick={() => setOpen(false)}
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+          <div
+            className={styles.whatsappOverlayContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
+            <a
+              href={`https://wa.me/${waNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.whatsappPhone}
+            >
+              {phone}
+            </a>
+            <p className={styles.whatsappHint}>Tocá para abrir WhatsApp</p>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
 const HighlightBox = ({ data }) => (
   <section className={styles.highlightBox}>
     <div className={styles.highlightBoxInner}>
@@ -643,6 +712,7 @@ const KIND_MAP = {
   tagline_cta: TaglineCta,
   highlight_box: HighlightBox,
   trusted_by: TrustedBy,
+  whatsapp_help: WhatsAppHelp,
 };
 
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {

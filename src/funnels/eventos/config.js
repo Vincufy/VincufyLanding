@@ -50,7 +50,7 @@ export const eventosFunnel = {
         tickets: 300,
         pricePerTicket: 499,
         total: 149700,
-        discountPercent: 0,
+        discountPercent: 20,
       },
       {
         id: "business",
@@ -58,7 +58,7 @@ export const eventosFunnel = {
         tickets: 1000,
         pricePerTicket: 549,
         total: 549000,
-        discountPercent: 0,
+        discountPercent: 40,
       },
     ],
     // tier destacado por segmento (Pro en las 3 para este round)
