@@ -186,24 +186,28 @@ export const boliches = {
       kind: "faq",
       items: [
         {
-          q: "¿Vincufy reemplaza a mi ticketera actual?",
-          a: "Puede reemplazarla o complementarla. Vincufy cubre venta de entradas y va más allá: agrega comunidad y canal de comunicación propio. Podés arrancar con un evento y evaluarlo.",
+          q: "¿Qué diferencia a Vincufy de una ticketera tradicional?",
+          a: "Además de vender entradas, Vincufy te ayuda a construir una comunidad propia alrededor de tus eventos. Los asistentes pueden conocerse entre sí, mantenerse conectados y seguir vinculados a tu marca incluso después de que termina el evento.",
         },
         {
-          q: "¿Sirve si mi boliche hace fechas todas las semanas?",
+          q: "¿Cómo hago para promocionar mis próximos eventos?",
+          a: "Cada evento te ayuda a construir una base propia de asistentes. En lugar de empezar desde cero en cada convocatoria, podés comunicar nuevas fechas, lanzamientos y novedades a personas que ya participaron de tus eventos.",
+        },
+        {
+          q: "¿Sirve para eventos pequeños?",
+          a: "Sí. Vincufy aporta valor tanto en eventos pequeños como masivos. De hecho, cuando estás construyendo una comunidad o una marca, generar vínculos con los asistentes suele ser aún más importante.",
+        },
+        {
+          q: "¿Sirve para todos mis eventos?",
           a: "Justamente ahí es donde más sentido tiene. Mientras más seguido hacés eventos, más vale tener una base propia que no dependa de Instagram para cada convocatoria.",
         },
         {
-          q: "¿Cómo se manejan los RRPPs?",
-          a: "Cada RRPP puede cargar y ver su propia lista. Vos ves el total consolidado. Terminaron los WhatsApp con totales contradictorios a las 2am.",
-        },
-        {
           q: "¿Mi público tiene que descargar una app?",
-          a: "No necesariamente. El flujo puede ser vía web. Si hay app, el onboarding con el founder te explica la mejor opción para tu caso.",
+          a: "No es necesario descargar una app para comprar entradas; todo puede hacerse desde la web. La aplicación ofrece funciones adicionales para que los asistentes se conecten entre sí, accedan a contenido exclusivo y personalicen su perfil. La descarga es opcional.",
         },
         {
-          q: "¿Qué pasa si ya tengo un sistema de anticipadas?",
-          a: "Podés arrancar usando Vincufy en paralelo para un solo evento y comparar resultados. No tenés que cambiar todo de golpe.",
+          q: "¿Cuánto tiempo lleva implementarlo?",
+          a: "Podés empezar con un solo evento y tener todo funcionando rápidamente. En pocos pasos ya podés comenzar a vender entradas, conectar a tus asistentes y construir una comunidad propia.",
         },
       ],
     },
