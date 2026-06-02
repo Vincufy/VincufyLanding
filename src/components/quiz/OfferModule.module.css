@@ -863,6 +863,12 @@
   margin-top: 0.15rem;
 }
 
+.checklistRowContent {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
 .checklistFeatureName {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.87);

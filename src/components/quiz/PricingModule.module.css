@@ -38,8 +38,8 @@
 
 /* ── Card ── */
 .card {
-  background: #1a1325;
-  border: 1px solid rgba(136, 17, 200, 0.3);
+  background: linear-gradient(180deg, rgba(136, 17, 200, 0.12) 0%, rgba(136, 17, 200, 0.05) 100%);
+  border: 1px solid rgba(136, 17, 200, 0.38);
   border-radius: 14px;
   padding: 0;
   position: relative;
@@ -50,8 +50,8 @@
 }
 
 .card:hover {
-  border-color: rgba(136, 17, 200, 0.55);
-  box-shadow: 0 0 24px rgba(136, 17, 200, 0.12);
+  border-color: rgba(136, 17, 200, 0.6);
+  box-shadow: 0 0 24px rgba(136, 17, 200, 0.18);
   transform: translateY(-2px);
 }
 

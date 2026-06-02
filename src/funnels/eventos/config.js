@@ -33,8 +33,8 @@ export const eventosFunnel = {
     },
   ],
   pricing: {
-    headline: "Comprá tu paquete de entradas y usalas cuando quieras.",
-    subheadline: "",
+    headline: "Conocé nuestros planes",
+    subheadline: "Comprá tu paquete de entradas y usalas cuando quieras.",
     tiers: [
       {
         id: "starter",

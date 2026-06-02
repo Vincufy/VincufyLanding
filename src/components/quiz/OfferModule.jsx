@@ -302,7 +302,7 @@ const WhatsAppHelp = ({ data }) => {
               <div className={styles.whatsappUnicornHalo} aria-hidden="true" />
               <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
             </div>
-            <p className={styles.whatsappCallout}>Botá a Lucas por aquí</p>
+            <p className={styles.whatsappCallout}>Lucas por aquí</p>
             <a
               href={`https://wa.me/${waNumber}`}
               target="_blank"
@@ -515,7 +515,7 @@ const IncludesChecklist = ({ data }) => (
             className={`${styles.checklistRow}${item.isBonus ? ` ${styles.checklistRowBonus}` : ""}`}
           >
             <span className={styles.checklistIcon}>{item.emoji}</span>
-            <div>
+            <div className={styles.checklistRowContent}>
               <p className={styles.checklistFeatureName}>{item.name}</p>
               <p className={styles.checklistFeatureDesc}>{item.desc}</p>
             </div>
