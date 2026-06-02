@@ -134,14 +134,14 @@ export const boliches = {
       kind: "benefits_grid_two_col",
       title: "Lo que ganás vos.\nLo que vive tu público.",
       colOrganizer: {
-        title: "Para vos (el boliche)",
+        title: "Para vos (tu boliche)",
         bullets: [
-          "Base de público que crece con cada fecha",
-          "Control total de listas y accesos",
+          "Base de datos que crece en cada fecha",
+          "Control total de la trazabilidad del evento",
           "Menos trabajo manual para tu equipo",
-          "Canal propio para convocar sin pagar publicidad",
-          "Métricas reales de quién viene y con qué frecuencia",
-          "Imagen más profesional en cada punto de contacto",
+          "Canal directo de comunicación con tu público",
+          "Métricas reales de tus clientes",
+          "Imagen de servicio profesional e innovador",
         ],
       },
       colAudience: {
