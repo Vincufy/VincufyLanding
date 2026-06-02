@@ -116,18 +116,18 @@ export const boliches = {
       steps: [
         {
           n: 1,
-          title: "Creamos tu evento",
-          body: "Cargás la info de la noche, configurás lotes de anticipadas y le das acceso a tus RRPPs.",
+          title: "Creá tu perfil",
+          body: "Registrá tu boliche en minutos y dejá listo el lugar para tus eventos.",
         },
         {
           n: 2,
-          title: "Tu público compra y entra",
-          body: "Cada persona recibe su entrada digital. En puerta, validación por QR. Sin caos.",
+          title: "Creá tu evento",
+          body: "Cargás la info de la noche, configurás lotes y le das acceso a tus RRPPs.",
         },
         {
           n: 3,
-          title: "Seguís conectado después",
-          body: "Tu público queda vinculado al boliche. Podés avisar la próxima fecha sin empezar de cero.",
+          title: "Crecé con nuestras herramientas",
+          body: "Validás en puerta, fidelizás a tu público y sumás base para la próxima fecha.",
         },
       ],
       cta: { kind: "cta_buy" },
