@@ -375,7 +375,9 @@ const BeforeAfterArrow = ({ data }) => (
 
 const IncludesChecklist = ({ data }) => (
   <section className={styles.includesChecklist}>
-    <h2 className={styles.includesChecklistTitle}>{data.title}</h2>
+    {data.title && (
+      <h2 className={styles.includesChecklistTitle}>{data.title}</h2>
+    )}
     <div className={styles.checklistItems}>
       {data.items.map((item, i) => (
         <div key={i}>
