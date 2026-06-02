@@ -74,7 +74,7 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                   onTierClick(tier);
                 }}
               >
-                Registrarme y comprar
+                Comprar
               </button>
             </div>
           );

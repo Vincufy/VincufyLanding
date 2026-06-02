@@ -19,7 +19,7 @@ const Hero = ({ data, onCtaBuy, highlightedTier }) => {
               className={styles.ctaPrimary}
               onClick={() => onCtaBuy(highlightedTier)}
             >
-              Registrarme y comprar
+              Comprar
             </button>
           )}
           {showSecondary && (
@@ -127,7 +127,7 @@ const HowItWorks = ({ data, onCtaBuy, highlightedTier }) => (
           className={styles.ctaPrimary}
           onClick={() => onCtaBuy(highlightedTier)}
         >
-          Registrarme y comprar
+          Comprar
         </button>
       </div>
     )}
@@ -157,7 +157,7 @@ const Offer = ({ data, onCtaBuy, highlightedTier }) => (
         className={styles.ctaPrimary}
         onClick={() => onCtaBuy(highlightedTier)}
       >
-        Registrarme y comprar
+        Comprar
       </button>
     </div>
     {data.microcopy && (
@@ -193,7 +193,7 @@ const FinalClose = ({ data, onCtaBuy, highlightedTier }) => (
           className={styles.ctaPrimary}
           onClick={() => onCtaBuy(highlightedTier)}
         >
-          Registrarme y comprar
+          Comprar
         </button>
       </div>
     )}
@@ -452,7 +452,7 @@ const TaglineCta = ({ data, onCtaBuy, highlightedTier }) => {
               className={styles.ctaPrimary}
               onClick={() => onCtaBuy(highlightedTier)}
             >
-              Registrarme y comprar
+              Comprar
             </button>
           )}
           {showSecondary && (
@@ -674,7 +674,7 @@ const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => (
         className={styles.ctaPrimary}
         onClick={() => onCtaBuy(highlightedTier)}
       >
-        Registrarme y comprar
+        Comprar
       </button>
     </div>
   </section>
