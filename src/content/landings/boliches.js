@@ -112,7 +112,7 @@ export const boliches = {
     {
       kind: "how_it_works",
       anchor: "como-funciona",
-      title: "En tres pasos, tu boliche empieza a usar Vincufy.",
+      title: "Pasos a seguir",
       steps: [
         { n: 1, title: "Creá tu perfil", body: "" },
         { n: 2, title: "Configurá tus eventos", body: "" },
@@ -132,7 +132,7 @@ export const boliches = {
     },
     {
       kind: "benefits_grid_two_col",
-      title: "Lo que ganás vos. Lo que vive tu público.",
+      title: "Lo que ganás vos.\nLo que vive tu público.",
       colOrganizer: {
         title: "Para vos (el boliche)",
         bullets: [
