@@ -74,7 +74,7 @@ export const boliches = {
         {
           emoji: "🎟️",
           name: "Vendés entradas",
-          desc: "Anticipadas y puerta, con QR y cortes de precio automáticos.",
+          desc: "Anticipadas y en puerta.",
           isBonus: false,
         },
         {
@@ -92,19 +92,19 @@ export const boliches = {
         {
           emoji: "📣",
           name: "Comunicás directo",
-          desc: "Avisás próximas fechas sin depender de que Instagram te muestre.",
+          desc: "Avisás próximas fechas a tus clientes.",
           isBonus: false,
         },
         {
           emoji: "📊",
-          name: "Medís cada evento",
-          desc: "Quién vino, por qué canal entró, cuántos repiten. Sin adivinanza.",
+          name: "Métricas de cada evento",
+          desc: "Todo lo que necesitás saber para medir el éxito de la fecha.",
           isBonus: false,
         },
         {
           emoji: "💬",
           name: "Construís comunidad",
-          desc: "Tu público queda vinculado a tu boliche después de la puerta.",
+          desc: "Tu público puede vincularse antes, durante y después en Vincufy.",
           isBonus: false,
         },
       ],
