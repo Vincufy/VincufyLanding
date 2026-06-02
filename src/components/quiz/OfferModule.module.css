@@ -1626,18 +1626,66 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-.whatsappUnicorn {
-  font-size: clamp(9rem, 38vw, 18rem);
-  line-height: 1;
-  filter: drop-shadow(0 0 60px rgba(165, 46, 224, 0.65))
-    drop-shadow(0 14px 30px rgba(0, 0, 0, 0.5));
-  animation: whatsappUnicornFloat 4.5s ease-in-out infinite;
-  transform-origin: center;
+.whatsappUnicornWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(15rem, 60vw, 26rem);
+  height: clamp(15rem, 60vw, 26rem);
+  isolation: isolate;
 }
 
-@keyframes whatsappUnicornFloat {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50%      { transform: translateY(-14px) rotate(2deg); }
+.whatsappUnicornHalo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(165, 46, 224, 0.55) 0%, rgba(136, 17, 200, 0.32) 35%, transparent 70%),
+    conic-gradient(from 0deg, rgba(165, 46, 224, 0.45), rgba(236, 72, 153, 0.4), rgba(96, 165, 250, 0.4), rgba(165, 46, 224, 0.45));
+  filter: blur(28px);
+  animation: whatsappHaloSpin 12s linear infinite, whatsappHaloPulse 3.2s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes whatsappHaloSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes whatsappHaloPulse {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+.whatsappUnicorn {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(9rem, 40vw, 20rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.35))
+    drop-shadow(0 0 80px rgba(165, 46, 224, 0.65))
+    drop-shadow(0 18px 36px rgba(0, 0, 0, 0.55));
+  animation: whatsappUnicornDance 2.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: center 70%;
+}
+
+@keyframes whatsappUnicornDance {
+  0%   { transform: translateY(0) rotate(-8deg) scale(1); }
+  20%  { transform: translateY(-22px) rotate(6deg) scale(1.04); }
+  40%  { transform: translateY(-6px) rotate(-4deg) scale(0.99); }
+  55%  { transform: translateY(-18px) rotate(8deg) scale(1.05); }
+  75%  { transform: translateY(-2px) rotate(-6deg) scale(1); }
+  100% { transform: translateY(0) rotate(-8deg) scale(1); }
+}
+
+.whatsappCallout {
+  margin: 0;
+  font-size: clamp(1.1rem, 4vw, 1.45rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 18px rgba(165, 46, 224, 0.55);
 }
 
 .whatsappPhone {

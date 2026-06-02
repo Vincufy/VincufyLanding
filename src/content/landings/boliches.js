@@ -174,54 +174,6 @@ export const boliches = {
       ],
     },
     {
-      kind: "testimonials_carousel",
-      title: "Lo que dicen los que lo usan",
-      items: [
-        {
-          quote: "Antes cada finde terminaba con cinco WhatsApp distintos de RRPPs peleándose por el total. Ahora todo cierra solo.",
-          name: "Luciana M.",
-          role: "organizadora de fiestas electrónicas",
-          city: "Buenos Aires, CABA",
-          placeholder: true,
-        },
-        {
-          quote: "La primera vez que pude avisar una fecha nueva sin pagar pauta fue con Vincufy. Mandé una notificación y tuvimos 200 confirmaciones en horas.",
-          name: "Matías R.",
-          role: "productor de eventos nocturnos",
-          city: "Córdoba capital",
-          placeholder: true,
-        },
-        {
-          quote: "Mis RRPPs ahora cargan sus listas solos y yo veo el total en tiempo real. Nunca más me enteré de cuánta gente había después de que cerró la puerta.",
-          name: "Valentina S.",
-          role: "dueña de boliche",
-          city: "Rosario, Santa Fe",
-          placeholder: true,
-        },
-        {
-          quote: "El QR en puerta parece una pavada hasta que lo usás. La gente entró el doble de rápido y casi no hubo líos.",
-          name: "Tomás F.",
-          role: "encargado de producción",
-          city: "Mendoza capital",
-          placeholder: true,
-        },
-        {
-          quote: "Lo que más me sorprendió fue que la gente quedó en la sala del evento incluso una semana después. Nos preguntaban por la próxima fecha solos.",
-          name: "Sofía P.",
-          role: "organizadora de fiestas universitarias",
-          city: "La Plata, Buenos Aires",
-          placeholder: true,
-        },
-        {
-          quote: "Pensé que era solo para eventos grandes. Lo probé para 180 personas y funcionó perfecto. Ahora lo uso en cada fecha.",
-          name: "Agustín B.",
-          role: "productor independiente",
-          city: "Mar del Plata, Buenos Aires",
-          placeholder: true,
-        },
-      ],
-    },
-    {
       kind: "pricing",
     },
     {

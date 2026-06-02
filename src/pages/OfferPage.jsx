@@ -172,15 +172,6 @@ const OfferPage = () => {
                     onTierClick={(tier) => handleCtaBuy(tier)}
                   />
                 </div>
-                <div className={styles.customVolumeRow}>
-                  <button
-                    type="button"
-                    className={styles.customVolumeLink}
-                    onClick={() => handleCtaBuy(customVolumeTier)}
-                  >
-                    Por mayor volumen consultar
-                  </button>
-                </div>
               </div>
             );
           }

@@ -298,7 +298,11 @@ const WhatsAppHelp = ({ data }) => {
             className={styles.whatsappOverlayContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
+            <div className={styles.whatsappUnicornWrap}>
+              <div className={styles.whatsappUnicornHalo} aria-hidden="true" />
+              <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
+            </div>
+            <p className={styles.whatsappCallout}>Botá a Lucas por aquí</p>
             <a
               href={`https://wa.me/${waNumber}`}
               target="_blank"
