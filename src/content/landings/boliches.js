@@ -114,21 +114,9 @@ export const boliches = {
       anchor: "como-funciona",
       title: "En tres pasos, tu boliche empieza a usar Vincufy.",
       steps: [
-        {
-          n: 1,
-          title: "Creá tu perfil",
-          body: "Registrá tu boliche en minutos y dejá listo el lugar para tus eventos.",
-        },
-        {
-          n: 2,
-          title: "Creá tu evento",
-          body: "Cargás la info de la noche, configurás lotes y le das acceso a tus RRPPs.",
-        },
-        {
-          n: 3,
-          title: "Crecé con nuestras herramientas",
-          body: "Validás en puerta, fidelizás a tu público y sumás base para la próxima fecha.",
-        },
+        { n: 1, title: "Creá tu perfil", body: "" },
+        { n: 2, title: "Configurá tus eventos", body: "" },
+        { n: 3, title: "Crecé con nuestras herramientas", body: "" },
       ],
       cta: { kind: "cta_buy" },
     },

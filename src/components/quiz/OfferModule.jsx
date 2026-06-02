@@ -115,7 +115,7 @@ const HowItWorks = ({ data, onCtaBuy, highlightedTier }) => (
           <div className={styles.stepNumber}>{s.n}</div>
           <div className={styles.stepContent}>
             <h3 className={styles.h3}>{s.title}</h3>
-            <p className={styles.stepBody}>{s.body}</p>
+            {s.body && <p className={styles.stepBody}>{s.body}</p>}
           </div>
         </li>
       ))}
