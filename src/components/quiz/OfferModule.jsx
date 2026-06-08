@@ -3,6 +3,11 @@ import { createPortal } from "react-dom";
 import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
 
+const scrollToPricing = () => {
+  const el = document.getElementById("planes");
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 /* ── Existing renderers ── */
 
 const Hero = ({ data, onCtaBuy, highlightedTier }) => {
@@ -18,9 +23,9 @@ const Hero = ({ data, onCtaBuy, highlightedTier }) => {
             <button
               type="button"
               className={styles.ctaPrimary}
-              onClick={() => onCtaBuy(highlightedTier)}
+              onClick={scrollToPricing}
             >
-              Comprar
+              Crear evento
             </button>
           )}
           {showSecondary && (
@@ -126,9 +131,9 @@ const HowItWorks = ({ data, onCtaBuy, highlightedTier }) => (
         <button
           type="button"
           className={styles.ctaPrimary}
-          onClick={() => onCtaBuy(highlightedTier)}
+          onClick={scrollToPricing}
         >
-          Comprar
+          Crear evento
         </button>
       </div>
     )}
@@ -156,9 +161,9 @@ const Offer = ({ data, onCtaBuy, highlightedTier }) => (
       <button
         type="button"
         className={styles.ctaPrimary}
-        onClick={() => onCtaBuy(highlightedTier)}
+        onClick={scrollToPricing}
       >
-        Comprar
+        Crear evento
       </button>
     </div>
     {data.microcopy && (
@@ -192,9 +197,9 @@ const FinalClose = ({ data, onCtaBuy, highlightedTier }) => (
         <button
           type="button"
           className={styles.ctaPrimary}
-          onClick={() => onCtaBuy(highlightedTier)}
+          onClick={scrollToPricing}
         >
-          Comprar
+          Crear evento
         </button>
       </div>
     )}
@@ -452,9 +457,9 @@ const TaglineCta = ({ data, onCtaBuy, highlightedTier }) => {
             <button
               type="button"
               className={styles.ctaPrimary}
-              onClick={() => onCtaBuy(highlightedTier)}
+              onClick={scrollToPricing}
             >
-              Comprar
+              Crear evento
             </button>
           )}
           {showSecondary && (
@@ -704,9 +709,9 @@ const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => {
           <button
             type="button"
             className={styles.ctaPrimary}
-            onClick={() => onCtaBuy(highlightedTier)}
+            onClick={scrollToPricing}
           >
-            Comprar
+            Crear evento
           </button>
         )}
       </div>

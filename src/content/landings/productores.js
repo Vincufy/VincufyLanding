@@ -172,7 +172,6 @@ export const productores = {
         { n: 3, title: "Configurá tus eventos", body: "" },
         { n: 4, title: "Crecé con nuestras herramientas", body: "" },
       ],
-      cta: { kind: "cta_buy" },
     },
     {
       kind: "pricing",

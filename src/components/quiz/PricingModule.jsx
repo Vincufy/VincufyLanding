@@ -31,7 +31,7 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
   const { headline, subheadline, tiers } = eventosFunnel.pricing;
 
   return (
-    <section className={styles.container}>
+    <section className={styles.container} id="planes">
       {headline && <h2 className={styles.headline}>{headline}</h2>}
       {subheadline && <p className={styles.subheadline}>{subheadline}</p>}
 
