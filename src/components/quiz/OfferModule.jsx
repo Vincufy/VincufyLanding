@@ -10,7 +10,7 @@ const scrollToPricing = () => {
 
 /* ── Existing renderers ── */
 
-const Hero = ({ data, onCtaBuy, highlightedTier }) => {
+const Hero = ({ data }) => {
   const showPrimary = !!data.ctaPrimary;
   const showSecondary = !!data.ctaSecondary;
   return (
@@ -112,7 +112,7 @@ const Includes = ({ data }) => (
   </section>
 );
 
-const HowItWorks = ({ data, onCtaBuy, highlightedTier }) => (
+const HowItWorks = ({ data }) => (
   <section className={styles.section} id={data.anchor}>
     <h2 className={styles.h2}>{data.title}</h2>
     <ol className={styles.steps}>
@@ -153,7 +153,7 @@ const Comparison = ({ data }) => (
 
 const UseCases = Includes;
 
-const Offer = ({ data, onCtaBuy, highlightedTier }) => (
+const Offer = ({ data }) => (
   <section className={styles.section}>
     <h2 className={styles.h2}>{data.title}</h2>
     <p className={styles.body}>{data.body}</p>
@@ -188,7 +188,7 @@ const FAQ = ({ data }) => (
   </section>
 );
 
-const FinalClose = ({ data, onCtaBuy, highlightedTier }) => (
+const FinalClose = ({ data }) => (
   <section className={styles.section}>
     <h2 className={styles.h2}>{data.title}</h2>
     <p className={styles.body}>{data.body}</p>
@@ -445,7 +445,7 @@ const ProblemFamiliar = ({ data }) => (
   </section>
 );
 
-const TaglineCta = ({ data, onCtaBuy, highlightedTier }) => {
+const TaglineCta = ({ data }) => {
   const showPrimary = !!data.ctaPrimary;
   const showSecondary = !!data.ctaSecondary;
   return (
@@ -671,7 +671,7 @@ const MoneyBackGuarantee = ({ data }) => (
   </section>
 );
 
-const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => {
+const FinalCtaCard = ({ data }) => {
   const [waOpen, setWaOpen] = useState(false);
   const wa = data.ctaWhatsapp;
   const phone = wa?.phone || "";
