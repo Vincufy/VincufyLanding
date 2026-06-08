@@ -144,7 +144,7 @@ export const boliches = {
       colAudience: {
         title: "Para tu público",
         bullets: [
-          "Entrada única y de fácil acceso",
+          "Compra rápida de entrada",
           "Información del evento en todo momento",
           "Espacio para vincularse con otros asistentes",
           "Menos espera en puerta",
