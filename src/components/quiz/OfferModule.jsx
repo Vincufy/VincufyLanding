@@ -666,21 +666,91 @@ const MoneyBackGuarantee = ({ data }) => (
   </section>
 );
 
-const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => (
-  <section className={styles.finalCtaCard}>
-    <div className={styles.finalCtaCardInner}>
-      <h2 className={styles.finalCtaHeadline}>{data.headline}</h2>
-      <p className={styles.finalCtaSubline}>{data.subline}</p>
-      <button
-        type="button"
-        className={styles.ctaPrimary}
-        onClick={() => onCtaBuy(highlightedTier)}
-      >
-        Comprar
-      </button>
-    </div>
-  </section>
-);
+const FinalCtaCard = ({ data, onCtaBuy, highlightedTier }) => {
+  const [waOpen, setWaOpen] = useState(false);
+  const wa = data.ctaWhatsapp;
+  const phone = wa?.phone || "";
+  const waNumber = phone.replace(/[^0-9]/g, "");
+
+  useEffect(() => {
+    if (!waOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => {
+      if (e.key === "Escape") setWaOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [waOpen]);
+
+  return (
+    <section className={styles.finalCtaCard}>
+      <div className={styles.finalCtaCardInner}>
+        <h2 className={styles.finalCtaHeadline}>{data.headline}</h2>
+        <p className={styles.finalCtaSubline}>{data.subline}</p>
+        {wa ? (
+          <button
+            type="button"
+            className={styles.whatsappHelpBtn}
+            onClick={() => setWaOpen(true)}
+          >
+            <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
+            {wa.label || "Escribinos por WhatsApp"}
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={styles.ctaPrimary}
+            onClick={() => onCtaBuy(highlightedTier)}
+          >
+            Comprar
+          </button>
+        )}
+      </div>
+
+      {wa && waOpen && createPortal(
+        <div
+          className={styles.whatsappOverlay}
+          onClick={() => setWaOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            className={styles.whatsappClose}
+            onClick={() => setWaOpen(false)}
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+          <div
+            className={styles.whatsappOverlayContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.whatsappUnicornWrap}>
+              <div className={styles.whatsappUnicornHalo} aria-hidden="true" />
+              <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
+            </div>
+            <p className={styles.whatsappCallout}>Lucas por aquí</p>
+            <a
+              href={`https://wa.me/${waNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.whatsappPhone}
+            >
+              {phone}
+            </a>
+            <p className={styles.whatsappHint}>Tocá para abrir WhatsApp</p>
+          </div>
+        </div>,
+        document.body
+      )}
+    </section>
+  );
+};
 
 /* ── KIND_MAP ── */
 const KIND_MAP = {
