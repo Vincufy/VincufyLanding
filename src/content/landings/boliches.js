@@ -213,7 +213,7 @@ export const boliches = {
     },
     {
       kind: "final_cta_card",
-      headline: "Tu próximo finde puede ser el inicio de una comunidad.",
+      headline: "Tu próximo finde puede ser el inicio de tu comunidad.",
       subline: "¿Tenés alguna duda?",
       ctaWhatsapp: { phone: "+54 9 11 0000 0000", label: "Escribinos por WhatsApp" },
     },
