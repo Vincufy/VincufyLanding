@@ -80,6 +80,8 @@ export const eventosFunnel = {
     launchLine: "",
     emailLabel: "Tu email",
     emailPlaceholder: "tu@email.com",
+    phoneLabel: "Tu teléfono",
+    phonePlaceholder: "+54 9 11 1234 5678",
     eventTextLabel: "¿Qué evento estás armando ahora?",
     eventTextHint: "Opcional",
     submitLabel: "Sumarme",

@@ -91,17 +91,19 @@ const OfferPage = () => {
 
   const handleCloseModal = () => setActiveTier(null);
 
-  const handleSubmitLead = async ({ email, eventText }) => {
+  const handleSubmitLead = async ({ email, phone, eventText }) => {
     if (!activeTier) return;
     analyticEvent("lead_email_submitted", {
       segment,
       tier: activeTier.id,
+      has_phone: !!phone,
     });
 
     // Fire-and-forget: submitLead runs in background, never blocks navigation.
     // PostHog is the real sink for round 1; backend is optional.
     const submitPromise = submitLead({
       email,
+      phone,
       segment,
       tier: activeTier.id,
       tier_total_ars: activeTier.total ?? null,
@@ -113,10 +115,12 @@ const OfferPage = () => {
     const distinctId = await hashEmail(email);
     analyticIdentify(distinctId, {
       email,
+      phone,
       email_domain: email.split("@")[1],
       assigned_segment: segment,
       selected_tier: activeTier.id,
       has_event_text: !!eventText,
+      has_phone: !!phone,
       first_touch_source: "landing_quiz_eventos",
       quiz_answers: answers || null,
     });
@@ -126,6 +130,7 @@ const OfferPage = () => {
       tier: activeTier.id,
       email_domain: email.split("@")[1],
       has_event_text: !!eventText,
+      has_phone: !!phone,
       backend_delivered: null,
     });
 

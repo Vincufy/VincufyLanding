@@ -28,6 +28,7 @@ const MIN_LOADING_MS = 350;
 const HonestRevealModal = ({ onClose, onSubmit }) => {
   const { reveal } = eventosFunnel;
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [eventText, setEventText] = useState("");
   // "idle" | "loading" | "success"
   const [submitState, setSubmitState] = useState("idle");
@@ -56,12 +57,17 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
       setError("Necesitamos un mail válido");
       return;
     }
+    const phoneDigits = phone.replace(/\D/g, "");
+    if (phoneDigits.length < 8) {
+      setError("Necesitamos un teléfono válido");
+      return;
+    }
     setSubmitState("loading");
     setError(null);
     try {
       // Enforce minimum visible loading time
       await Promise.all([
-        onSubmit({ email, eventText }),
+        onSubmit({ email, phone, eventText }),
         new Promise((res) => setTimeout(res, MIN_LOADING_MS)),
       ]);
       setSubmitState("success");
@@ -144,6 +150,25 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
             />
             <label className={styles.floatingLabel} htmlFor="email">
               {reveal.emailLabel}
+            </label>
+          </div>
+
+          {/* Floating-label phone field */}
+          <div className={styles.fieldWrapper}>
+            <input
+              id="phone"
+              type="tel"
+              required
+              inputMode="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder={reveal.phonePlaceholder}
+              className={`${styles.input} ${error ? styles.inputError : ""} ph-no-capture`}
+              autoComplete="tel"
+              aria-label={reveal.phoneLabel}
+            />
+            <label className={styles.floatingLabel} htmlFor="phone">
+              {reveal.phoneLabel}
             </label>
           </div>
 
