@@ -107,17 +107,6 @@ export const boliches = {
       ],
     },
     {
-      kind: "how_it_works",
-      anchor: "como-funciona",
-      title: "Pasos a seguir",
-      steps: [
-        { n: 1, title: "Creá tu perfil", body: "" },
-        { n: 2, title: "Configurá tus eventos", body: "" },
-        { n: 3, title: "Crecé con nuestras herramientas", body: "" },
-      ],
-      cta: { kind: "cta_buy" },
-    },
-    {
       kind: "gallery_carousel",
       title: "Cómo se ve Vincufy en acción",
       cards: [
@@ -172,6 +161,18 @@ export const boliches = {
         { number: "+1.500", label: "eventos gestionados" },
         { number: "+600.000", label: "entradas emitidas" },
       ],
+    },
+    {
+      kind: "how_it_works",
+      anchor: "como-funciona",
+      title: "Pasos a seguir",
+      steps: [
+        { n: 1, title: "Comprá tus entradas", body: "" },
+        { n: 2, title: "Creá tu perfil", body: "" },
+        { n: 3, title: "Configurá tus eventos", body: "" },
+        { n: 4, title: "Crecé con nuestras herramientas", body: "" },
+      ],
+      cta: { kind: "cta_buy" },
     },
     {
       kind: "pricing",
