@@ -15,7 +15,7 @@ import {
   hashEmail,
 } from "../lib/posthog";
 import { submitLead } from "../lib/leadSink";
-import { pixelTrack } from "../lib/metaPixel";
+import { pixelTrack, pixelTrackCustom } from "../lib/metaPixel";
 import styles from "./OfferPage.module.css";
 import moduleStyles from "../components/quiz/OfferModule.module.css";
 
@@ -118,6 +118,10 @@ const OfferPage = () => {
       tier_tickets: tier.tickets ?? null,
       tier_price_per_ticket: tier.pricePerTicket ?? null,
       source: tier.source ?? "pricing_card",
+    });
+    pixelTrackCustom("CreateEventClick", {
+      source: tier.source ?? "pricing_card",
+      tier: tier.id,
     });
     setActiveTier(tier);
     analyticEvent("reveal_shown", {

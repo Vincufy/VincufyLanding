@@ -3,8 +3,10 @@ import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
 import useInViewTrack from "./useInViewTrack";
 import { analyticEvent } from "../../lib/posthog";
+import { pixelTrackCustom } from "../../lib/metaPixel";
 
 const scrollToPricing = () => {
+  pixelTrackCustom("CreateEventClick");
   const el = document.getElementById("planes");
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 };

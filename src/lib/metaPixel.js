@@ -1,3 +1,5 @@
+import ReactPixel from "react-facebook-pixel";
+
 let initialized = false;
 
 export function initMetaPixel() {
@@ -9,37 +11,25 @@ export function initMetaPixel() {
     }
     return;
   }
-
-  // Standard Meta Pixel snippet
-  !(function (f, b, e, v, n, t, s) {
-    if (f.fbq) return;
-    n = f.fbq = function () {
-      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-    };
-    if (!f._fbq) f._fbq = n;
-    n.push = n;
-    n.loaded = !0;
-    n.version = "2.0";
-    n.queue = [];
-    t = b.createElement(e);
-    t.async = !0;
-    t.src = v;
-    s = b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t, s);
-  })(
-    window,
-    document,
-    "script",
-    "https://connect.facebook.net/en_US/fbevents.js"
-  );
-
-  window.fbq("init", pixelId);
-  window.fbq("track", "PageView");
+  ReactPixel.init(pixelId, undefined, {
+    autoConfig: true,
+    debug: !import.meta.env.PROD,
+  });
+  ReactPixel.pageView();
   initialized = true;
 }
 
+export function pixelPageView() {
+  if (!initialized) return;
+  ReactPixel.pageView();
+}
+
 export function pixelTrack(event, params) {
-  if (typeof window.fbq === "function") {
-    window.fbq("track", event, params);
-  }
+  if (!initialized) return;
+  ReactPixel.track(event, params);
+}
+
+export function pixelTrackCustom(event, params) {
+  if (!initialized) return;
+  ReactPixel.trackCustom(event, params);
 }
