@@ -1757,3 +1757,12 @@
   .whatsappOverlayContent,
   .whatsappUnicorn { animation: none; }
 }
+
+.galleryCardImg {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #0a0a0a;
+  display: block;
+}

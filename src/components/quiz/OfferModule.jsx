@@ -481,6 +481,33 @@ const IncludesChecklist = ({ data }) => (
   </section>
 );
 
+const GalleryCard = ({ card }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImg = card.src && !imgFailed;
+  return (
+    <div className={styles.galleryCard}>
+      {showImg ? (
+        <img
+          src={card.src}
+          alt={card.caption}
+          className={styles.galleryCardImg}
+          onError={() => setImgFailed(true)}
+        />
+      ) : (
+        <div
+          className={`${styles.placeholder} ${styles.galleryCardPlaceholder}`}
+          data-label={`PLACEHOLDER — ${card.caption}`}
+          aria-hidden="true"
+        >
+          PLACEHOLDER
+          <span>{card.dimensions || "390×844 · 9:16"}</span>
+        </div>
+      )}
+      <p className={styles.galleryCardCaption}>{card.caption}</p>
+    </div>
+  );
+};
+
 const GalleryCarousel = ({ data }) => (
   <section className={styles.galleryCarousel}>
     <div className={styles.galleryCarouselInner}>
@@ -489,17 +516,7 @@ const GalleryCarousel = ({ data }) => (
     <div className={styles.galleryTrackWrap}>
       <div className={styles.galleryTrack} role="region" aria-label="Galería de pantallas">
         {data.cards.map((card, i) => (
-          <div key={i} className={styles.galleryCard}>
-            <div
-              className={`${styles.placeholder} ${styles.galleryCardPlaceholder}`}
-              data-label={`PLACEHOLDER — ${card.caption}`}
-              aria-hidden="true"
-            >
-              PLACEHOLDER
-              <span>{card.dimensions || "390×844 · 9:16"}</span>
-            </div>
-            <p className={styles.galleryCardCaption}>{card.caption}</p>
-          </div>
+          <GalleryCard key={i} card={card} />
         ))}
       </div>
     </div>
