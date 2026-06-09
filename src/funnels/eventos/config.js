@@ -75,7 +75,7 @@ export const eventosFunnel = {
     ],
     benefits: [
       "Te contactamos personalmente.",
-      "Acceso prioritario apenas se abra tu lugar.",
+      "Acceso prioritario apenas se abran nuevos cupos.",
     ],
     launchLine: "",
     emailLabel: "Tu email",

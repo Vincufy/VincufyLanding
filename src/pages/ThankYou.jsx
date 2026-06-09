@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { analyticEvent, analyticPageview } from "../lib/posthog";
-import { eventosFunnel } from "../funnels/eventos/config";
 import styles from "./ThankYou.module.css";
 
 const ThankYou = () => {
@@ -23,21 +22,8 @@ const ThankYou = () => {
         <div className={styles.checkmark}>✓</div>
         <h1 className={styles.title}>Tu lugar está reservado.</h1>
         <p className={styles.subtitle}>
-          Te llega un mail en menos de 5 minutos con todo lo que sigue.
+          Nos comunicaremos apenas se libere un nuevo cupo.
         </p>
-
-        <div className={styles.list}>
-          <p>Qué pasa ahora:</p>
-          <ol>
-            <li>Te escribo cada 2-3 semanas con avances reales.</li>
-            <li>
-              Cuando esté listo el beta (estimo {eventosFunnel.launchDate}), te aviso primero.
-            </li>
-            <li>
-              Si en algún momento decido no seguir adelante, te lo digo derecho.
-            </li>
-          </ol>
-        </div>
 
         {calendlyLink && (
           <a
