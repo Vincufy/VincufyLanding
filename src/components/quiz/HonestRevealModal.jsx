@@ -239,8 +239,6 @@ const HonestRevealModal = ({
             {renderButtonContent()}
           </button>
         </form>
-
-        <p className={styles.footerNote}>{reveal.footerNote}</p>
       </div>
     </div>
   );
