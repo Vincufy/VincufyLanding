@@ -354,7 +354,6 @@ const TrustedLogo = ({ logo, hidden }) => {
           <span className={styles.trustedLogoPlaceholder}>LOGO</span>
         )}
       </div>
-      <p className={styles.trustedLogoName}>{logo.name}</p>
     </div>
   );
 };
@@ -572,7 +571,6 @@ const GalleryCard = ({ card }) => {
           <span>{card.dimensions || "390×844 · 9:16"}</span>
         </div>
       )}
-      <p className={styles.galleryCardCaption}>{card.caption}</p>
     </div>
   );
 };

@@ -16,7 +16,6 @@ export const productores = {
     {
       kind: "tagline_cta",
       ctaPrimary: { kind: "cta_buy" },
-      ctaSecondary: { kind: "scroll_to", target: "como-funciona", label: "Ver cómo funciona" },
     },
     {
       kind: "highlight_box",

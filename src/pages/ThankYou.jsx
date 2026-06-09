@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { analyticEvent, analyticPageview } from "../lib/posthog";
 import { eventosFunnel } from "../funnels/eventos/config";
 import styles from "./ThankYou.module.css";
@@ -8,6 +7,7 @@ const ThankYou = () => {
   const calendlyLink = import.meta.env.VITE_CALENDLY_LINK;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     analyticPageview("/q/eventos/gracias");
     analyticEvent("thankyou_viewed", {});
   }, []);
@@ -50,10 +50,6 @@ const ThankYou = () => {
             ¿15 minutos esta semana? Agendá una charla →
           </a>
         )}
-
-        <Link to="/" className={styles.homeLink}>
-          Volver al inicio
-        </Link>
       </div>
     </div>
   );
