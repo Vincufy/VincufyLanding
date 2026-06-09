@@ -1005,29 +1005,28 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
 }
 
 .benefitsList li {
-  display: inline-flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 1.1rem 1fr 1.1rem;
+  align-items: center;
+  gap: 0.4rem;
   color: rgb(196, 196, 196);
   font-size: 0.875rem;
   line-height: 1.4;
   min-height: 2.6rem;
-  text-align: left;
-  max-width: 100%;
+  text-align: center;
 }
 
 .benefitsList li::before {
   content: "✓";
   color: #8811c8;
   font-weight: 700;
-  flex-shrink: 0;
   line-height: 1.4;
+  text-align: left;
+  grid-column: 1;
 }
 
 /* ── testimonials_carousel ── */
