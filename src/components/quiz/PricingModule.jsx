@@ -1,5 +1,6 @@
 import styles from "./PricingModule.module.css";
 import { eventosFunnel } from "../../funnels/eventos/config";
+import { analyticEvent } from "../../lib/posthog";
 
 const formatArs = (n) =>
   new Intl.NumberFormat("es-AR", {
@@ -27,7 +28,7 @@ const createRipple = (e) => {
   ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
 };
 
-const PricingModule = ({ highlightedTierId, onTierClick }) => {
+const PricingModule = ({ highlightedTierId, onTierClick, segment }) => {
   const { headline, subheadline, tiers } = eventosFunnel.pricing;
 
   return (
@@ -71,6 +72,16 @@ const PricingModule = ({ highlightedTierId, onTierClick }) => {
                 }`}
                 onClick={(e) => {
                   createRipple(e);
+                  analyticEvent("comprar_clicked", {
+                    tier_id: tier.id,
+                    tier_name: tier.name,
+                    tier_tickets: tier.tickets,
+                    tier_price_per_ticket: tier.pricePerTicket,
+                    tier_total_ars: tier.total,
+                    tier_discount_percent: tier.discountPercent,
+                    is_highlighted: isHighlighted,
+                    segment,
+                  });
                   onTierClick(tier);
                 }}
               >

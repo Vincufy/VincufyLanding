@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./HonestRevealModal.module.css";
 import { eventosFunnel } from "../../funnels/eventos/config";
+import { analyticEvent } from "../../lib/posthog";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -25,7 +26,12 @@ const createRipple = (e) => {
  */
 const MIN_LOADING_MS = 350;
 
-const HonestRevealModal = ({ onClose, onSubmit }) => {
+const HonestRevealModal = ({
+  onClose,
+  onSubmit,
+  source = "comprar_button",
+  tierId = null,
+}) => {
   const { reveal } = eventosFunnel;
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -34,6 +40,11 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
   const [submitState, setSubmitState] = useState("idle");
   const [error, setError] = useState(null);
   const emailRef = useRef(null);
+
+  // Fire modal_viewed on mount
+  useEffect(() => {
+    analyticEvent("modal_viewed", { source, tier_id: tierId });
+  }, [source, tierId]);
 
   useEffect(() => {
     emailRef.current?.focus();
@@ -45,21 +56,50 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
 
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        analyticEvent("modal_closed", {
+          dismiss_method: "escape",
+          has_email_attempt: !!email,
+          has_phone_attempt: !!phone,
+        });
+        onClose();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, email, phone]);
+
+  const handleClose = () => {
+    analyticEvent("modal_closed", {
+      dismiss_method: "close_button",
+      has_email_attempt: !!email,
+      has_phone_attempt: !!phone,
+    });
+    onClose();
+  };
+
+  const handleBackdropClose = () => {
+    analyticEvent("modal_closed", {
+      dismiss_method: "backdrop",
+      has_email_attempt: !!email,
+      has_phone_attempt: !!phone,
+    });
+    onClose();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !EMAIL_REGEX.test(email)) {
+      const reason = "invalid_email";
       setError("Necesitamos un mail válido");
+      analyticEvent("modal_validation_failed", { reason });
       return;
     }
     const phoneDigits = phone.replace(/\D/g, "");
     if (phoneDigits.length < 8) {
+      const reason = "invalid_phone";
       setError("Necesitamos un teléfono válido");
+      analyticEvent("modal_validation_failed", { reason });
       return;
     }
     setSubmitState("loading");
@@ -102,7 +142,7 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div className={styles.backdrop} onClick={onClose}>
+    <div className={styles.backdrop} onClick={handleBackdropClose}>
       <div
         className={styles.modal}
         role="dialog"
@@ -112,7 +152,7 @@ const HonestRevealModal = ({ onClose, onSubmit }) => {
         <button
           type="button"
           className={styles.close}
-          onClick={onClose}
+          onClick={handleClose}
           aria-label="Cerrar"
         >
           ×

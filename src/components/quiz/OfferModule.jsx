@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
+import useInViewTrack from "./useInViewTrack";
+import { analyticEvent } from "../../lib/posthog";
 
 const scrollToPricing = () => {
   const el = document.getElementById("planes");
@@ -9,7 +11,7 @@ const scrollToPricing = () => {
 
 /* ── Existing renderers ── */
 
-const Hero = ({ data }) => {
+const Hero = ({ data, segment }) => {
   const showPrimary = !!data.ctaPrimary;
   const showSecondary = !!data.ctaSecondary;
   return (
@@ -22,7 +24,14 @@ const Hero = ({ data }) => {
             <button
               type="button"
               className={styles.ctaPrimary}
-              onClick={scrollToPricing}
+              onClick={() => {
+                analyticEvent("cta_clicked", {
+                  cta_id: "hero-primary",
+                  action: "scroll_to_pricing",
+                  segment,
+                });
+                scrollToPricing();
+              }}
             >
               Crear evento
             </button>
@@ -32,6 +41,12 @@ const Hero = ({ data }) => {
               type="button"
               className={styles.ctaSecondary}
               onClick={() => {
+                analyticEvent("cta_clicked", {
+                  cta_id: "hero-secondary",
+                  action: "scroll_to_anchor",
+                  target: data.ctaSecondary.target,
+                  segment,
+                });
                 const el = document.getElementById(data.ctaSecondary.target);
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
@@ -111,7 +126,7 @@ const Includes = ({ data }) => (
   </section>
 );
 
-const HowItWorks = ({ data }) => (
+const HowItWorks = ({ data, segment }) => (
   <section className={styles.section} id={data.anchor}>
     <h2 className={styles.h2}>{data.title}</h2>
     <ol className={styles.steps}>
@@ -130,7 +145,14 @@ const HowItWorks = ({ data }) => (
         <button
           type="button"
           className={styles.ctaPrimary}
-          onClick={scrollToPricing}
+          onClick={() => {
+            analyticEvent("cta_clicked", {
+              cta_id: "how-it-works-cta",
+              action: "scroll_to_pricing",
+              segment,
+            });
+            scrollToPricing();
+          }}
         >
           Crear evento
         </button>
@@ -152,7 +174,7 @@ const Comparison = ({ data }) => (
 
 const UseCases = Includes;
 
-const Offer = ({ data }) => (
+const Offer = ({ data, segment }) => (
   <section className={styles.section}>
     <h2 className={styles.h2}>{data.title}</h2>
     <p className={styles.body}>{data.body}</p>
@@ -160,7 +182,14 @@ const Offer = ({ data }) => (
       <button
         type="button"
         className={styles.ctaPrimary}
-        onClick={scrollToPricing}
+        onClick={() => {
+          analyticEvent("cta_clicked", {
+            cta_id: "offer-cta",
+            action: "scroll_to_pricing",
+            segment,
+          });
+          scrollToPricing();
+        }}
       >
         Crear evento
       </button>
@@ -173,12 +202,23 @@ const Offer = ({ data }) => (
 
 const RiskReduction = Presentation;
 
-const FAQ = ({ data }) => (
+const FAQ = ({ data, segment }) => (
   <section className={styles.section}>
     <h2 className={styles.h2}>Preguntas frecuentes</h2>
     <div className={styles.faqList}>
       {data.items.map((it, i) => (
-        <details key={i} className={styles.faqItem}>
+        <details
+          key={i}
+          className={styles.faqItem}
+          onToggle={(e) => {
+            analyticEvent("faq_toggled", {
+              question_index: i,
+              question: it.q,
+              opened: e.target.open,
+              segment,
+            });
+          }}
+        >
           <summary className={styles.faqQ}>{it.q}</summary>
           <p className={styles.faqA}>{it.a}</p>
         </details>
@@ -187,7 +227,7 @@ const FAQ = ({ data }) => (
   </section>
 );
 
-const FinalClose = ({ data }) => (
+const FinalClose = ({ data, segment }) => (
   <section className={styles.section}>
     <h2 className={styles.h2}>{data.title}</h2>
     <p className={styles.body}>{data.body}</p>
@@ -196,7 +236,14 @@ const FinalClose = ({ data }) => (
         <button
           type="button"
           className={styles.ctaPrimary}
-          onClick={scrollToPricing}
+          onClick={() => {
+            analyticEvent("cta_clicked", {
+              cta_id: "final-close-cta",
+              action: "scroll_to_pricing",
+              segment,
+            });
+            scrollToPricing();
+          }}
         >
           Crear evento
         </button>
@@ -251,7 +298,7 @@ const HeroImage = ({ data = {} }) => {
   );
 };
 
-const WhatsAppHelp = ({ data }) => {
+const WhatsAppHelp = ({ data, segment }) => {
   const phone = data.phone || "+5492215678232";
   const waNumber = phone.replace(/[^0-9]/g, "");
   const text = data.text || "¿Tenés alguna duda?";
@@ -265,6 +312,13 @@ const WhatsAppHelp = ({ data }) => {
         target="_blank"
         rel="noopener noreferrer"
         className={styles.whatsappHelpBtn}
+        onClick={() => {
+          analyticEvent("whatsapp_clicked", {
+            source: "whatsapp_help",
+            segment,
+            phone: waNumber,
+          });
+        }}
       >
         <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
         {cta}
@@ -392,7 +446,7 @@ const ProblemFamiliar = ({ data }) => (
   </section>
 );
 
-const TaglineCta = ({ data }) => {
+const TaglineCta = ({ data, segment }) => {
   const showPrimary = !!data.ctaPrimary;
   const showSecondary = !!data.ctaSecondary;
   return (
@@ -404,7 +458,14 @@ const TaglineCta = ({ data }) => {
             <button
               type="button"
               className={styles.ctaPrimary}
-              onClick={scrollToPricing}
+              onClick={() => {
+                analyticEvent("cta_clicked", {
+                  cta_id: "tagline-primary",
+                  action: "scroll_to_pricing",
+                  segment,
+                });
+                scrollToPricing();
+              }}
             >
               Crear evento
             </button>
@@ -414,6 +475,12 @@ const TaglineCta = ({ data }) => {
               type="button"
               className={styles.ctaSecondary}
               onClick={() => {
+                analyticEvent("cta_clicked", {
+                  cta_id: "tagline-secondary",
+                  action: "scroll_to_anchor",
+                  target: data.ctaSecondary.target,
+                  segment,
+                });
                 const el = document.getElementById(data.ctaSecondary.target);
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
@@ -635,7 +702,7 @@ const MoneyBackGuarantee = ({ data }) => (
   </section>
 );
 
-const FinalCtaCard = ({ data }) => {
+const FinalCtaCard = ({ data, segment }) => {
   const wa = data.ctaWhatsapp;
   const phone = wa?.phone || "";
   const waNumber = phone.replace(/[^0-9]/g, "");
@@ -651,6 +718,13 @@ const FinalCtaCard = ({ data }) => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.whatsappHelpBtn}
+            onClick={() => {
+              analyticEvent("whatsapp_clicked", {
+                source: "final_cta_card",
+                segment,
+                phone: waNumber,
+              });
+            }}
           >
             <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
             {wa.label || "Escribinos por WhatsApp"}
@@ -659,7 +733,14 @@ const FinalCtaCard = ({ data }) => {
           <button
             type="button"
             className={styles.ctaPrimary}
-            onClick={scrollToPricing}
+            onClick={() => {
+              analyticEvent("cta_clicked", {
+                cta_id: "final-cta-card-primary",
+                action: "scroll_to_pricing",
+                segment,
+              });
+              scrollToPricing();
+            }}
           >
             Crear evento
           </button>
@@ -708,18 +789,27 @@ const KIND_MAP = {
   whatsapp_help: WhatsAppHelp,
 };
 
-const OfferModule = ({ module: m, onCtaBuy, highlightedTier }) => {
+const OfferModule = ({ module: m, onCtaBuy, highlightedTier, segment }) => {
   const Component = KIND_MAP[m.kind];
   const [revealRef, revealed] = useInViewReveal();
+  const trackRef = useInViewTrack({ section: m.kind });
 
   if (!Component) return null;
   return (
     <div
-      ref={revealRef}
+      ref={(node) => {
+        revealRef.current = node;
+        trackRef.current = node;
+      }}
       className={styles.reveal}
       data-revealed={revealed ? "true" : "false"}
     >
-      <Component data={m} onCtaBuy={onCtaBuy} highlightedTier={highlightedTier} />
+      <Component
+        data={m}
+        onCtaBuy={onCtaBuy}
+        highlightedTier={highlightedTier}
+        segment={segment}
+      />
     </div>
   );
 };

@@ -74,6 +74,7 @@ function registerSuperProps() {
 
 function flushQueue() {
   eventQueue.forEach(({ type, name, props, distinctId }) => {
+    if (type === "register") posthog.register(props);
     if (type === "capture") posthog.capture(name, props);
     if (type === "identify") posthog.identify(distinctId, props);
   });
@@ -102,6 +103,17 @@ export function analyticIdentify(distinctId, props) {
 
 export function analyticPageview(pathname) {
   analyticEvent("$pageview", { $current_url: pathname });
+}
+
+export function analyticRegister(props) {
+  if (!isEnabled()) return;
+  if (posthog.__loaded) {
+    posthog.register(props);
+    log("register", props);
+  } else {
+    // Queue as a synthetic capture so super-props are set before the first event
+    eventQueue.push({ type: "register", props });
+  }
 }
 
 export async function hashEmail(email) {

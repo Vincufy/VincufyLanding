@@ -11,6 +11,7 @@ import {
   analyticEvent,
   analyticIdentify,
   analyticPageview,
+  analyticRegister,
   hashEmail,
 } from "../lib/posthog";
 import { submitLead } from "../lib/leadSink";
@@ -26,6 +27,7 @@ const OfferPage = () => {
   const [stickyVisible, setStickyVisible] = useState(false);
   const [pricingRevealRef, pricingRevealed] = useInViewReveal();
   const heroSentinelRef = useRef(null);
+  const stickyShownRef = useRef(false);
 
   // Validate segment early (but after all hooks are declared)
   const isValidSegment = SEGMENTS.includes(segment);
@@ -53,6 +55,12 @@ const OfferPage = () => {
     discountPercent: 0,
   };
 
+  // Register segment as super property so every subsequent event carries it
+  useEffect(() => {
+    if (!isValidSegment) return;
+    analyticRegister({ segment, landing_variant: segment });
+  }, [segment, isValidSegment]);
+
   useEffect(() => {
     if (!isValidSegment) return;
     analyticPageview(`/q/eventos/r/${segment}`);
@@ -60,18 +68,47 @@ const OfferPage = () => {
     pixelTrack("ViewContent", { content_category: segment });
   }, [segment, isValidSegment]);
 
+  // Scroll-depth milestones: 25 / 50 / 75 / 100
+  useEffect(() => {
+    if (!isValidSegment) return;
+    const fired = new Set();
+    const thresholds = [25, 50, 75, 100];
+
+    const onScroll = () => {
+      const scrolled = window.scrollY;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      const pct = (scrolled / maxScroll) * 100;
+      thresholds.forEach((t) => {
+        if (pct >= t && !fired.has(t)) {
+          fired.add(t);
+          analyticEvent("scroll_depth", { percent: t, segment });
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [segment, isValidSegment]);
+
   // IntersectionObserver: show sticky CTA when hero scrolls out of view
   useEffect(() => {
     if (!heroSentinelRef.current) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setStickyVisible(!entry.isIntersecting);
+        const nowVisible = !entry.isIntersecting;
+        setStickyVisible(nowVisible);
+        if (nowVisible && !stickyShownRef.current) {
+          stickyShownRef.current = true;
+          analyticEvent("sticky_mobile_cta_shown", { segment });
+        }
       },
       { threshold: 0 }
     );
     observer.observe(heroSentinelRef.current);
     return () => observer.disconnect();
-  }, [isValidSegment]);
+  }, [isValidSegment, segment]);
 
   const handleCtaBuy = (tier) => {
     analyticEvent("cta_buy_clicked", {
@@ -175,6 +212,7 @@ const OfferPage = () => {
                   <PricingModule
                     highlightedTierId={highlightedTierId}
                     onTierClick={(tier) => handleCtaBuy(tier)}
+                    segment={segment}
                   />
                 </div>
               </div>
@@ -189,6 +227,7 @@ const OfferPage = () => {
                   module={m}
                   onCtaBuy={handleCtaBuy}
                   highlightedTier={highlightedTier}
+                  segment={segment}
                 />
                 <div ref={heroSentinelRef} aria-hidden="true" style={{ height: 0 }} />
               </div>
@@ -200,6 +239,7 @@ const OfferPage = () => {
               module={m}
               onCtaBuy={handleCtaBuy}
               highlightedTier={highlightedTier}
+              segment={segment}
             />
           );
         })}
@@ -218,7 +258,17 @@ const OfferPage = () => {
         <button
           type="button"
           className={moduleStyles.stickyMobileBtn}
-          onClick={() => handleCtaBuy(customVolumeTier)}
+          onClick={() => {
+            analyticEvent("cta_clicked", {
+              cta_id: "sticky-mobile",
+              action: "open_modal",
+              segment,
+              tier_id: customVolumeTier.id,
+              tier_name: customVolumeTier.name,
+              source: customVolumeTier.source,
+            });
+            handleCtaBuy(customVolumeTier);
+          }}
         >
           Sumarme
         </button>
@@ -228,6 +278,8 @@ const OfferPage = () => {
         <HonestRevealModal
           onClose={handleCloseModal}
           onSubmit={handleSubmitLead}
+          source="comprar_button"
+          tierId={activeTier.id}
         />
       )}
     </div>
