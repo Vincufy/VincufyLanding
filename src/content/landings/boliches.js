@@ -114,6 +114,7 @@ export const boliches = {
         { src: "/landing/screenshots/2.png", caption: "Comunidad del evento", dimensions: "390×844 · 9:16" },
         { src: "/landing/screenshots/3.png", caption: "Validación en puerta", dimensions: "390×844 · 9:16" },
         { src: "/landing/screenshots/4.png", caption: "Reporte post-evento", dimensions: "390×844 · 9:16" },
+        { src: "/landing/screenshots/5.png", caption: "Detalle del evento", dimensions: "390×844 · 9:16" },
       ],
     },
     {
@@ -154,8 +155,6 @@ export const boliches = {
         { name: "Empresa 6", src: "/landing/logos/6.png" },
         { name: "Empresa 7", src: "/landing/logos/7.png" },
         { name: "Empresa 8", src: "/landing/logos/8.png" },
-        { name: "Empresa 9", src: "/landing/logos/9.png" },
-        { name: "Empresa 10", src: "/landing/logos/10.png" },
       ],
       stats: [
         { number: "+1.500", label: "eventos gestionados" },
