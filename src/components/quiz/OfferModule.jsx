@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import styles from "./OfferModule.module.css";
 import useInViewReveal from "./useInViewReveal";
 
@@ -253,75 +252,23 @@ const HeroImage = ({ data = {} }) => {
 };
 
 const WhatsAppHelp = ({ data }) => {
-  const [open, setOpen] = useState(false);
-  const phone = data.phone || "+54 9 11 0000 0000";
+  const phone = data.phone || "+5492215678232";
   const waNumber = phone.replace(/[^0-9]/g, "");
   const text = data.text || "¿Tenés alguna duda?";
   const cta = data.cta || "Escribinos por WhatsApp";
 
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
   return (
     <section className={styles.whatsappHelp}>
       <p className={styles.whatsappHelpTitle}>{text}</p>
-      <button
-        type="button"
+      <a
+        href={`https://wa.me/${waNumber}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className={styles.whatsappHelpBtn}
-        onClick={() => setOpen(true)}
       >
         <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
         {cta}
-      </button>
-
-      {open && createPortal(
-        <div
-          className={styles.whatsappOverlay}
-          onClick={() => setOpen(false)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <button
-            type="button"
-            className={styles.whatsappClose}
-            onClick={() => setOpen(false)}
-            aria-label="Cerrar"
-          >
-            ×
-          </button>
-          <div
-            className={styles.whatsappOverlayContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.whatsappUnicornWrap}>
-              <div className={styles.whatsappUnicornHalo} aria-hidden="true" />
-              <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
-            </div>
-            <p className={styles.whatsappCallout}>Lucas por aquí</p>
-            <a
-              href={`https://wa.me/${waNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.whatsappPhone}
-            >
-              {phone}
-            </a>
-            <p className={styles.whatsappHint}>Tocá para abrir WhatsApp</p>
-          </div>
-        </div>,
-        document.body
-      )}
+      </a>
     </section>
   );
 };
@@ -672,24 +619,9 @@ const MoneyBackGuarantee = ({ data }) => (
 );
 
 const FinalCtaCard = ({ data }) => {
-  const [waOpen, setWaOpen] = useState(false);
   const wa = data.ctaWhatsapp;
   const phone = wa?.phone || "";
   const waNumber = phone.replace(/[^0-9]/g, "");
-
-  useEffect(() => {
-    if (!waOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e) => {
-      if (e.key === "Escape") setWaOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [waOpen]);
 
   return (
     <section className={styles.finalCtaCard}>
@@ -697,14 +629,15 @@ const FinalCtaCard = ({ data }) => {
         <h2 className={styles.finalCtaHeadline}>{data.headline}</h2>
         <p className={styles.finalCtaSubline}>{data.subline}</p>
         {wa ? (
-          <button
-            type="button"
+          <a
+            href={`https://wa.me/${waNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.whatsappHelpBtn}
-            onClick={() => setWaOpen(true)}
           >
             <span className={styles.whatsappHelpBtnIcon} aria-hidden="true">💬</span>
             {wa.label || "Escribinos por WhatsApp"}
-          </button>
+          </a>
         ) : (
           <button
             type="button"
@@ -715,44 +648,6 @@ const FinalCtaCard = ({ data }) => {
           </button>
         )}
       </div>
-
-      {wa && waOpen && createPortal(
-        <div
-          className={styles.whatsappOverlay}
-          onClick={() => setWaOpen(false)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <button
-            type="button"
-            className={styles.whatsappClose}
-            onClick={() => setWaOpen(false)}
-            aria-label="Cerrar"
-          >
-            ×
-          </button>
-          <div
-            className={styles.whatsappOverlayContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.whatsappUnicornWrap}>
-              <div className={styles.whatsappUnicornHalo} aria-hidden="true" />
-              <div className={styles.whatsappUnicorn} aria-hidden="true">🦄</div>
-            </div>
-            <p className={styles.whatsappCallout}>Lucas por aquí</p>
-            <a
-              href={`https://wa.me/${waNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.whatsappPhone}
-            >
-              {phone}
-            </a>
-            <p className={styles.whatsappHint}>Tocá para abrir WhatsApp</p>
-          </div>
-        </div>,
-        document.body
-      )}
     </section>
   );
 };

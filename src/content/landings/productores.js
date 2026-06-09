@@ -180,7 +180,7 @@ export const productores = {
       kind: "whatsapp_help",
       text: "¿Tenés alguna duda?",
       cta: "Escribinos por WhatsApp",
-      phone: "+54 9 11 0000 0000",
+      phone: "+5492215678232",
     },
     {
       kind: "faq",
@@ -215,7 +215,7 @@ export const productores = {
       kind: "final_cta_card",
       headline: "Tu próximo finde puede ser el inicio de tu comunidad.",
       subline: "¿Tenés alguna duda?",
-      ctaWhatsapp: { phone: "+54 9 11 0000 0000", label: "Escribinos por WhatsApp" },
+      ctaWhatsapp: { phone: "+5492215678232", label: "Escribinos por WhatsApp" },
     },
   ],
 };
