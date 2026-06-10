@@ -161,6 +161,7 @@ const OfferPage = () => {
       assigned_segment: segment,
       selected_tier: activeTier.id,
       has_event_text: !!eventText,
+      event_text: eventText || null,
       has_phone: !!phone,
       first_touch_source: "landing_quiz_eventos",
       quiz_answers: answers || null,
@@ -171,6 +172,7 @@ const OfferPage = () => {
       tier: activeTier.id,
       email_domain: email.split("@")[1],
       has_event_text: !!eventText,
+      event_text: eventText || null,
       has_phone: !!phone,
       backend_delivered: null,
     });

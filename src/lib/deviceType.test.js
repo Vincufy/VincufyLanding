@@ -13,25 +13,25 @@ describe("getDeviceType", () => {
     setUserAgent("desktop-default");
   });
 
-  it("returns 'ios' for iPhone user agent", () => {
+  it("returns 'landing-ios' for iPhone user agent", () => {
     setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)");
-    expect(getDeviceType()).toBe("ios");
+    expect(getDeviceType()).toBe("landing-ios");
   });
 
-  it("returns 'ios' for iPad user agent", () => {
+  it("returns 'landing-ios' for iPad user agent", () => {
     setUserAgent("Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X)");
-    expect(getDeviceType()).toBe("ios");
+    expect(getDeviceType()).toBe("landing-ios");
   });
 
-  it("returns 'android' for Android user agent", () => {
+  it("returns 'landing-android' for Android user agent", () => {
     setUserAgent("Mozilla/5.0 (Linux; Android 14; Pixel 8)");
-    expect(getDeviceType()).toBe("android");
+    expect(getDeviceType()).toBe("landing-android");
   });
 
-  it("returns 'desktop' for desktop user agent", () => {
+  it("returns 'landing-desktop' for desktop user agent", () => {
     setUserAgent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36"
     );
-    expect(getDeviceType()).toBe("desktop");
+    expect(getDeviceType()).toBe("landing-desktop");
   });
 });
