@@ -66,7 +66,7 @@ function registerSuperProps() {
     app: "landing",
     funnel_slug: import.meta.env.VITE_FUNNEL_DEFAULT_SLUG || "eventos",
     platform: getDeviceType(),
-    environment: import.meta.env.MODE,
+    environment: import.meta.env.PROD ? "prod" : "dev",
     ...utms,
     ...(fbclid && { fbclid }),
   });
