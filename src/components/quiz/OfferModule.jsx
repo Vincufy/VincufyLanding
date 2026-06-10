@@ -269,32 +269,32 @@ const HeroMockup = () => (
 
 const HeroImage = ({ data = {} }) => {
   const [imgFailed, setImgFailed] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const isSquare = data.aspect === "square";
   const wrapClass = `${styles.heroImageWrap} ${isSquare ? styles.heroImageWrapSquare : ""}`;
-  const placeholderClass = `${styles.placeholder} ${isSquare ? styles.heroImagePlaceholderSquare : styles.heroImagePlaceholder}`;
-  const placeholderLabel = isSquare
-    ? "PLACEHOLDER — imagen cuadrada"
-    : "PLACEHOLDER — imagen contextual del evento";
-  const dimensionHint = isSquare ? "1200×1200 · 1:1 cuadrada" : "2100×900 · 21:9 cinematic";
+  const skeletonClass = `${styles.heroImageSkeleton} ${
+    isSquare ? styles.heroImageSkeletonSquare : styles.heroImageSkeletonCinematic
+  }`;
 
-  if (data.src && !imgFailed) {
+  if (!data.src || imgFailed) {
     return (
       <div className={wrapClass}>
-        <img
-          src={data.src}
-          alt={data.alt || ""}
-          className={styles.heroImageImg}
-          onError={() => setImgFailed(true)}
-        />
+        <div className={`${skeletonClass} ${styles.heroImageSkeletonStatic}`} aria-hidden="true" />
       </div>
     );
   }
 
   return (
     <div className={wrapClass}>
-      <div className={placeholderClass} data-label={placeholderLabel} aria-hidden="true">
-        {placeholderLabel}
-        <span>{dimensionHint}</span>
+      <div className={`${styles.heroImageStack} ${isSquare ? styles.heroImageStackSquare : styles.heroImageStackCinematic}`}>
+        {!imgLoaded && <div className={skeletonClass} aria-hidden="true" />}
+        <img
+          src={data.src}
+          alt={data.alt || ""}
+          className={`${styles.heroImageImg} ${imgLoaded ? styles.heroImageImgLoaded : ""}`}
+          onLoad={() => setImgLoaded(true)}
+          onError={() => setImgFailed(true)}
+        />
       </div>
     </div>
   );

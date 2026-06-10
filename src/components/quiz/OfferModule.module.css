@@ -394,25 +394,108 @@
   padding: 0 1.25rem 1.25rem;
 }
 
-.heroImagePlaceholder {
+.heroImageStack {
+  position: relative;
   width: 100%;
-  aspect-ratio: 21 / 9;
+}
+.heroImageStackSquare { aspect-ratio: 1 / 1; }
+.heroImageStackCinematic { aspect-ratio: 21 / 9; }
+
+.heroImageStack > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.heroImagePlaceholderSquare {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+.heroImageSkeleton {
   border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 28% 26%, rgba(165, 46, 224, 0.22) 0%, transparent 42%),
+    radial-gradient(circle at 75% 70%, rgba(98, 10, 145, 0.18) 0%, transparent 48%),
+    linear-gradient(135deg, rgba(40, 18, 64, 0.7) 0%, rgba(8, 8, 12, 0.9) 100%);
+  border: 1px solid rgba(136, 17, 200, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 8px 32px -16px rgba(136, 17, 200, 0.35);
+  isolation: isolate;
+}
+
+.heroImageSkeletonSquare { aspect-ratio: 1 / 1; }
+.heroImageSkeletonCinematic { aspect-ratio: 21 / 9; border-radius: 0; }
+
+/* shimmer sweep */
+.heroImageSkeleton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  animation: heroShimmer 1.9s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* central purple pulse */
+.heroImageSkeleton::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32%;
+  height: 32%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(165, 46, 224, 0.42) 0%,
+    rgba(136, 17, 200, 0.18) 35%,
+    transparent 70%
+  );
+  filter: blur(8px);
+  animation: heroPulse 2.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroImageSkeletonStatic::before,
+.heroImageSkeletonStatic::after {
+  animation: none;
+}
+
+@keyframes heroShimmer {
+  0%   { background-position: 220% 0; }
+  100% { background-position: -220% 0; }
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.92); }
+  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImageSkeleton::before,
+  .heroImageSkeleton::after { animation: none; }
 }
 
 .heroImageImg {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
   border-radius: 18px;
+  opacity: 0;
+  transition: opacity 360ms ease-out;
+  z-index: 2;
 }
+
+.heroImageImgLoaded { opacity: 1; }
 
 /* ── highlight_box ── */
 .highlightBox {
