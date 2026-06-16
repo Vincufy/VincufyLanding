@@ -122,6 +122,10 @@ const OfferPage = () => {
     pixelTrackCustom("CreateEventClick", {
       source: tier.source ?? "pricing_card",
       tier: tier.id,
+      segment,
+      tier_total_ars: tier.total ?? null,
+      value: tier.total ? +(tier.total / 1400).toFixed(2) : null,
+      currency: "USD",
     });
     setActiveTier(tier);
     analyticEvent("reveal_shown", {
