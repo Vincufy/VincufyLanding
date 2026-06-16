@@ -183,8 +183,12 @@ const OfferPage = () => {
 
     pixelTrack("Lead", {
       content_category: segment,
-      value: activeTier.total ?? null,
-      currency: "ARS",
+      value: activeTier.total ? +(activeTier.total / 1400).toFixed(2) : null,
+      currency: "USD",
+      source: activeTier.source ?? "pricing_card",
+      tier: activeTier.id,
+      segment,
+      tier_total_ars: activeTier.total ?? null,
     });
 
     submitPromise.catch((err) => {
