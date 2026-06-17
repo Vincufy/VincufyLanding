@@ -29,6 +29,25 @@ export function pixelTrack(event, params) {
   ReactPixel.track(event, params);
 }
 
+/**
+ * Igual que pixelTrack pero pasa un `eventID` al pixel para deduplicación
+ * con CAPI. Usar el MISMO eventID al disparar trackConversionViaCapi(),
+ * así Meta cuenta como 1 evento aunque lleguen los dos.
+ *
+ * Implementado con window.fbq directo porque react-facebook-pixel.track
+ * no expone la opción `{eventID}`.
+ */
+export function pixelTrackWithEventId(event, params, eventID) {
+  if (!initialized) return;
+  if (typeof window !== "undefined" && typeof window.fbq === "function") {
+    window.fbq("track", event, params, { eventID });
+  } else {
+    // Fallback: si fbq no está disponible (poco probable post-init),
+    // usamos el track normal sin dedupe.
+    ReactPixel.track(event, params);
+  }
+}
+
 export function pixelTrackCustom(event, params) {
   if (!initialized) return;
   ReactPixel.trackCustom(event, params);

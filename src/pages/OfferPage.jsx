@@ -15,7 +15,13 @@ import {
   hashEmail,
 } from "../lib/posthog";
 import { submitLead } from "../lib/leadSink";
-import { pixelTrack } from "../lib/metaPixel";
+import { pixelTrack, pixelTrackWithEventId } from "../lib/metaPixel";
+import { makeEventId, trackConversionViaCapi } from "../lib/metaCapi";
+
+// Slug de la campaña activa. Sirve para que el backend del SuperAdmin
+// resuelva el pixel_id correcto desde campaigns.json cuando llegan los
+// eventos CAPI server-side.
+const CAMPAIGN_SLUG_FOR_CAPI = "smoke-1";
 import styles from "./OfferPage.module.css";
 import moduleStyles from "../components/quiz/OfferModule.module.css";
 
@@ -119,13 +125,29 @@ const OfferPage = () => {
       tier_price_per_ticket: tier.pricePerTicket ?? null,
       source: tier.source ?? "pricing_card",
     });
-    pixelTrack("InitiateCheckout", {
+    const valueUsd = tier.total ? +(tier.total / 1400).toFixed(2) : null;
+    const pixelParams = {
       source: tier.source ?? "pricing_card",
       tier: tier.id,
       segment,
       tier_total_ars: tier.total ?? null,
-      value: tier.total ? +(tier.total / 1400).toFixed(2) : null,
+      value: valueUsd,
       currency: "USD",
+    };
+    // event_id compartido entre pixel + CAPI → Meta deduplica.
+    const eventID = makeEventId("ic");
+    pixelTrackWithEventId("InitiateCheckout", pixelParams, eventID);
+    // CAPI server-side: si el pixel se bloqueó por adblocker, este igual llega.
+    // Fire-and-forget; no bloqueamos al usuario.
+    trackConversionViaCapi({
+      event_name: "InitiateCheckout",
+      event_id: eventID,
+      currency: "USD",
+      value: valueUsd,
+      content_category: segment,
+      tier: tier.id,
+      campaign_slug: CAMPAIGN_SLUG_FOR_CAPI,
+      // email/phone aún no los tenemos en este momento (todavía no llenó el modal)
     });
     setActiveTier(tier);
     analyticEvent("reveal_shown", {
@@ -181,14 +203,29 @@ const OfferPage = () => {
       backend_delivered: null,
     });
 
-    pixelTrack("Lead", {
+    const leadValueUsd = activeTier.total ? +(activeTier.total / 1400).toFixed(2) : null;
+    const leadPixelParams = {
       content_category: segment,
-      value: activeTier.total ? +(activeTier.total / 1400).toFixed(2) : null,
+      value: leadValueUsd,
       currency: "USD",
       source: activeTier.source ?? "pricing_card",
       tier: activeTier.id,
       segment,
       tier_total_ars: activeTier.total ?? null,
+    };
+    const leadEventID = makeEventId("lead");
+    pixelTrackWithEventId("Lead", leadPixelParams, leadEventID);
+    // CAPI server-side con email + teléfono (mejor match quality).
+    trackConversionViaCapi({
+      event_name: "Lead",
+      event_id: leadEventID,
+      email,
+      phone,
+      currency: "USD",
+      value: leadValueUsd,
+      content_category: segment,
+      tier: activeTier.id,
+      campaign_slug: CAMPAIGN_SLUG_FOR_CAPI,
     });
 
     submitPromise.catch((err) => {
