@@ -1,7 +1,7 @@
 import styles from "./WhatsappButton.module.css";
 
 const WhatsappButton = ({ info }) => {
-  const phoneNumber = "5492214773939";
+  const phoneNumber = "5492215678232";
   const message = info?.message;
   const encodedMessage = encodeURIComponent(message);
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

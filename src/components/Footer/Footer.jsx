@@ -7,7 +7,7 @@ import whatsappIcon from "../../assets/Logo/whatsappBlanco.png";
 
 const socialLinks = [
   { name: "Instagram", icon: instagramIcon, url: "https://www.instagram.com/vincufy" },
-  { name: "WhatsApp", icon: whatsappIcon, url: "https://wa.me/5492214773939" },
+  { name: "WhatsApp", icon: whatsappIcon, url: "https://wa.me/5492215678232" },
   { name: "Meet", icon: meetIcon, url: "https://calendly.com/contacto-vincufy/30min?month=2025-05" },
 ];
 
