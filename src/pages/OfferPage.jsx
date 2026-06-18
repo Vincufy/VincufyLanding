@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import OfferModule from "../components/quiz/OfferModule";
 import PricingModule from "../components/quiz/PricingModule";
@@ -23,17 +23,13 @@ import { makeEventId, trackConversionViaCapi } from "../lib/metaCapi";
 // eventos CAPI server-side.
 const CAMPAIGN_SLUG_FOR_CAPI = "smoke-1";
 import styles from "./OfferPage.module.css";
-import moduleStyles from "../components/quiz/OfferModule.module.css";
 
 const OfferPage = () => {
   const { segment } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTier, setActiveTier] = useState(null);
-  const [stickyVisible, setStickyVisible] = useState(false);
   const [pricingRevealRef, pricingRevealed] = useInViewReveal();
-  const heroSentinelRef = useRef(null);
-  const stickyShownRef = useRef(false);
 
   // Validate segment early (but after all hooks are declared)
   const isValidSegment = SEGMENTS.includes(segment);
@@ -50,16 +46,6 @@ const OfferPage = () => {
   })();
 
   const answers = location.state?.answers;
-
-  // Sentinel tier for custom volume link
-  const customVolumeTier = {
-    id: "custom",
-    name: "Mayor volumen",
-    source: "custom_volume_link",
-    tickets: null,
-    total: null,
-    discountPercent: 0,
-  };
 
   // Register segment as super property so every subsequent event carries it
   useEffect(() => {
@@ -97,24 +83,6 @@ const OfferPage = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [segment, isValidSegment]);
-
-  // IntersectionObserver: show sticky CTA when hero scrolls out of view
-  useEffect(() => {
-    if (!heroSentinelRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const nowVisible = !entry.isIntersecting;
-        setStickyVisible(nowVisible);
-        if (nowVisible && !stickyShownRef.current) {
-          stickyShownRef.current = true;
-          analyticEvent("sticky_mobile_cta_shown", { segment });
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(heroSentinelRef.current);
-    return () => observer.disconnect();
-  }, [isValidSegment, segment]);
 
   const handleCtaBuy = (tier) => {
     analyticEvent("cta_buy_clicked", {
@@ -270,20 +238,6 @@ const OfferPage = () => {
             );
           }
           // Attach sentinel ref after the first hero module
-          if (m.kind === "hero" && !heroSentinelRef._attached) {
-            heroSentinelRef._attached = true;
-            return (
-              <div key={i}>
-                <OfferModule
-                  module={m}
-                  onCtaBuy={handleCtaBuy}
-                  highlightedTier={highlightedTier}
-                  segment={segment}
-                />
-                <div ref={heroSentinelRef} aria-hidden="true" style={{ height: 0 }} />
-              </div>
-            );
-          }
           return (
             <OfferModule
               key={i}
@@ -294,35 +248,6 @@ const OfferPage = () => {
             />
           );
         })}
-      </div>
-
-      {/* Sticky mobile CTA — shows after hero scrolls out of view, mobile only */}
-      <div
-        className={moduleStyles.stickyMobileCta}
-        data-visible={stickyVisible ? "true" : "false"}
-        aria-hidden={!stickyVisible}
-      >
-        <div className={moduleStyles.stickyMobilePrice}>
-          desde
-          <span className={moduleStyles.stickyMobilePriceNum}>ARS 6.400</span>
-        </div>
-        <button
-          type="button"
-          className={moduleStyles.stickyMobileBtn}
-          onClick={() => {
-            analyticEvent("cta_clicked", {
-              cta_id: "sticky-mobile",
-              action: "open_modal",
-              segment,
-              tier_id: customVolumeTier.id,
-              tier_name: customVolumeTier.name,
-              source: customVolumeTier.source,
-            });
-            handleCtaBuy(customVolumeTier);
-          }}
-        >
-          Sumarme
-        </button>
       </div>
 
       {activeTier && (
