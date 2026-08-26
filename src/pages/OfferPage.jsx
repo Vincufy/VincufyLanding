@@ -1,34 +1,52 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import OfferModule from "../components/quiz/OfferModule";
 import PricingModule from "../components/quiz/PricingModule";
-import HonestRevealModal from "../components/quiz/HonestRevealModal";
 import useInViewReveal from "../components/quiz/useInViewReveal";
 import { landingsBySegment } from "../content/landings";
 import { eventosFunnel } from "../funnels/eventos/config";
 import { SEGMENTS } from "../lib/segments";
 import {
   analyticEvent,
-  analyticIdentify,
   analyticPageview,
   analyticRegister,
-  hashEmail,
+  getAttribution,
+  getDistinctId,
 } from "../lib/posthog";
-import { submitLead } from "../lib/leadSink";
 import { pixelTrack, pixelTrackWithEventId } from "../lib/metaPixel";
 import { makeEventId, trackConversionViaCapi } from "../lib/metaCapi";
+import styles from "./OfferPage.module.css";
 
 // Slug de la campaña activa. Sirve para que el backend del SuperAdmin
 // resuelva el pixel_id correcto desde campaigns.json cuando llegan los
 // eventos CAPI server-side.
-const CAMPAIGN_SLUG_FOR_CAPI = "smoke-1";
-import styles from "./OfferPage.module.css";
+const CAMPAIGN_SLUG_FOR_CAPI = "smoke-2";
+
+// Producto (otro dominio) y punto de entrada del onboarding de creación de evento.
+// Un anónimo cae en Login/Registro y el propio producto lo devuelve acá al terminar
+// (loggedOriginRoute), así que se puede deep-linkear sin estar logueado.
+const PRODUCT_ORIGIN = "https://www.vincufy.com.ar";
+const ONBOARDING_HASH = "#/onboarding/evento";
+
+/**
+ * URL del onboarding con la atribución colgada ANTES del '#'.
+ * El producto usa HashRouter y PostHog lee `location.search`: si los parámetros van
+ * después del '#', no los ve nadie y se pierde la atribución entera.
+ */
+function buildProductOnboardingUrl(tier) {
+  const qs = new URLSearchParams({
+    ...getAttribution(), // utm_* + fbclid del primer load de la landing
+    vinc_src: "landing_oferta",
+    vinc_tier: tier?.id || "",
+  });
+  const aid = getDistinctId();
+  if (aid) qs.set("vinc_aid", aid); // puente de identidad landing ↔ producto
+  return `${PRODUCT_ORIGIN}/?${qs.toString()}${ONBOARDING_HASH}`;
+}
 
 const OfferPage = () => {
   const { segment } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const [activeTier, setActiveTier] = useState(null);
   const [pricingRevealRef, pricingRevealed] = useInViewReveal();
 
   // Validate segment early (but after all hooks are declared)
@@ -44,8 +62,6 @@ const OfferPage = () => {
     const t = eventosFunnel.pricing.tiers.find((x) => x.id === highlightedTierId);
     return { ...t };
   })();
-
-  const answers = location.state?.answers;
 
   // Register segment as super property so every subsequent event carries it
   useEffect(() => {
@@ -117,92 +133,9 @@ const OfferPage = () => {
       campaign_slug: CAMPAIGN_SLUG_FOR_CAPI,
       // email/phone aún no los tenemos en este momento (todavía no llenó el modal)
     });
-    setActiveTier(tier);
-    analyticEvent("reveal_shown", {
-      segment,
-      tier: tier.id,
-    });
-  };
-
-  const handleCloseModal = () => setActiveTier(null);
-
-  const handleSubmitLead = async ({ email, phone, eventText }) => {
-    if (!activeTier) return;
-    analyticEvent("lead_email_submitted", {
-      segment,
-      tier: activeTier.id,
-      has_phone: !!phone,
-    });
-
-    // Fire-and-forget: submitLead runs in background, never blocks navigation.
-    // PostHog is the real sink for round 1; backend is optional.
-    const submitPromise = submitLead({
-      email,
-      phone,
-      segment,
-      tier: activeTier.id,
-      tier_total_ars: activeTier.total ?? null,
-      tier_tickets: activeTier.tickets ?? null,
-      event_text: eventText,
-      funnel_slug: "eventos",
-    });
-
-    const distinctId = await hashEmail(email);
-    analyticIdentify(distinctId, {
-      email,
-      phone,
-      email_domain: email.split("@")[1],
-      assigned_segment: segment,
-      selected_tier: activeTier.id,
-      has_event_text: !!eventText,
-      event_text: eventText || null,
-      has_phone: !!phone,
-      first_touch_source: "landing_quiz_eventos",
-      quiz_answers: answers || null,
-    });
-
-    analyticEvent("lead_captured", {
-      segment,
-      tier: activeTier.id,
-      email_domain: email.split("@")[1],
-      has_event_text: !!eventText,
-      event_text: eventText || null,
-      has_phone: !!phone,
-      backend_delivered: null,
-    });
-
-    const leadValueUsd = activeTier.total ? +(activeTier.total / 1400).toFixed(2) : null;
-    const leadPixelParams = {
-      content_category: segment,
-      value: leadValueUsd,
-      currency: "USD",
-      source: activeTier.source ?? "pricing_card",
-      tier: activeTier.id,
-      segment,
-      tier_total_ars: activeTier.total ?? null,
-    };
-    const leadEventID = makeEventId("lead");
-    pixelTrackWithEventId("Lead", leadPixelParams, leadEventID);
-    // CAPI server-side con email + teléfono (mejor match quality).
-    trackConversionViaCapi({
-      event_name: "Lead",
-      event_id: leadEventID,
-      email,
-      phone,
-      currency: "USD",
-      value: leadValueUsd,
-      content_category: segment,
-      tier: activeTier.id,
-      campaign_slug: CAMPAIGN_SLUG_FOR_CAPI,
-    });
-
-    submitPromise.catch((err) => {
-      if (!import.meta.env.PROD) {
-        console.warn("[OfferPage] submitLead failed:", err);
-      }
-    });
-
-    navigate("/q/eventos/gracias");
+    // Smoke #2: en vez de abrir el modal de captura (puerta falsa del smoke #1),
+    // mandamos a la persona al onboarding real de creación de evento.
+    window.location.href = buildProductOnboardingUrl(tier);
   };
 
   // Early return after all hooks are declared
@@ -250,14 +183,6 @@ const OfferPage = () => {
         })}
       </div>
 
-      {activeTier && (
-        <HonestRevealModal
-          onClose={handleCloseModal}
-          onSubmit={handleSubmitLead}
-          source="comprar_button"
-          tierId={activeTier.id}
-        />
-      )}
     </div>
   );
 };

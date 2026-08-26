@@ -51,6 +51,26 @@ export function initPostHog() {
   });
 }
 
+// Atribución del primer load, guardada aparte de las super properties para poder
+// reenviarla al producto (otro dominio) cuando el usuario hace click en Comprar.
+// No se puede releer de la URL en ese momento: si hubo navegación interna (quiz →
+// oferta) el query string ya no está.
+let capturedAttribution = {};
+
+/** UTMs + fbclid capturados al cargar la landing. */
+export function getAttribution() {
+  return { ...capturedAttribution };
+}
+
+/** distinct_id de PostHog: es el puente de identidad hacia el producto. */
+export function getDistinctId() {
+  try {
+    return posthog.get_distinct_id?.() || null;
+  } catch {
+    return null;
+  }
+}
+
 function registerSuperProps() {
   const params = new URLSearchParams(window.location.search);
   const utms = {};
@@ -61,6 +81,8 @@ function registerSuperProps() {
     }
   );
   const fbclid = params.get("fbclid");
+
+  capturedAttribution = { ...utms, ...(fbclid && { fbclid }) };
 
   posthog.register({
     app: "landing",
