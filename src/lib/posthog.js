@@ -1,8 +1,6 @@
 import posthog from "posthog-js";
 import { getDeviceType } from "./deviceType";
 
-let eventQueue = [];
-
 const isEnabled = () =>
   import.meta.env.PROD || import.meta.env.VITE_POSTHOG_TEST === "true";
 
@@ -46,7 +44,6 @@ export function initPostHog() {
     loaded: () => {
       log("loaded");
       registerSuperProps();
-      flushQueue();
     },
   });
 }
@@ -94,33 +91,20 @@ function registerSuperProps() {
   });
 }
 
-function flushQueue() {
-  eventQueue.forEach(({ type, name, props, distinctId }) => {
-    if (type === "register") posthog.register(props);
-    if (type === "capture") posthog.capture(name, props);
-    if (type === "identify") posthog.identify(distinctId, props);
-  });
-  eventQueue = [];
-}
-
 export function analyticEvent(name, props) {
   if (!isEnabled()) return;
-  if (posthog.__loaded) {
-    posthog.capture(name, props);
-    log(`event: ${name}`, props);
-  } else {
-    eventQueue.push({ type: "capture", name, props });
-  }
+  // Se llama a posthog directo, sin cola propia. posthog-js ya bufferea internamente
+  // lo que se le pide antes de terminar de inicializar, asi que la cola de acá solo
+  // agregaba una carrera: si `loaded` disparaba antes de que React montara, el flush
+  // encontraba la cola vacia y todo lo que se encolaba despues no se enviaba nunca.
+  posthog.capture(name, props);
+  log(`event: ${name}`, props);
 }
 
 export function analyticIdentify(distinctId, props) {
   if (!isEnabled()) return;
-  if (posthog.__loaded) {
-    posthog.identify(distinctId, props);
-    log(`identify: ${distinctId}`, props);
-  } else {
-    eventQueue.push({ type: "identify", distinctId, props });
-  }
+  posthog.identify(distinctId, props);
+  log(`identify: ${distinctId}`, props);
 }
 
 export function analyticPageview(pathname) {
@@ -129,13 +113,8 @@ export function analyticPageview(pathname) {
 
 export function analyticRegister(props) {
   if (!isEnabled()) return;
-  if (posthog.__loaded) {
-    posthog.register(props);
-    log("register", props);
-  } else {
-    // Queue as a synthetic capture so super-props are set before the first event
-    eventQueue.push({ type: "register", props });
-  }
+  posthog.register(props);
+  log("register", props);
 }
 
 export async function hashEmail(email) {
