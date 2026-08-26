@@ -54,7 +54,11 @@ export function readFbclid() {
  * }} params
  */
 export async function trackConversionViaCapi(params) {
-  const apiUrl = import.meta.env.VITE_SUPERADMIN_API_URL;
+  // Default en código a propósito: el .env está gitignoreado, así que si esto
+  // dependiera sólo de la variable, cualquiera que buildee sin su .env al día
+  // dejaría de mandar conversiones a Meta sin ningún síntoma visible.
+  const apiUrl =
+    import.meta.env.VITE_SUPERADMIN_API_URL || "https://vincufy.assis.pp.ua";
   if (!apiUrl) {
     if (!import.meta.env.PROD) {
       console.log("[meta-capi] no VITE_SUPERADMIN_API_URL, skipping");
