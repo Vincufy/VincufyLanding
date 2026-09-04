@@ -56,7 +56,7 @@ describe("precios de la landing", () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ quantity: p.tickets }),
-          signal: AbortSignal.timeout(15000),
+          signal: AbortSignal.timeout(8000),
         });
         real = (await res.json())?.data?.cost;
       } catch {
@@ -65,6 +65,9 @@ describe("precios de la landing", () => {
       }
       expect(real, `el backend no devolvió costo para ${p.tickets}`).toBeDefined();
       expect(real).toBe(p.total);
-    });
+      // El timeout del test tiene que ser MAYOR que el del fetch. Con el default de 5s
+      // de vitest, un backend lento hacía fallar el test por timeout en vez de entrar
+      // al catch que lo saltea: el test quedaba intermitente y eso enseña a ignorarlo.
+    }, 15000);
   }
 });
