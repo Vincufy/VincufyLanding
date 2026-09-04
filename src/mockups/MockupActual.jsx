@@ -1,6 +1,18 @@
 import s from "./mockup.module.css";
 import MockupShell from "./MockupShell";
-import LandingRealReplica from "./LandingRealReplica";
+/**
+ * La landing real va en un <iframe> y no embebida directo: sus estilos usan media
+ * queries contra el viewport, asi que dentro de una ventana de escritorio se veia con
+ * el diseño de desktop aunque el marco fuera de 390 px. El iframe tiene su propio
+ * viewport y resuelve las media queries como un celular.
+ */
+const LandingEnIframe = () => (
+  <iframe
+    src="/lab-k7x92m/_r/landing"
+    title="Landing real (vista móvil)"
+    style={{ width: "100%", height: "100%", border: 0, display: "block" }}
+  />
+);
 
 /**
  * RÉPLICA DE LO ACTUAL — la que corrió en la campaña #2
@@ -31,7 +43,7 @@ const PasoActual = ({ n, titulo, children }) => (
 );
 
 const pantallas = [
-  { titulo: "Landing", render: () => <LandingRealReplica segment="productores" />,
+  { titulo: "Landing", render: () => <LandingEnIframe />,
     dato: "El 100% ve el hero · 44% llega al highlight · 24% a '¿Te pasa que...?' · 5% al CTA final. El 56% no pasa del hero. De 201 visitas, 6 apretaron Comprar (2,99%).",
     decisiones: [
       { que: "Es la landing REAL, no una copia",

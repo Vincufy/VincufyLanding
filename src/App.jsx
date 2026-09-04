@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import MockupActual from "./mockups/MockupActual";
 import MockupA from "./mockups/MockupA";
 import MockupB from "./mockups/MockupB";
+import LandingRealBare from "./mockups/LandingRealBare";
 import Home from "./pages/Home";
 import QuizLander from "./pages/QuizLander";
 import OfferPage from "./pages/OfferPage";
@@ -36,6 +37,9 @@ const App = () => {
         <Route path="/q/eventos/r/:segment" element={<OfferPage />} />
         <Route path="/q/eventos/gracias" element={<ThankYou />} />
         <Route path="/lab-k7x92m/actual" element={<MockupActual />} />
+        {/* La landing real sola, para que el mockup la muestre en un iframe de 390 px
+            y las media queries resuelvan como en un celular. */}
+        <Route path="/lab-k7x92m/_r/landing" element={<LandingRealBare />} />
         <Route path="/lab-k7x92m/a-gratis-primero" element={<MockupA />} />
         <Route path="/lab-k7x92m/b-plata-retenida" element={<MockupB />} />
       </Routes>
