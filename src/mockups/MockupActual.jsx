@@ -1,5 +1,6 @@
 import s from "./mockup.module.css";
 import MockupShell from "./MockupShell";
+import LandingRealReplica from "./LandingRealReplica";
 
 /**
  * RÉPLICA DE LO ACTUAL — la que corrió en la campaña #2
@@ -11,87 +12,6 @@ import MockupShell from "./MockupShell";
  * Cada pantalla lleva anotado el dato medido de esa campaña, que es lo que convierte
  * esto en argumento y no en opinión.
  */
-const Landing = () => (
-  <div className={s.pag}>
-    <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
-    <div className={s.hero}>
-      <h1 className={s.h1}>Las ticketeras no deberían solo vender entradas.</h1>
-      <p className={s.sub}>Sino ayudarte a crear tu comunidad y hacerte crecer.</p>
-      <div style={{ height: 150, background: "#17171d", borderRadius: 12,
-        display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18 }}>
-        <span className={s.mini}>[ imagen del hero ]</span>
-      </div>
-      <button className={s.cta}>Crear evento</button>
-      <p className={s.micro}>0% de comisión · sin costo de servicio · liquidación al instante</p>
-    </div>
-
-    <div className={s.sec}>
-      <h2 className={s.h2}>¿Te pasa que...?</h2>
-      {[
-        ["⏳", "Tu ticketera te retiene los fondos y te paga después de tu evento."],
-        ["🔄", "Cada evento volvés a convocar desde cero."],
-        ["📣", "Dependés de Instagram, publicidad o RRPP para llenar."],
-        ["❓", "No sabés quiénes fueron ni podés contactarlos."],
-        ["👥", "Llenás una fecha, pero no construís audiencia propia."],
-        ["👋", "Invertís para atraer gente que después desaparece."],
-      ].map(([e, t]) => (
-        <p className={s.dolor} key={t}><span>{e}</span><span>{t}</span></p>
-      ))}
-    </div>
-
-    <div className={s.sec}>
-      <h2 className={s.h2}>¿Y si tu próximo evento fuera diferente?</h2>
-      <div className={s.card}>
-        <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 14 }}>Con otra ticketera</div>
-        {["Te liquidan los fondos después del evento", "Los asistentes pagan costo de servicio",
-          "No fidelizás a tu público", "Mayor costo de adquisición"].map((t) => (
-          <div className={s.mini} key={t} style={{ marginBottom: 4 }}>✗ {t}</div>
-        ))}
-      </div>
-      <div className={s.card}>
-        <div style={{ fontWeight: 600, marginBottom: 8, fontSize: 14 }}>Con Vincufy</div>
-        {["Recibís la plata al instante", "Compran entradas más baratas",
-          "Tu público se vincula en la plataforma", "Les mandás promociones"].map((t) => (
-          <div className={s.mini} key={t} style={{ marginBottom: 4 }}>✓ {t}</div>
-        ))}
-      </div>
-    </div>
-
-    <div className={s.sec}>
-      <h2 className={s.h2}>¿Qué es Vincufy?</h2>
-      <p className={s.mini}>Una plataforma integral para la gestión de eventos.</p>
-      {["🎟️ Vendés entradas", "📋 Gestionás acreditaciones", "👥 Administrás clientes",
-        "📣 Comunicás directo", "📊 Métricas de cada evento", "💬 Construís comunidad"].map((t) => (
-        <div className={s.card} key={t} style={{ padding: 11 }}>
-          <span style={{ fontSize: 14 }}>{t}</span>
-        </div>
-      ))}
-    </div>
-
-    <div className={s.sec}>
-      <h2 className={s.h2}>Confían en nosotros</h2>
-      <div className={s.mini}>+1.500 eventos gestionados · +600.000 entradas emitidas</div>
-    </div>
-
-    <div className={s.sec}>
-      <h2 className={s.h2}>Conocé nuestros planes</h2>
-      <p className={s.mini} style={{ marginBottom: 14 }}>Comprá tu paquete de entradas y usalas cuando quieras.</p>
-      {[["Pequeños eventos", 20, 649, "12.980", null],
-        ["Más popular", 300, 599, "179.700", "8% off"],
-        ["Mejor costo", 1000, 549, "549.000", "15% off"]].map(([n, t, p, tot, off]) => (
-        <div className={s.card} key={n}>
-          <div className={s.mini}>{n}</div>
-          <div style={{ fontSize: 17, fontWeight: 700, margin: "4px 0" }}>{t} entradas</div>
-          <div><span className={s.precio} style={{ fontSize: 24 }}>${p}</span>
-            <span className={s.mini}> c/u</span> {off && <span className={s.chip}>{off}</span>}</div>
-          <div className={s.mini} style={{ margin: "6px 0 10px" }}>Total: ARS {tot}</div>
-          <button className={s.cta}>Comprar</button>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 const PasoActual = ({ n, titulo, children }) => (
   <div className={s.pag}>
     <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
@@ -111,10 +31,42 @@ const PasoActual = ({ n, titulo, children }) => (
 );
 
 const pantallas = [
-  { titulo: "Landing", render: () => <Landing />,
-    nota: "MEDIDO en la campaña #2: el 100% ve el hero, el 44% llega al highlight, el 24% a '¿Te pasa que...?' y sólo el 5% al CTA final. El 56% no pasa del hero. De 201 visitas, 6 apretaron Comprar (2,99%)." },
+  { titulo: "Landing", render: () => <LandingRealReplica segment="productores" />,
+    dato: "El 100% ve el hero · 44% llega al highlight · 24% a '¿Te pasa que...?' · 5% al CTA final. El 56% no pasa del hero. De 201 visitas, 6 apretaron Comprar (2,99%).",
+    decisiones: [
+      { que: "Es la landing REAL, no una copia",
+        porque: "Renderiza OfferModule, PricingModule y el contenido de landingsBySegment con su propio CSS. Cualquier diferencia contra producción sería un bug, no una licencia del mockup.",
+        fuente: "Una réplica a mano se desactualiza el día que alguien toca la landing, y ahí la comparación deja de valer." },
+      { que: "El titular habla de la categoría, no del visitante",
+        porque: "'Las ticketeras no deberían solo vender entradas' es nuestra tesis sobre el rubro. El tráfico de un ad de Instagram es frío: no sabe que tiene alternativa, así que hay que abrir por su problema o su deseo.",
+        fuente: "Niveles de consciencia (Schwartz): a nivel 1-2 nunca se abre con el nombre ni la categoría del producto." },
+      { que: "El dolor está enterrado",
+        porque: "'¿Te pasa que...?' es la sección que más se parece a una conversación con él, y llega detrás de tres bloques de producto. La ve 1 de cada 4.",
+        fuente: "PAS (Problema-Agitar-Solución) convirtió ~22% más que una lista de features en un análisis de 12.400 landings." },
+      { que: "Seis dolores seguidos",
+        porque: "Más de 3-5 ítems genera fatiga de decisión y ninguno queda grabado.",
+        fuente: "Regla numérica: 3 bullets, máximo 3-7." },
+      { que: "Un solo CTA arriba y el resto al final",
+        porque: "El 56% se va antes del segundo. Repetir el CTA por cada fold rinde 20-35% más.",
+        fuente: "Regla de CTA por fold." },
+    ] },
 
-  { titulo: "1 · Crear tu comunidad", nota: "MEDIDO: acá abandonaron 4 de 6. La persona viene de apretar 'Comprar' sobre un paquete de hasta ARS 179.700 y esta pantalla no menciona la compra, ni el precio, ni el paquete. Le pide nombrar una 'comunidad', que es vocabulario nuestro.",
+  { titulo: "1 · Crear tu comunidad",
+    dato: "Acá abandonaron 4 de 6. Es el único punto del embudo que pierde más de la mitad.",
+    decisiones: [
+      { que: "La compra desaparece",
+        porque: "Viene de apretar Comprar sobre un paquete de hasta ARS 179.700 y esta pantalla no menciona ni la compra, ni el precio, ni el paquete. Para él, apretar Comprar lo llevó a otra cosa.",
+        fuente: "Message match: si el ad y el paso siguiente no hablan de lo mismo, la persona cree que se equivocó de lugar." },
+      { que: "'Comunidad' es vocabulario nuestro",
+        porque: "Él quiere llenar su fiesta. 'Comunidad' es el concepto más abstracto del producto y es lo primero que se le pide nombrar.",
+        fuente: "Hablarle en su idioma, no en el del producto." },
+      { que: "'Paso 1 de 5' anuncia trabajo",
+        porque: "El número aparece antes que cualquier beneficio: lo primero que sabe es que le faltan cinco pantallas.",
+        fuente: "Reversión de riesgo: el costo percibido de decir que sí tiene que ser el mínimo posible." },
+      { que: "Se le pide crear algo antes de recibir nada",
+        porque: "No hay ningún momento 'wow' previo. Da antes de recibir.",
+        fuente: "Acto 1 = puro imán, cero barreras." },
+    ],
     render: () => (
       <PasoActual n={1} titulo="Crear tu comunidad">
         <p className={s.ayuda} style={{ marginTop: -4 }}>
@@ -128,7 +80,14 @@ const pantallas = [
       </PasoActual>
     ) },
 
-  { titulo: "2 · Perfil del evento", nota: "MEDIDO: llegaron 2 de 6.",
+  { titulo: "2 · Perfil del evento",
+    dato: "Llegaron 2 de 6.",
+    decisiones: [
+      { que: "Recién acá aparece el evento",
+        porque: "Es lo que la persona vino a hacer, y es la segunda pantalla. Lo urgente para ella quedó detrás de lo conceptual para nosotros." },
+      { que: "Imagen y descripción opcionales, pero visibles",
+        porque: "Ocupan lugar y suman decisiones en una pantalla donde lo único obligatorio es el nombre." },
+    ],
     render: () => (
       <PasoActual n={2} titulo="Perfil del evento">
         <div className={s.label}>Nombre *</div>
@@ -140,7 +99,12 @@ const pantallas = [
       </PasoActual>
     ) },
 
-  { titulo: "3 · Fecha y lugar", nota: "MEDIDO: 2 de 6.",
+  { titulo: "3 · Fecha y lugar",
+    dato: "2 de 6.",
+    decisiones: [
+      { que: "Tres campos de fecha en una pantalla propia",
+        porque: "Inicio, fin y lugar podrían convivir con el nombre del evento. Cada pantalla extra es una oportunidad más de abandonar." },
+    ],
     render: () => (
       <PasoActual n={3} titulo="Fecha y lugar">
         <div className={s.label}>Inicio</div><input className={s.campo} defaultValue="2026-09-12 23:00" />
@@ -149,7 +113,14 @@ const pantallas = [
       </PasoActual>
     ) },
 
-  { titulo: "4 · Inscripción y acceso", nota: "MEDIDO: 2 de 6.",
+  { titulo: "4 · Inscripción y acceso",
+    dato: "2 de 6.",
+    decisiones: [
+      { que: "Tres decisiones de configuración antes de existir",
+        porque: "Aprobación manual y control de puerta son decisiones de operación que se pueden tomar después de tener el evento creado y compartido." },
+      { que: "Es la pantalla más prescindible del flujo",
+        porque: "Todo lo que pide tiene un valor por defecto razonable." },
+    ],
     render: () => (
       <PasoActual n={4} titulo="Inscripción y acceso">
         <div className={s.card}>¿El evento es pago o gratuito?</div>
@@ -158,7 +129,16 @@ const pantallas = [
       </PasoActual>
     ) },
 
-  { titulo: "5 · Cupo de entradas", nota: "MEDIDO: llegaron 2 de 6 y NINGUNO completó. Acá aparece por primera vez el costo, y la calculadora de cupos es la parte más compleja del wizard.",
+  { titulo: "5 · Cupo de entradas",
+    dato: "Llegaron 2 de 6 y NINGUNO completó. El segundo cuello del embudo está acá.",
+    decisiones: [
+      { que: "El costo aparece por primera vez en la última pantalla",
+        porque: "Después de cuatro pantallas de trabajo. Quien eligió un paquete de ARS 179.700 en la landing no volvió a ver ese número hasta acá." },
+      { que: "La calculadora pide entender tres conceptos a la vez",
+        porque: "Asignás, prepagos, comprás y costo son cuatro líneas que la persona tiene que reconciliar sola." },
+      { que: "Los 25 cupos de regalo no se anuncian",
+        porque: "El producto los da al crear la comunidad, pero la pantalla no dice que el primer evento puede salir cero." },
+    ],
     render: () => (
       <PasoActual n={5} titulo="Cupo de entradas">
         <div className={s.card}>
@@ -184,7 +164,12 @@ const pantallas = [
       </PasoActual>
     ) },
 
-  { titulo: "Pago", nota: "MEDIDO: 1 de 6 conectó Mercado Pago. Nadie llegó a pagar.",
+  { titulo: "Pago",
+    dato: "1 de 6 conectó Mercado Pago. Nadie llegó a pagar.",
+    decisiones: [
+      { que: "El checkout es la sexta pantalla",
+        porque: "Entre el 'Comprar' de la landing y este botón hay cinco pantallas de configuración." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>

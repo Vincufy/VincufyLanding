@@ -14,6 +14,12 @@ import MockupShell from "./MockupShell";
  *
  * Por eso esto no contradice la regla de "poné siempre el precio": el precio de entrada
  * es CERO, y se dice desde el primer renglón.
+ *
+ * TODO ESTE FLUJO VIVE EN EL PRODUCTO, no en una landing aparte. El ad entra directo acá
+ * y la persona no cambia de sitio en ningún momento. Hoy salta de vincufy.com a
+ * vincufy.com.ar justo en el instante de máxima intención: ese salto corta la sesión,
+ * cambia el dominio a la vista y obliga a re-explicar todo del otro lado. La pantalla 1
+ * es la de persuasión y las siguientes son el onboarding: una sola aplicación.
  */
 const Landing = () => (
   <div className={s.pag}>
@@ -95,10 +101,42 @@ const Paso = ({ n, de, titulo, children, cta = "Continuar", micro }) => (
 );
 
 const pantallas = [
-  { titulo: "Landing", render: () => <Landing />,
-    nota: "Sin precios y sin planes. Un solo CTA repetido tres veces, con microcopy que desactiva la objeción de plata en cada uno. El dolor va arriba, no en la sección que hoy ve el 24%." },
+  { titulo: "Entrada (en el producto)", render: () => <Landing />,
+    decisiones: [
+      { que: "Vive en el producto, no en una landing aparte",
+        porque: "El ad entra directo acá. Desaparece el salto de vincufy.com a vincufy.com.ar en el momento de máxima intención, que es donde hoy se pierde el hilo.",
+        fuente: "Cada cambio de sitio cuesta contexto, sesión y confianza." },
+      { que: "El titular promete el resultado, no el producto",
+        porque: "'Creá la página de tu fiesta en 2 minutos. Gratis.' responde qué gana él y cuánto le cuesta, en una sola idea.",
+        fuente: "Titular: 1 idea, ≤10 palabras, responde '¿qué gano yo?'." },
+      { que: "Sin precios ni planes",
+        porque: "La decisión de plata se mueve al momento en que ya tiene el evento armado. El costo de decir que sí baja a cero.",
+        fuente: "No rompe 'poné siempre el precio': el precio de entrada ES cero y se dice en el primer renglón." },
+      { que: "Microcopy bajo cada CTA",
+        porque: "'Gratis · sin tarjeta · tus primeras 25 entradas incluidas' desactiva las tres objeciones de plata en la línea donde se decide.",
+        fuente: "El microcopy inmediato al botón hace trabajo real de conversión." },
+      { que: "Tres dolores, no seis",
+        porque: "Los tres más caros: la plata retenida, convocar de cero y no tener los datos.",
+        fuente: "3-5 bullets; más genera fatiga de decisión." },
+      { que: "El CTA se repite tres veces",
+        porque: "El 56% de la campaña #2 no pasó del primer fold.",
+        fuente: "CTA por fold rinde 20-35% más." },
+      { que: "Prueba social cerca del último CTA",
+        porque: "Sin testimonios todavía, se usan los números del producto y una cara visible.",
+        fuente: "Sustitutos válidos en pre-lanzamiento: demo, cara, números." },
+    ] },
 
-  { titulo: "Crear evento", nota: "Se entra a crear SIN registrarse. La cuenta se pide al final, cuando ya hay algo que perder: es la barrera más cara y hoy está al principio.",
+  { titulo: "Crear evento", decisiones: [
+      { que: "Se entra a crear sin registrarse",
+        porque: "La cuenta es la barrera más cara del flujo y hoy está al principio. Acá se pide al final, cuando ya tiene algo que perder.",
+        fuente: "Reversión de riesgo: primero que reciba, después que dé." },
+      { que: "Dos campos, no cinco",
+        porque: "Nombre y fecha es lo mínimo para que el evento exista. Todo lo demás es configuración que puede esperar." },
+      { que: "'Tu evento se guarda solo'",
+        porque: "Desactiva el miedo a perder el trabajo, que es la objeción típica de un formulario largo en celular." },
+      { que: "Desaparece la palabra 'comunidad'",
+        porque: "Es vocabulario nuestro. Él quiere llenar su fiesta; la comunidad se crea sola por detrás." },
+    ],
     render: () => (
       <Paso n={1} de={3} titulo="¿Cómo se llama tu fiesta?" micro="Podés cambiarlo después">
         <input className={s.campo} placeholder="Ej: Jueves de Previa" defaultValue="Jueves de Previa" />
@@ -107,7 +145,16 @@ const pantallas = [
       </Paso>
     ) },
 
-  { titulo: "Entradas", nota: "Acá aparece el precio POR PRIMERA VEZ, y sólo si pide más de 25. Hasta 25 el cartel dice 'incluidas': el costo llega cuando ya invirtió tiempo y tiene el evento armado.",
+  { titulo: "Entradas", decisiones: [
+      { que: "El precio aparece acá y sólo si pide más de 25",
+        porque: "Hasta 25 el cartel dice 'incluidas'. El costo llega cuando ya invirtió tiempo y tiene el evento casi armado.",
+        fuente: "La objeción de precio es la 4ª de la secuencia, no la 1ª." },
+      { que: "El verde de 'incluidas' es el mensaje, no el input",
+        porque: "Lo que tiene que quedar grabado es que este evento no le sale nada." },
+      { que: "Se muestra qué pasaría si pide más",
+        porque: "No esconde el precio de escalar: lo deja a la vista sin cobrarlo todavía.",
+        fuente: "Esconder el precio le dice al escéptico que es alto." },
+    ],
     render: () => (
       <Paso n={2} de={3} titulo="¿Cuántas entradas vas a vender?" cta="Continuar" micro="Podés sumar más en cualquier momento">
         <input className={s.campo} defaultValue="25" />
@@ -125,7 +172,13 @@ const pantallas = [
       </Paso>
     ) },
 
-  { titulo: "Precio de entrada", nota: "El precio de venta al público va acá, no antes: es su decisión de negocio y hace concreto el 0% de comisión.",
+  { titulo: "Precio de entrada", decisiones: [
+      { que: "El precio de venta va acá, no antes",
+        porque: "Es su decisión de negocio y la toma cuando el evento ya existe." },
+      { que: "Se calcula lo que va a recaudar",
+        porque: "Convierte el 0% de comisión de eslogan en un número: $200.000, comisión $0.",
+        fuente: "El beneficio abstracto no convence; el número sí." },
+    ],
     render: () => (
       <Paso n={3} de={3} titulo="¿A cuánto vendés cada entrada?" cta="Crear mi evento" micro="Vincufy no se queda con nada de esto">
         <input className={s.campo} defaultValue="$ 8.000" />
@@ -140,7 +193,16 @@ const pantallas = [
       </Paso>
     ) },
 
-  { titulo: "Listo · compartir", nota: "El momento 'wow' llega ANTES de pedir la cuenta. Ya tiene su página y su link: la cuenta ahora protege algo que existe.",
+  { titulo: "Listo · compartir", decisiones: [
+      { que: "El momento 'wow' llega antes de pedir la cuenta",
+        porque: "Ya tiene su página y su link. La cuenta ahora protege algo que existe, en vez de ser un peaje.",
+        fuente: "Acto 3: que no actuar se sienta como perder algo." },
+      { que: "Compartir por WhatsApp es el botón principal",
+        porque: "Es lo que realmente va a hacer, y es el momento en que el producto se difunde solo." },
+      { que: "'Sólo lo ve quien recibe el link'",
+        porque: "Responde la objeción de privacidad justo cuando aparece, y es verdad del producto.",
+        fuente: "Las objeciones se responden tejidas en el recorrido, no en un bloque aparte." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
@@ -168,7 +230,12 @@ const pantallas = [
       </div>
     ) },
 
-  { titulo: "Pago (sólo si escala)", nota: "El único checkout, y llega recién cuando pidió MÁS de lo incluido. Quien se queda en 25 nunca ve esta pantalla.",
+  { titulo: "Pago (sólo si escala)", decisiones: [
+      { que: "Es el único checkout de todo el flujo",
+        porque: "Llega recién cuando pidió más de lo incluido. Quien se queda en 25 nunca ve esta pantalla." },
+      { que: "Se muestra qué ya tiene gratis antes del total",
+        porque: "El total se lee como 'lo que falta', no como 'lo que cuesta'." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>

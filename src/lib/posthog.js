@@ -1,8 +1,24 @@
 import posthog from "posthog-js";
 import { getDeviceType } from "./deviceType";
 
+/**
+ * Interruptor para los mockups internos (/lab-*).
+ *
+ * Los mockups renderizan los componentes REALES de la landing para que la replica sea
+ * fiel al pixel, pero comparten dominio con la landing de produccion: si emitieran
+ * eventos, contaminarian las metricas de la campana, que es exactamente lo que esos
+ * mockups existen para no hacer.
+ *
+ * Arranca apagado y solo lo prende la ruta del mockup. Nadie mas lo toca.
+ */
+let silenciadoParaMockup = false;
+export const silenciarAnalytics = () => {
+  silenciadoParaMockup = true;
+};
+
 const isEnabled = () =>
-  import.meta.env.PROD || import.meta.env.VITE_POSTHOG_TEST === "true";
+  !silenciadoParaMockup &&
+  (import.meta.env.PROD || import.meta.env.VITE_POSTHOG_TEST === "true");
 
 const log = (...args) => {
   if (!import.meta.env.PROD) {

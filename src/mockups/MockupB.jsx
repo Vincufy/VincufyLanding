@@ -15,6 +15,9 @@ import MockupShell from "./MockupShell";
  *
  * El onboarding se comprime a UNA sola pantalla: mientras la A ordena en 3 pasos, la B
  * apuesta a que ver el formulario entero de una es menos intimidante que un "paso 1 de N".
+ *
+ * Igual que la A, TODO ESTE FLUJO VIVE EN EL PRODUCTO: el ad entra directo y la persona
+ * nunca cambia de sitio. La pantalla 1 persuade y las siguientes crean el evento.
  */
 const Landing = () => (
   <div className={s.pag}>
@@ -86,10 +89,38 @@ const Landing = () => (
 );
 
 const pantallas = [
-  { titulo: "Landing", render: () => <Landing />,
-    nota: "PAS puro: problema en el titular, agitación con la cuenta de plata real, y recién ahí la solución. El nombre del producto no aparece hasta la mitad de la página." },
+  { titulo: "Entrada (en el producto)", render: () => <Landing />,
+    decisiones: [
+      { que: "Vive en el producto, no en una landing aparte",
+        porque: "El ad entra directo acá. Sin salto de dominio en el momento de máxima intención.",
+        fuente: "Cada cambio de sitio cuesta contexto, sesión y confianza." },
+      { que: "El titular es el problema, no la solución",
+        porque: "'Tu fiesta ya se hizo. Tu plata todavía no llegó.' El nombre del producto no aparece hasta la mitad de la página.",
+        fuente: "Schwartz: tráfico frío (nivel 1-2) abre con el deseo o el dolor, nunca con el producto." },
+      { que: "La agitación es una cuenta, no un adjetivo",
+        porque: "300 × $8.000 = $2.400.000 retenidos 30 días. Un número propio duele más que 'te retienen los fondos'.",
+        fuente: "PAS convirtió ~22% más que una lista de features en 12.400 landings analizadas." },
+      { que: "El dolor se cierra con la consecuencia",
+        porque: "'Con esa plata pagabas el sonido, la seña y la próxima fecha.' El problema se vuelve concreto en su operación." },
+      { que: "La solución llega recién en el tercer bloque",
+        porque: "Antes hay que hacerle sentir el problema. Si la solución aparece primero, no hay nada que resolver.",
+        fuente: "Acto 1 relevancia → Acto 2 creencia → Acto 3 acción." },
+      { que: "FAQ con la objeción caliente primero",
+        porque: "'¿De verdad no cobran comisión?' y '¿entonces de qué viven?' son las dos que deciden. La segunda desarma la sospecha de trampa.",
+        fuente: "FAQ 5-6, ordenadas por objeción caliente: costo, esfuerzo, condiciones." },
+    ] },
 
-  { titulo: "Crear (una pantalla)", nota: "Todo el onboarding en UNA pantalla. La apuesta contra la A: ver el formulario entero es menos intimidante que un 'paso 1 de 5', que anuncia trabajo antes de empezarlo.",
+  { titulo: "Crear (una pantalla)", decisiones: [
+      { que: "Todo el onboarding en una sola pantalla",
+        porque: "La apuesta contra la A: ver el formulario entero es menos intimidante que un 'paso 1 de 5', que anuncia trabajo antes de empezarlo." },
+      { que: "'Sin cuenta. Guardás al final.'",
+        porque: "Se dice arriba de todo, antes del primer campo: es la objeción que frena a alguien que llegó de un ad." },
+      { que: "El costo se anuncia sin cobrarse",
+        porque: "'Las primeras 25 van incluidas. Si ponés más, te muestro el costo antes de cobrarte.' Transparencia sin fricción.",
+        fuente: "Esconder el precio le dice al escéptico que es alto." },
+      { que: "Cuatro campos y ninguno opcional a la vista",
+        porque: "Nada que decidir de más. Imagen, descripción y control de puerta se configuran después." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
@@ -112,7 +143,15 @@ const pantallas = [
       </div>
     ) },
 
-  { titulo: "Listo · compartir", nota: "Mismo principio que la A: el momento 'wow' antes de pedir la cuenta. Se suma la proyección de recaudación, que refuerza el gancho del titular.",
+  { titulo: "Listo · compartir", decisiones: [
+      { que: "El 'wow' antes de pedir la cuenta",
+        porque: "Mismo principio que la A: primero recibe, después da.",
+        fuente: "Acto 3: que no actuar se sienta como perder algo." },
+      { que: "Se proyecta la recaudación",
+        porque: "'$200.000, te llega a medida que compran' cierra el círculo con el titular: era plata retenida, ahora es plata que entra." },
+      { que: "Privacidad en el microcopy del botón de compartir",
+        porque: "Es donde aparece la duda: '¿esto lo va a ver cualquiera?'." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
@@ -141,7 +180,14 @@ const pantallas = [
       </div>
     ) },
 
-  { titulo: "Conectar cobro", nota: "Conectar Mercado Pago se pide cuando la primera venta lo vuelve urgente, no antes. Hoy es un botón que puede fallar en silencio en medio del wizard.",
+  { titulo: "Conectar cobro", decisiones: [
+      { que: "Mercado Pago se conecta cuando llega la primera venta",
+        porque: "No durante la creación. Antes de vender es un trámite; con alguien esperando para comprar es urgente y tiene sentido." },
+      { que: "El disparador es una buena noticia",
+        porque: "'Alguien quiere comprar tu entrada' convierte un paso administrativo en una recompensa." },
+      { que: "'La plata va a tu cuenta, no a la nuestra'",
+        porque: "Desarma la desconfianza de conectar una cuenta de cobro a un producto que recién conoce." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
@@ -158,7 +204,13 @@ const pantallas = [
       </div>
     ) },
 
-  { titulo: "Pago (sólo si escala)", nota: "Idéntico a la A: el checkout llega sólo si pidió más de 25. Se muestra el ahorro contra la comisión de una ticketera para que el precio se lea como barato.",
+  { titulo: "Pago (sólo si escala)", decisiones: [
+      { que: "El checkout llega sólo si pidió más de 25",
+        porque: "Idéntico a la A: quien se queda en el evento gratis nunca ve esta pantalla." },
+      { que: "El precio se compara contra la comisión de una ticketera",
+        porque: "$164.725 solo es un número. Al lado de los $220.000 que le habría cobrado una ticketera —y encima después del evento— se lee barato.",
+        fuente: "El precio no se defiende con descuentos: se defiende con el costo de la alternativa." },
+    ],
     render: () => (
       <div className={s.pag}>
         <div className={s.topbar}><span className={s.logo}>vincufy</span></div>
