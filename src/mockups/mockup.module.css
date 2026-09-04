@@ -1,0 +1,70 @@
+/* Chrome de los mockups. Nada de esto toca la landing real: vive sólo acá. */
+.root { min-height:100vh; background:#0b0b0d; color:#ededed;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding-bottom:60px; }
+.aviso { background:#f59e0b; color:#1a1a1a; font-weight:700; font-size:12px;
+  text-align:center; padding:7px 12px; position:sticky; top:0; z-index:20; letter-spacing:.2px; }
+.marco { display:flex; justify-content:center; padding:22px 12px 8px; }
+.telefono { width:390px; max-width:100%; border:10px solid #26262b; border-radius:34px;
+  overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.6); background:#000; }
+.pantalla { height:780px; overflow-y:auto; background:#0c0c0e; }
+.controles { display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:10px 12px; flex-wrap:wrap; }
+.navBtn { background:#1e1e24; color:#ededed; border:1px solid #33333c; border-radius:8px;
+  padding:8px 14px; font-size:13px; cursor:pointer; }
+.navBtn:disabled { opacity:.35; cursor:default; }
+.pasoInfo { font-size:13px; color:#b9b9c2; min-width:230px; text-align:center; }
+.notaPantalla { max-width:760px; margin:0 auto; padding:0 16px; }
+.nota { background:#141419; border-left:3px solid #8810c7; border-radius:6px;
+  padding:10px 13px; font-size:13px; line-height:1.5; color:#c9c9d2; }
+.resumen { max-width:760px; margin:16px auto 0; padding:0 16px; }
+.resumen summary { cursor:pointer; font-size:14px; color:#c9a4ff; padding:8px 0; }
+.resumenCuerpo { font-size:13.5px; line-height:1.65; color:#c9c9d2; }
+.resumenCuerpo h4 { color:#ededed; margin:14px 0 5px; font-size:14px; }
+.resumenCuerpo ul { margin:4px 0 4px 18px; padding:0; }
+.saltos { max-width:760px; margin:16px auto 0; padding:0 16px; display:flex;
+  flex-wrap:wrap; gap:6px; }
+.salto, .saltoActivo { font-size:11.5px; padding:5px 9px; border-radius:6px; cursor:pointer;
+  border:1px solid #2c2c34; background:#141419; color:#9b9baa; }
+.saltoActivo { background:#8810c7; border-color:#8810c7; color:#fff; }
+
+/* ── Primitivas de pantalla, compartidas por los tres mockups ── */
+.pag { padding:0 0 30px; }
+.topbar { display:flex; align-items:center; justify-content:center; height:52px;
+  background:linear-gradient(to right,#1c1c1c,#666); position:relative; }
+.logo { font-weight:800; font-size:17px; letter-spacing:-.4px;
+  background:linear-gradient(90deg,#ff8a3d,#c341e0); -webkit-background-clip:text;
+  background-clip:text; color:transparent; }
+.hero { padding:26px 20px 20px; }
+.h1 { font-size:27px; line-height:1.18; font-weight:800; margin:0 0 12px; letter-spacing:-.5px; }
+.sub { font-size:15px; line-height:1.5; color:#c2c2cc; margin:0 0 20px; }
+.cta { display:block; width:100%; background:#8810c7; color:#fff; border:0; border-radius:11px;
+  padding:15px; font-size:16px; font-weight:700; cursor:pointer; }
+.ctaSec { display:block; width:100%; background:transparent; color:#ededed;
+  border:1px solid #45454f; border-radius:11px; padding:13px; font-size:15px; cursor:pointer; }
+.micro { text-align:center; font-size:12.5px; color:#9b9baa; margin:9px 0 0; }
+.sec { padding:24px 20px; border-top:1px solid #1c1c22; }
+.h2 { font-size:20px; font-weight:700; margin:0 0 12px; letter-spacing:-.3px; }
+.dolor { display:flex; gap:9px; align-items:flex-start; margin:0 0 11px;
+  font-size:14.5px; line-height:1.45; color:#d6d6de; }
+.check { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:14px;
+  line-height:1.45; color:#d6d6de; }
+.paso { display:flex; gap:11px; align-items:flex-start; margin:0 0 14px; }
+.pasoNum { flex:none; width:25px; height:25px; border-radius:50%; background:#8810c7;
+  color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center;
+  justify-content:center; }
+.card { background:#141419; border:1px solid #24242c; border-radius:12px; padding:15px; margin:0 0 11px; }
+.campo { width:100%; background:#17171d; border:1px solid #2e2e38; border-radius:9px;
+  padding:13px; color:#ededed; font-size:15px; margin:0 0 12px; box-sizing:border-box; }
+.label { font-size:13.5px; font-weight:600; margin:0 0 6px; color:#ededed; }
+.ayuda { font-size:12px; color:#8f8f9c; margin:-7px 0 12px; }
+.chip { display:inline-block; background:rgba(136,16,199,.18); border:1px solid #8810c7;
+  color:#e2c8ff; font-size:11.5px; padding:3px 9px; border-radius:99px; margin:0 5px 6px 0; }
+.exito { background:rgba(76,176,80,.13); border:1px solid #4cb050; border-radius:11px;
+  padding:15px; text-align:center; }
+.precio { font-size:31px; font-weight:800; letter-spacing:-1px; }
+.tachado { text-decoration:line-through; color:#7b7b88; font-size:14px; }
+.barra { height:5px; background:#22222a; border-radius:99px; overflow:hidden; margin:0 0 16px; }
+.barraFill { height:100%; background:#8810c7; }
+.mini { font-size:12px; color:#9b9baa; }
+.gris { color:#9b9baa; }
+.verde { color:#4cb050; font-weight:700; }
