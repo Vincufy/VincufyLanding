@@ -1,0 +1,154 @@
+🎯 *VINCUFY SMOKE — Campaña Meta Ads*
+
+Arrancamos HOY martes 16/06, 4 días. Necesito que validen lo que ya está decidido y confirmen lo que falta para poder armar todo y lanzar antes del mediodía.
+
+━━━━━━━━━━━━━━━━━━
+
+📋 *QUÉ HACEMOS*
+
+Campaña de Meta Ads con *6 anuncios* (3 productores + 3 boliches) llevando tráfico a vincufy.com/q/eventos.
+
+*Objetivo:* validar si productores y/o boliches están dispuestos a pagar por Vincufy ANTES de construir el MVP.
+
+*Métrica norte:* clicks en el botón "Comprar" dentro de los planes (la persona vio el precio y aun así quiso). Como refuerzo: leads (email + teléfono dejados).
+
+*Plata:* USD 150 total.
+- Días 1-2 (mar-mié): 6 creativos × 6 USD/día = 72 USD FIJO
+- Días 3-4 (jue-vie): los 78 USD restantes se reparten según los datos del miércoles a la noche
+
+*Días:* mar 16 → vie 19. Lanzamiento HOY a la mañana, cierre manual viernes a la noche, decisión del equipo el sábado.
+
+━━━━━━━━━━━━━━━━━━
+
+✅ *DECISIONES YA CONFIRMADAS*
+
+*1. Umbrales para decidir el sábado*
+- ≥3 clicks-Comprar en productores Y ≥3 en boliches → ambos validan
+- ≥5 en uno, <4 en el otro → focalizar el segmento ganador
+- ≥3 en uno, <3 en el otro → validación parcial débil
+- <3 en ambos → no valida, iterar antes de construir
+
+Razón: tickets medianamente altos + la decisión NO es comprar un producto, es cambiar de proveedor de ticketera en el core operativo. Cada click vale mucho más que un click de e-commerce, por eso los umbrales son bajos.
+
+*2. Estructura de la campaña*
+- Tipo: ABO (presupuesto por cada cajón/adset, no por campaña)
+- Objetivo Meta: "Clientes potenciales" (no Tráfico ni Interacción)
+- Optimización: por *"InitiateCheckout"* (evento estándar de Meta que se dispara al clickear "Comprar" en un plan). Razón: usar evento estándar activa los modelos pre-entrenados de Meta para Argentina, mucho mejor para optimizar con poco presupuesto que un custom event.
+- Destino: landing vincufy.com/q/eventos (NO formulario nativo de FB — queremos que vean el precio)
+- Identidades del ad: page Vincufy + IG @vincufy
+- Placements: Advantage+ (Meta distribuye solo en Feed/Stories/Reels/Explore)
+
+6 adsets, 1 creativo cada uno:
+- ADSET-PRODUCTOR-1 → video comunidad (relato)
+- ADSET-PRODUCTOR-2 → video comisión (agresivo)
+- ADSET-PRODUCTOR-3 → imagen versus (demostración)
+- ADSET-BOLICHE-1 → video comunidad (relato)
+- ADSET-BOLICHE-2 → video comisiones (agresivo)
+- ADSET-BOLICHE-3 → imagen versus (demostración)
+
+*3. Setup técnico (todo listo)*
+✅ Pixel de Meta funcionando en la landing
+✅ Tracking enriquecido (cada click "Comprar" dispara InitiateCheckout estándar con segment + tier + value USD; el modal de email+teléfono dispara Lead estándar)
+✅ Cuenta @vincufy de Instagram vinculada al ad account
+✅ Método de pago cargado (Mastercard *7914)
+✅ Page Vincufy con foto de perfil
+✅ Timezone Buenos Aires, currency USD
+✅ Los 6 creativos verificados (videos 1080×1920 con audio, imágenes 9:16)
+✅ Copy de los 6 ads generado a partir de la transcripción de los videos y el análisis visual de las imágenes
+✅ Dashboard de PostHog para leer la calidad del interés (qué plan eligió cada uno, qué segmento, etc.)
+
+━━━━━━━━━━━━━━━━━━
+
+🟡 *FALTA CONFIRMAR* (respondan sí/no o sugieran cambio)
+
+*1️⃣ Geografía*
+Recomendado: *CABA + GBA*
+Razón: con 150 USD abrir todo el país diluye el budget y sube el CPM. CABA + GBA concentra ~85% de boliches y productoras urbanas. Si abrimos Córdoba/Rosario sumamos ~10% más de target pero diluimos 30% del budget.
+¿OK? ¿O agregamos Córdoba + Rosario?
+
+*2️⃣ Edad*
+Recomendado: *25-45*
+Razón: dueños y managers de boliches/productoras caen ahí. 18-24 están en el evento pero no toman decisiones B2B. 45+ no es el target principal del rubro.
+¿OK?
+
+*3️⃣ Intereses Productores* (los 3 adsets de productores)
+Recomendado: *Event planning, Music festivals, Disc jockey, Event management*
+Razón: cubre productores formales (Event management) + electrónicos (DJs, festivals). El plan del curso dice "no obsesionarse — el creativo segmenta más que el targeting".
+¿OK o quieren cambiar/agregar?
+
+*4️⃣ Intereses Boliches* (los 3 adsets de boliches)
+Recomendado: *Nightlife, Nightclubs, Bar (establishment), Hospitality industry*
+Razón: cubre dueños/gerentes del rubro. Excluí "Cocktail" y "Music" porque sesgaban a clientes finales en vez de dueños.
+¿OK o quieren cambiar/agregar?
+
+*5️⃣ Costo máximo por click-Comprar (apagar arriba de eso)*
+Recomendado: *3 USD*
+Razón: el benchmark Argentina dice 0,50-2,50 USD = "bueno", 3-4 USD = "tope, apagar". Además: si el plan más popular es 107 USD y asumimos 5-10% de conversión de smoke → cliente real, pagar 3 USD/click es 3,5x-7x de recuperación = margen sano. Más caro = unit economics riesgosos.
+¿OK con 3 USD?
+
+*6️⃣ Spend cap account (red de seguridad)*
+Recomendado: *150 USD* (igual al budget planeado)
+Razón: si por error algún adset queda mal configurado, Meta nos frena exactamente en 150 sin importar nada más. Es gratis, lo seteamos sí o sí.
+¿OK?
+
+*7️⃣ Copy de los ads*
+Generé hook + headline + CTA para los 6 anuncios, basado en lo que dicen los videos y muestran las imágenes. Voseo, primera persona, sin prometer "comprar" (el botón "Más información" lleva al quiz primero).
+
+Lo dejo en el repo: meta-creativos/copy.md
+Si quieren los pego en este chat o se los mando por mail. ¿Algún hook que cambiar?
+
+━━━━━━━━━━━━━━━━━━
+
+⏳ *FALTA HACER ANTES DE LANZAR*
+
+🔸 *Posts orgánicos en @vincufy y page de FB Vincufy*
+1-2 posts mínimos en cada una. Hoy @vincufy tiene 115 followers pero sin posts visibles — cuando alguien clickea el handle desde el ad y ve cuenta fantasma, baja el trust y la conversión. Idem la page de FB.
+*¿Quién lo hace? ¿Agustín o yo?*
+
+🔸 *Verificar Test Events del Pixel*
+Entrar a Events Manager → Test Events → poner URL https://vincufy.com/q/eventos → navegar el flow completo (quiz + click en Comprar de un plan + completar el modal con email+teléfono) → confirmar que aparecen *PageView*, *ViewContent*, *InitiateCheckout* (al clickear Comprar) y *Lead* (al enviar el modal) en el panel.
+Yo no lo puedo hacer (es manual desde la UI de Meta). 5 min.
+
+🔸 *Configurar tablero [VINCUFY][SMOKE] en Ads Manager*
+Columnas del Ads Manager personalizadas para que veamos solo lo que importa (Gasto, CTR, CPM, Clicks Comprar, Leads, CPL, Frecuencia). No se puede vía API.
+Lo hace cualquiera con acceso, 5 min.
+
+━━━━━━━━━━━━━━━━━━
+
+🚀 *CRONOGRAMA*
+
+📌 *HOY MAR 16/06*
+- AM: ustedes confirman los 7 puntos de arriba + suben posts orgánicos
+- AM: yo armo la campaña + 6 adsets + 6 ads en Meta, todo PAUSED
+- Mediodía: ustedes revisan previews en Ads Manager + configuran el tablero + verifican Test Events
+- Mediodía/Tarde: OK final → activo todo en 1 prompt → arrancó
+
+📌 *MIÉ 17/06 — Día 2 FIJO*
+- Todo el día: no tocar nada. Los 6 adsets siguen a 6 USD/día (72 USD acumulados)
+- 19-21 hs: yo paso reporte por segmento de los 6 creativos + recomendación de reparto para los 78 USD restantes
+- 21-22 hs: el equipo decide el reparto
+- 22-23 hs: yo aplico cambios (apago descartados, reasigno budget)
+
+📌 *JUE 18/06 — Día 3*
+Corren los creativos elegidos. Mirar de tarde-noche. NO decidir a la mañana.
+
+📌 *VIE 19/06 — Día 4, cierre*
+- 22-23 hs: apagar manual (NUNCA usar "fecha de finalización")
+- 23 hs: yo paso reporte final + decisión vs umbrales
+
+📌 *SAB 20/06 — decisión del equipo*
+Mirar la tabla de umbrales con los números reales. Decisión binaria, sin discusión emocional.
+
+━━━━━━━━━━━━━━━━━━
+
+⚡ *NECESITO DE USTEDES AHORA*
+
+Para arrancar HOY antes del mediodía:
+
+1. *Validen los 7 puntos de "FALTA CONFIRMAR"* (respuestas tipo "OK a todo" o "cambio el 1 a... el 5 a...")
+
+2. *Quién sube los posts orgánicos* a @vincufy y a la page de FB Vincufy
+
+3. *Quién verifica los Test Events del Pixel* (5 min en Events Manager)
+
+Cuando tenga las respuestas, armo la campaña en 30 min y la dejo PAUSED. Después ustedes revisan en Ads Manager y damos el OK final para activar.

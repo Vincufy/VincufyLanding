@@ -792,7 +792,9 @@ const KIND_MAP = {
 const OfferModule = ({ module: m, onCtaBuy, highlightedTier, segment }) => {
   const Component = KIND_MAP[m.kind];
   const [revealRef, revealed] = useInViewReveal();
-  const trackRef = useInViewTrack({ section: m.kind });
+  // Con `segment` se puede comparar el recorrido de productores contra el de boliches:
+  // hoy las dos landings se miden juntas y no se sabe si una convence mas que la otra.
+  const trackRef = useInViewTrack({ section: m.kind, extra: { segment } });
 
   if (!Component) return null;
   return (

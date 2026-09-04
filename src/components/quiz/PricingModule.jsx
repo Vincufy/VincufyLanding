@@ -1,6 +1,7 @@
 import styles from "./PricingModule.module.css";
 import { eventosFunnel } from "../../funnels/eventos/config";
 import { analyticEvent } from "../../lib/posthog";
+import useInViewTrack from "./useInViewTrack";
 
 const formatArs = (n) =>
   new Intl.NumberFormat("es-AR", {
@@ -30,9 +31,16 @@ const createRipple = (e) => {
 
 const PricingModule = ({ highlightedTierId, onTierClick, segment }) => {
   const { headline, subheadline, tiers } = eventosFunnel.pricing;
+  /**
+   * Esta seccion NO reportaba que se la habia visto, y es la mas importante de la
+   * pagina: sin esto no habia denominador para los clicks en Comprar. Se sabia cuanta
+   * gente compraba, no cuanta llegaba a ver los precios, que son dos preguntas muy
+   * distintas cuando el 56% no pasa del hero.
+   */
+  const trackRef = useInViewTrack({ section: "pricing", extra: { segment } });
 
   return (
-    <section className={styles.container} id="planes">
+    <section className={styles.container} id="planes" ref={trackRef}>
       {headline && <h2 className={styles.headline}>{headline}</h2>}
       {subheadline && <p className={styles.subheadline}>{subheadline}</p>}
 

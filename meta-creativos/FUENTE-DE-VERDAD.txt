@@ -1,0 +1,13 @@
+Estos archivos son una COPIA LOCAL. La fuente de verdad esta en Drive:
+
+  Vincufy - SuperAdmin > 01-Marketing > Campañas > _Creativos-Meta
+  https://drive.google.com/drive/folders/1iMnr7PRi6gVouaaajKQ2_9GpRfYdIRrN
+
+Y estan registrados en el assis-core (nodos :Creative con drive_file_id y la
+relacion USED_IN hacia smoke-1 y smoke-2), asi que antes de lanzar se puede
+ver de una que anuncios usan cada activo:  GET /api/creatives
+
+Si vas a corregir un creativo, cambialo en Drive. Esta carpeta puede quedar vieja.
+
+Ojo: hay una tercera copia en ~/Downloads/vincufy/campaña-meta-1/ que quedo de
+junio y NO se actualiza. Es la que conviene borrar.
